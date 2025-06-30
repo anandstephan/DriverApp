@@ -38,7 +38,6 @@ export default Login
 
 const styles = StyleSheet.create({
     container:{
-       
         justifyContent:'center',
         alignItems:"flex-start",
         marginHorizontal:20,
@@ -47,7 +46,7 @@ const styles = StyleSheet.create({
     },  
     primaryContainer:{
         width:"100%",
-        marginVertical:'20%',
+        marginVertical:'10%',
     
     },
     logo:{
