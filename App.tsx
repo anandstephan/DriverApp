@@ -9,7 +9,7 @@ const App = () =>{
 return       <NavigationContainer>
 <SafeAreaProvider>
   <SafeAreaView style={{flex:1}}>
-    {true ?<Main/> :<Auth/>}
+    {!true ?<Main/> :<Auth/>}
   </SafeAreaView>
 </SafeAreaProvider>
 </NavigationContainer>
