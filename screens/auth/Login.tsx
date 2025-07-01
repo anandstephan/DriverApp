@@ -1,6 +1,8 @@
+import { useNavigation } from "@react-navigation/native"
 import { View,Text,StyleSheet, TextInput, Pressable } from "react-native"
 
 const Login = () =>{
+    const navigation = useNavigation()
 return <View style={styles.container}>
     <View>
     <Text style={styles.logo}>LOGO</Text>
@@ -21,7 +23,7 @@ return <View style={styles.container}>
             <View style={{width:'35%',borderWidth:0.5,borderColor:"#00031480"}}/>
         </View>
         <View style={styles.btnContainer}>
-            <Pressable>
+            <Pressable onPress={()=>navigation.navigate('Otp')}>
                 <Text style={{color:"#000000"}}>Login with OTP</Text>
                 <View style={{borderWidth:0.5,borderColor:"#000000"}}/>
             </Pressable>
