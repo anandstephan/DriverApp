@@ -1,14 +1,15 @@
 import { StyleSheet, View ,Text} from "react-native"
 import Lock from "../../assets/jsx/Lock"
+import Check from "../../assets/jsx/Check"
 const ReigsterSucess = () =>{
 return <View style={styles.container}>
         <View style={{flex:2}}/>
         <View style={{flex:1}}>
-        <Lock/>
+        <Check/>
         </View>
-        <View style={{flex:3,alignItems:"center"}}>
-        <Text style={styles.heading}>OTP Verified Successfully</Text>
-        <Text style={styles.txtStyle}>OTP has been verified successfully, you can proceed with complete registration</Text>        
+        <View style={{flex:3,alignItems:"center",marginHorizontal:10}}>
+        <Text style={styles.heading}>Registered Successfully </Text>
+        <Text style={styles.txtStyle}>Our Team will contact you shortly! Meanwhile browse our offerings </Text>        
         </View>   
 
 </View>
@@ -27,7 +28,8 @@ const styles = StyleSheet.create({
         fontWeight:"400",
         fontSize:22,
         lineHeight:32,
-        color:"#101010"
+        color:"#101010",
+        marginVertical:10
     },
     txtStyle:{
         color:"#878787",

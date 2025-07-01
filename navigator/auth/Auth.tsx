@@ -4,12 +4,13 @@ import Initial from '../../screens/auth/Initial';
 import Otp from '../../screens/auth/Otp';
 import OtpSucess from '../../screens/auth/OtpSucess';
 import Register from '../../screens/auth/Register';
+import ReigsterSucess from '../../screens/auth/RegisterSucess';
 
 const Stack = createNativeStackNavigator();
 
 const  Auth =() => {
   return (
-      <Stack.Navigator initialRouteName="Register" screenOptions={{headerShown:false}}>
+      <Stack.Navigator initialRouteName="RegisterSucess" screenOptions={{headerShown:false}}>
         <Stack.Screen name='Initial' component={Initial}/>
         <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="Otp" component={Otp} options={{
@@ -17,6 +18,8 @@ const  Auth =() => {
         }}/>
         <Stack.Screen name="OtpSucess" component={OtpSucess}/>
         <Stack.Screen name="Register" component={Register}/>
+        <Stack.Screen name="RegisterSucess" component={ReigsterSucess}/>
+        
       </Stack.Navigator>
 
   );
