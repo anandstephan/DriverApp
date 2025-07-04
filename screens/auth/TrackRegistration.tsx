@@ -46,7 +46,6 @@ const TrackRegistration = () =>{
             />
             <Text style={styles.txtStyle}>More Services</Text>
             </View>
-        
             </View>
             <View style={{marginVertical:'50%'}}>
                 <Pressable>
