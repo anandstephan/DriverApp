@@ -1,6 +1,7 @@
 import { View,StyleSheet,Text, Image } from "react-native"
 import Entypo from 'react-native-vector-icons/Entypo'
 import AntDesign from 'react-native-vector-icons/AntDesign'
+import { Rating, AirbnbRating } from 'react-native-ratings';
 const BatteryStatus = () =>{
 return <View style={styles.container}>   
         <View style={styles.rowContainer}>
@@ -30,7 +31,7 @@ return <View style={styles.container}>
                 <Entypo name="clock" size={20}/>
                 <Text style={styles.date}>9:00 - 12:00AM</Text>
                 </View>
-            <View style={[styles.rowContainer,{padding:5,marginHorizontal:10,marginVertical:10,paddingVertical:10}]}>
+            <View style={[styles.rowContainer,{padding:5,marginHorizontal:0,marginVertical:10,paddingVertical:10}]}>
             <Text style={[styles.date,{color:"#7D7D7D"}]}>Service Engineer: <Text style={{color:"#000",fontWeight:"500"}}>9909090909</Text></Text>
             <Text style={{borderBottomWidth:1,color:"#7D7D7D"}}>Call Now</Text>
             </View>
@@ -52,6 +53,23 @@ return <View style={styles.container}>
             <View/>
             </View>
         </View>
+        <View style={styles.container}>
+                <Text style={styles.rating}>Rate Our Service</Text>
+            {/* <View style={{flex:1}}> */}
+            <Rating
+            type="custom"
+            ratingColor="#FFFFFF"
+            ratingCount={5}
+            ratingBackgroundColor="#FFF"
+            style={{
+                marginLeft:-90,
+                marginVertical:10,
+
+            }}
+            />
+            {/* </View>  */}
+
+        </View>
 
 </View>
 }
@@ -65,7 +83,7 @@ const styles = StyleSheet.create({
         borderRadius:20,
         marginHorizontal:20,
         marginVertical:10,
-        padding:5
+        padding:5,
 
     },
     rowContainer:{
@@ -105,5 +123,10 @@ const styles = StyleSheet.create({
         height:50,
         backgroundColor:"#D9D9D9",
         borderRadius:5
+    },
+    rating:{
+        fontWeight:"400",
+        color:"#676767",
+        fontSize:16
     }
 })
