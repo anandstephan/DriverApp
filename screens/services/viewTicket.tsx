@@ -1,5 +1,6 @@
+import { useNavigation } from '@react-navigation/native';
 import React from 'react';
-import { View, Text, FlatList, StyleSheet, Dimensions } from 'react-native';
+import { View, Text, FlatList, StyleSheet, Dimensions, Pressable } from 'react-native';
 
 const data = [
   { id: '1', date: '11 - 04 - 25', type: 'Battery', status: 'Open' },
@@ -9,7 +10,11 @@ const data = [
 ];
 
 const ViewTicket = () => {
+
+    const navigation = useNavigation()
+
   const renderItem = ({ item }: any) => (
+    <Pressable onPress={()=>navigation.navigate('batteryStatus')}>
     <View
       style={[
         styles.card,
@@ -24,6 +29,7 @@ const ViewTicket = () => {
         {item.status}
       </Text>
     </View>
+    </Pressable>
   );
 
   return (

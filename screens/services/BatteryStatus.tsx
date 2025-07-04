@@ -1,9 +1,109 @@
-import { View } from "react-native"
-
+import { View,StyleSheet,Text, Image } from "react-native"
+import Entypo from 'react-native-vector-icons/Entypo'
+import AntDesign from 'react-native-vector-icons/AntDesign'
 const BatteryStatus = () =>{
-return <View>   
-    
+return <View style={styles.container}>   
+        <View style={styles.rowContainer}>
+            <View style={{flexDirection:"row",alignItems:"center",justifyContent:"space-between"}}>
+            <View style={styles.circle}>
+            <Image source={require('../../assets/png/batteryIcon.png')}/>
+            </View>
+                <Text style={styles.heading}>Battery Status</Text>
+                </View>
+            <View>
+                <Entypo name="dots-three-vertical" size={20}/>
+            </View>
+        </View>
+        <View style={[styles.container,{backgroundColor:"#FFF"}]}>
+            <View style={[styles.rowContainer]}>
+                <View style={[styles.rowContainer,{padding:0}]}>
+                <AntDesign name="calendar" size={20}/>
+                <Text style={styles.date}>10/02/2025</Text>
+                </View>
+
+                <View style={{backgroundColor:"#EAEAEA",padding:5,borderRadius:5}}>
+                <Text style={[styles.date,{fontSize:12,color:"#ADADAD"}]}>10AL9831</Text>
+            </View>
+            
+            </View>
+            <View style={[styles.rowContainer,{justifyContent:"flex-start",marginTop:-20}]}>
+                <Entypo name="clock" size={20}/>
+                <Text style={styles.date}>9:00 - 12:00AM</Text>
+                </View>
+            <View style={[styles.rowContainer,{padding:5,marginHorizontal:10,marginVertical:10,paddingVertical:10}]}>
+            <Text style={[styles.date,{color:"#7D7D7D"}]}>Service Engineer: <Text style={{color:"#000",fontWeight:"500"}}>9909090909</Text></Text>
+            <Text style={{borderBottomWidth:1,color:"#7D7D7D"}}>Call Now</Text>
+            </View>
+        </View>
+
+        <View style={[styles.container,{backgroundColor:"#FFF",marginVertical:10}]}>
+            <Text style={[styles.heading,{fontWeight:"500"}]}>Description</Text>
+            <Text style={styles.para}>
+            Battery stopped working yesterday, please fix it fast. Charger is working
+            </Text>
+            <View style={[styles.container,{flexDirection:"row",justifyContent:"space-between",backgroundColor:"#FFF",marginVertical:10}]}>
+            <View style={styles.box}/>
+            <View style={styles.box}/>
+            <View style={styles.box}>
+            <Entypo name="controller-play" size={50}/>
+            </View>
+            <View/>
+            <View/>
+            <View/>
+            </View>
+        </View>
+
 </View>
 }
 
 export default BatteryStatus
+
+const styles = StyleSheet.create({
+    container:{
+        backgroundColor:"#D9D9D9",
+        // height:100,
+        borderRadius:20,
+        marginHorizontal:20,
+        marginVertical:10,
+        padding:5
+
+    },
+    rowContainer:{
+        flexDirection:"row",
+        justifyContent:"space-between",
+        alignItems:"center",
+        padding:20,
+    },
+    circle:{
+        backgroundColor:"#FFF",
+        padding:10,
+        borderRadius:50,
+        borderTopLeftRadius:10,
+    },
+    heading:{
+        marginHorizontal:20,
+        color:"#5E5E5E",
+        fontWeight:"700",
+        fontSize:16,
+        marginVertical:5
+    },
+    date:{
+        fontWeight:"500",
+        fontSize:14,
+        marginHorizontal:10   
+    },
+    para:{
+        marginHorizontal:10,
+        marginLeft:20,
+        color:"#7D7D7D",
+        fontWeight:"400",
+        fontSize:12,
+        marginVertical:10
+    },
+    box:{
+        width:50,
+        height:50,
+        backgroundColor:"#D9D9D9",
+        borderRadius:5
+    }
+})
