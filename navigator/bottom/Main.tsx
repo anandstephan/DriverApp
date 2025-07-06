@@ -1,8 +1,9 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { View, Text, Image } from 'react-native';
-import Index from '../../screens/services';
-
+import Services from '../../screens/services';
+import Wallet from '../../screens/wallet'
+import Profile from '../../screens/profile'
 const Tab = createBottomTabNavigator();
 
 const DummyScreen = ({ title }) => (
@@ -23,7 +24,7 @@ const getIcon = (routeName, focused) => {
       return require('../../assets/png/settings.png')
    
     case 'My Profile':
-      return require('../../assets/png/settings.png')
+      return require('../../assets/png/profile.png')
         
     default:
       return null;
@@ -56,9 +57,9 @@ const Main = () => {
       })}
     >
       <Tab.Screen name="Assets" children={() => <DummyScreen title="Assets" />} />
-      <Tab.Screen name="My Wallet" children={() => <DummyScreen title="My Wallet" />} />
-      <Tab.Screen name="Services"  component={Index}/>
-      <Tab.Screen name="My Profile" children={() => <DummyScreen title="My Profile" />} />
+      <Tab.Screen name="My Wallet" component={Wallet}/>
+      <Tab.Screen name="Services"  component={Services}/>
+      <Tab.Screen name="My Profile"  component={Profile}/>
     </Tab.Navigator>
   );
 };
