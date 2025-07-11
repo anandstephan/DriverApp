@@ -34,6 +34,7 @@ const getIcon = (routeName, focused) => {
 const Main = () => {
   return (
     <Tab.Navigator
+  initialRouteName="My Wallet"
       screenOptions={({ route }) => ({
         tabBarIcon: ({ focused }) => (
           <Image
@@ -41,12 +42,13 @@ const Main = () => {
             style={{
               width: 24,
               height: 24,
-              tintColor: focused ? '#FFFFFF' : 'lightgray',
+              tintColor: focused ? '#000' : 'lightgray',
             }}
             resizeMode="contain"
           />
         ),
-        tabBarActiveTintColor: 'white',
+        tabBarActiveBackgroundColor:"#FFFFFF",
+        tabBarActiveTintColor: '#000',
         tabBarInactiveTintColor: 'lightgray',
         tabBarStyle: {
           backgroundColor: '#3D3D3D',

@@ -52,62 +52,49 @@
 	<key>UIAppFonts</key>
 	<array>
 		<string>AntDesign.ttf</string>
-		<string>AntDesign.ttf 07-55-07-673.ttf</string>
-		<string>AntDesign.ttf 08-23-29-584.ttf</string>
 		<string>Entypo.ttf</string>
-		<string>Entypo.ttf 07-55-07-685.ttf</string>
-		<string>Entypo.ttf 08-23-29-632.ttf</string>
 		<string>EvilIcons.ttf</string>
-		<string>EvilIcons.ttf 07-55-07-680.ttf</string>
-		<string>EvilIcons.ttf 08-23-29-595.ttf</string>
 		<string>Feather.ttf</string>
-		<string>Feather.ttf 07-55-07-685.ttf</string>
-		<string>Feather.ttf 08-23-29-632.ttf</string>
 		<string>FontAwesome.ttf</string>
-		<string>FontAwesome.ttf 07-55-07-684.ttf</string>
-		<string>FontAwesome.ttf 08-23-29-628.ttf</string>
 		<string>FontAwesome5_Brands.ttf</string>
-		<string>FontAwesome5_Brands.ttf 07-55-07-681.ttf</string>
-		<string>FontAwesome5_Brands.ttf 08-23-29-618.ttf</string>
 		<string>FontAwesome5_Regular.ttf</string>
-		<string>FontAwesome5_Regular.ttf 07-55-07-677.ttf</string>
-		<string>FontAwesome5_Regular.ttf 08-23-29-591.ttf</string>
 		<string>FontAwesome5_Solid.ttf</string>
-		<string>FontAwesome5_Solid.ttf 07-55-07-683.ttf</string>
-		<string>FontAwesome5_Solid.ttf 08-23-29-622.ttf</string>
 		<string>FontAwesome6_Brands.ttf</string>
-		<string>FontAwesome6_Brands.ttf 07-55-07-683.ttf</string>
-		<string>FontAwesome6_Brands.ttf 08-23-29-624.ttf</string>
 		<string>FontAwesome6_Regular.ttf</string>
-		<string>FontAwesome6_Regular.ttf 07-55-07-679.ttf</string>
-		<string>FontAwesome6_Regular.ttf 08-23-29-594.ttf</string>
 		<string>FontAwesome6_Solid.ttf</string>
-		<string>FontAwesome6_Solid.ttf 07-55-07-684.ttf</string>
-		<string>FontAwesome6_Solid.ttf 08-23-29-631.ttf</string>
 		<string>Fontisto.ttf</string>
-		<string>Fontisto.ttf 07-55-07-678.ttf</string>
-		<string>Fontisto.ttf 08-23-29-592.ttf</string>
 		<string>Foundation.ttf</string>
-		<string>Foundation.ttf 07-55-07-682.ttf</string>
-		<string>Foundation.ttf 08-23-29-621.ttf</string>
 		<string>Ionicons.ttf</string>
-		<string>Ionicons.ttf 07-55-07-681.ttf</string>
-		<string>Ionicons.ttf 08-23-29-617.ttf</string>
 		<string>MaterialCommunityIcons.ttf</string>
-		<string>MaterialCommunityIcons.ttf 07-55-07-686.ttf</string>
-		<string>MaterialCommunityIcons.ttf 08-23-29-633.ttf</string>
 		<string>MaterialIcons.ttf</string>
-		<string>MaterialIcons.ttf 07-55-07-681.ttf</string>
-		<string>MaterialIcons.ttf 08-23-29-615.ttf</string>
 		<string>Octicons.ttf</string>
-		<string>Octicons.ttf 07-55-07-678.ttf</string>
-		<string>Octicons.ttf 08-23-29-592.ttf</string>
 		<string>SimpleLineIcons.ttf</string>
-		<string>SimpleLineIcons.ttf 07-55-07-680.ttf</string>
-		<string>SimpleLineIcons.ttf 08-23-29-594.ttf</string>
 		<string>Zocial.ttf</string>
-		<string>Zocial.ttf 07-55-07-679.ttf</string>
-		<string>Zocial.ttf 08-23-29-593.ttf</string>
+		<string>Poppins-Black.ttf</string>
+		<string>Poppins-BlackItalic.ttf</string>
+		<string>Poppins-Bold.ttf</string>
+		<string>Poppins-BoldItalic.ttf</string>
+		<string>Poppins-ExtraBold.ttf</string>
+		<string>Poppins-ExtraBoldItalic.ttf</string>
+		<string>Poppins-ExtraLight.ttf</string>
+		<string>Poppins-ExtraLightItalic.ttf</string>
+		<string>Poppins-Italic.ttf</string>
+		<string>Poppins-Light.ttf</string>
+		<string>Poppins-LightItalic.ttf</string>
+		<string>Poppins-Medium.ttf</string>
+		<string>Poppins-MediumItalic.ttf</string>
+		<string>Poppins-Regular.ttf</string>
+		<string>Poppins-SemiBold.ttf</string>
+		<string>Poppins-SemiBoldItalic.ttf</string>
+		<string>Poppins-Thin.ttf</string>
+		<string>Poppins-ThinItalic.ttf</string>
+		<string>Inter_28pt-Italic.ttf</string>
+		<string>Inter_28pt-Light.ttf</string>
+		<string>Inter_28pt-LightItalic.ttf</string>
+		<string>Inter_28pt-Medium.ttf</string>
+		<string>Inter_28pt-MediumItalic.ttf</string>
+		<string>Inter_28pt-Regular.ttf</string>
+		<string>Inter_28pt-SemiBold.ttf</string>
 	</array>
 </dict>
 </plist>

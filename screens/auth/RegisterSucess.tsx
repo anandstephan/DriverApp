@@ -1,7 +1,15 @@
 import { StyleSheet, View ,Text} from "react-native"
 import Lock from "../../assets/jsx/Lock"
 import Check from "../../assets/jsx/Check"
+import { useNavigation } from "@react-navigation/native"
+import { useEffect } from "react"
 const ReigsterSucess = () =>{
+    const navigation = useNavigation()
+    useEffect(()=>{
+        setTimeout(()=>{
+            navigation.navigate('TrackRegistration')
+        })
+    },[])
 return <View style={styles.container}>
         <View style={{flex:2}}/>
         <View style={{flex:1}}>

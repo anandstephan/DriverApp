@@ -29,10 +29,12 @@ return <View style={styles.container}>
         </View>
         <View style={styles.btnContainer}>
         
-            <Pressable style={styles.btn}>
+            <Pressable style={styles.btn} onPress={()=>navigation.navigate('RegisterSucess')}>
                 <Text style={{ color:"#FFFFFF"}}>Submit</Text>
             </Pressable>
+            <Pressable onPress={()=>navigation.navigate('Login')}>
             <Text style={styles.txtStyle}>Already have an account? <Text style={styles.underlineTxt}>Sign in</Text></Text>
+            </Pressable>
         </View>
     </View>
    

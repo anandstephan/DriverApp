@@ -1,6 +1,17 @@
+import { useNavigation } from "@react-navigation/native";
+import { useEffect } from "react";
 import { StyleSheet, View,Text } from "react-native"
 import { OtpInput } from "react-native-otp-entry";
 const Otp = () =>{
+
+    const navigation = useNavigation()
+
+    useEffect(()=>{
+        setTimeout(()=>{
+            navigation.navigate('OtpSucess')
+        },2000)
+    },[])
+
     return <View style={styles.container}>
         
         <View style={styles.primaryContainer}>

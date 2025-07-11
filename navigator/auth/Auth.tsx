@@ -11,7 +11,7 @@ const Stack = createNativeStackNavigator();
 
 const  Auth =() => {
   return (
-      <Stack.Navigator initialRouteName="TrackRegistration" screenOptions={{headerShown:false}}>
+      <Stack.Navigator initialRouteName="Initial" screenOptions={{headerShown:false}}>
         <Stack.Screen name='Initial' component={Initial}/>
         <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="Otp" component={Otp} options={{

@@ -1,6 +1,12 @@
 import { StyleSheet, View,Image,Text, Pressable } from "react-native"
+import { useDispatch } from "react-redux"
+import { toggleDarkMode } from "../../store/themeSlice"
 
 const TrackRegistration = () =>{
+    const dispatch = useDispatch()
+
+
+
     return <View style={styles.container}>
             <View style={styles.innerContainer}>
             <View style={styles.row}>
@@ -48,7 +54,7 @@ const TrackRegistration = () =>{
             </View>
             </View>
             <View style={{marginVertical:'50%'}}>
-                <Pressable>
+                <Pressable onPress={()=>dispatch(toggleDarkMode())}>
                 <Text style={{color:"#00A6FF",textAlign:"center"}}>Track Registration</Text>
                 </Pressable>
       

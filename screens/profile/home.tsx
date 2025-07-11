@@ -4,12 +4,12 @@ import Card from "./components/Card"
 
 const arr = [
     {title:"My Profile",navigationScreen:"myProfile"},
-    {title:"Digital Documents"},
+    {title:"Digital Documents",navigationScreen:"myProfile"},
     {title:"Warranty card",navigationScreen:"waranty"},
-    {title:"Product Information"},
-    {title:"Driver Agreement"},
+    {title:"Product Information",navigationScreen:"productInfo"},
+    {title:"Driver Agreement",navigationScreen:"myProfile"},
     {title:"Refer and Earn",navigationScreen:"referAndEarn"},
-    {title:"Logout"}
+    {title:"Logout",navigationScreen:"myProfile"}
 ]
 
 const Home = () =>{

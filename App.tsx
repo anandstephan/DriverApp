@@ -1,17 +1,22 @@
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import Login from "./screens/auth/Login"
 import { NavigationContainer } from '@react-navigation/native';
-import Auth from './navigator/auth/Auth';
-import Main from './navigator/bottom/Main';
-
+import { Provider } from 'react-redux';
+import store from './store';
+import First from './First';
 const App = () =>{
+  
+
+
 
 return       <NavigationContainer>
+  <Provider store={store}>
 <SafeAreaProvider>
   <SafeAreaView style={{flex:1}}>
-    {true ?<Main/> :<Auth/>}
-  </SafeAreaView>
+    <First/>
+  </SafeAreaView> 
 </SafeAreaProvider>
+</Provider>
 </NavigationContainer>
 
 }
