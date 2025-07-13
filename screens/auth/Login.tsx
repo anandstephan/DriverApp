@@ -1,34 +1,37 @@
 import { useNavigation } from "@react-navigation/native"
 import { View,Text,StyleSheet, TextInput, Pressable } from "react-native"
+import Logo from "../../assets/jsx/Logo"
+import Fonts from "../../constants/font"
+import Colors from "../../constants/color"
 
 const Login = () =>{
     const navigation = useNavigation()
 return <View style={styles.container}>
     <View>
-    <Text style={styles.logo}>LOGO</Text>
+    <Logo/>
     </View>
-
-    <View style={styles.primaryContainer}>
         <Text style={styles.heading}>Login</Text>
+    <View style={styles.primaryContainer}>
+
         <View style={styles.form}>
-            <Text>Driver ID</Text>
+            <Text style={styles.headingText}>Driver ID</Text>
             <TextInput style={styles.input}/>
         </View>
-        <View style={[styles.form,{marginTop:'10%'}]}>
-            <Text>Password</Text>
+        <View style={[styles.form]}>
+            <Text style={styles.headingText}>Password</Text>
             <TextInput style={styles.input} keyboardType="visible-password" />
         </View>
         <View style={[styles.form,{marginTop:0,marginLeft:20}]}>
-            <Text style={{color:"#00031480",fontWeight:"400",fontSize:14}}>Forgot Password</Text>
+            <Text style={{color:"#00031480",fontWeight:"400",fontSize:14,fontFamily:Fonts.poppinsLight}}>Forgot Password</Text>
             <View style={{width:'35%',borderWidth:0.5,borderColor:"#00031480"}}/>
         </View>
         <View style={styles.btnContainer}>
             <Pressable onPress={()=>navigation.navigate('Otp')}>
-                <Text style={{color:"#000000"}}>Login with OTP</Text>
+                <Text style={{color:"#000000",fontFamily:Fonts.poppinsRegular}}>Login with OTP</Text>
                 <View style={{borderWidth:0.5,borderColor:"#000000"}}/>
             </Pressable>
             <Pressable style={styles.btn}>
-                <Text style={{ color:"#FFFFFF"}}>Login</Text>
+                <Text style={{ color:"#FFFFFF",fontFamily:Fonts.poppinsRegular}}>Login</Text>
             </Pressable>
         </View>
     </View>
@@ -49,6 +52,9 @@ const styles = StyleSheet.create({
     primaryContainer:{
         width:"100%",
         marginVertical:'10%',
+        backgroundColor:"#FFFFFF",
+        borderRadius:10,
+        // marginHorizontal:2,
     
     },
     logo:{
@@ -61,7 +67,9 @@ const styles = StyleSheet.create({
     heading:{
         fontWeight:"400",
         fontSize:32,
-        color:"#131212"
+        color:"#2F343E",
+        fontFamily:Fonts.poppinsBold,
+        margin:5
     },
     input:{
         borderColor:"#CBD3DF",
@@ -74,7 +82,7 @@ const styles = StyleSheet.create({
     form:{
         textAlign:"center",
         width:"95%",
-        marginTop:'15%',
+        marginTop:'5%',
         marginLeft:10
         
     },
@@ -95,8 +103,13 @@ const styles = StyleSheet.create({
         justifyContent:"center",
         alignItems:"center",
         margin:10,
-        backgroundColor:"#D9D9D9",
+        backgroundColor:Colors.primary,
         borderRadius:20
        
+    },
+    headingText:{
+        fontWeight:"400",
+        fontSize:15,
+        fontFamily:Fonts.poppinsRegular
     }
 })
