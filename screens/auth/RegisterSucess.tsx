@@ -3,6 +3,7 @@ import Lock from "../../assets/jsx/Lock"
 import Check from "../../assets/jsx/Check"
 import { useNavigation } from "@react-navigation/native"
 import { useEffect } from "react"
+import Fonts from "../../constants/font"
 const ReigsterSucess = () =>{
     const navigation = useNavigation()
     useEffect(()=>{
@@ -37,13 +38,15 @@ const styles = StyleSheet.create({
         fontSize:22,
         lineHeight:32,
         color:"#101010",
-        marginVertical:10
+        marginVertical:10,
+        fontFamily:Fonts.poppinsRegular
     },
     txtStyle:{
         color:"#878787",
         textAlign:"center",
         marginHorizontal:20,
         fontWeight:"400",
-        fontSize:14
+        fontSize:14,
+        fontFamily:Fonts.poppinsRegular
     }
 })

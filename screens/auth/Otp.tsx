@@ -2,6 +2,7 @@ import { useNavigation } from "@react-navigation/native";
 import { useEffect } from "react";
 import { StyleSheet, View,Text } from "react-native"
 import { OtpInput } from "react-native-otp-entry";
+import Fonts from "../../constants/font";
 const Otp = () =>{
 
     const navigation = useNavigation()
@@ -49,6 +50,7 @@ const Otp = () =>{
                 theme={{
                     containerStyle:{
                         // borderWidth:2
+                        backgroundColor:"#FFFFFF"
                     },
                     pinCodeContainerStyle:{
                         borderWidth:0,
@@ -58,8 +60,8 @@ const Otp = () =>{
                     }
                 }}
                 />
-            <View style={styles.otpTxt}>
-            <Text>The OTP code will expire in 05:00</Text>
+            <View style={styles.otp}>
+            <Text style={styles.para}>The OTP code will expire in 05:00</Text>
             </View>
     </View>
     </View>
@@ -83,9 +85,11 @@ const styles = StyleSheet.create({
     },
     secondaryContainer:{
         flex:3,
-        marginVertical:'20%'
+        marginVertical:'20%',
+        height:20,
+        // backgroundColor:"red"
      },
-     otpTxt:{
+     otp:{
         justifyContent:"center",
         alignItems:"center",
         marginVertical:20
@@ -96,13 +100,15 @@ const styles = StyleSheet.create({
         fontSize:38,
         color:"#6C6A69",
         margin:15,
-        marginHorizontal:35
+        marginHorizontal:35,
+        fontFamily:Fonts.poppinsRegular
     },
     
     para:{
         color:"#404040",
         fontWeight:"400",
         fontSize:15,
-        margin:10
+        margin:10,
+        fontFamily:Fonts.poppinsRegular
     }
 })

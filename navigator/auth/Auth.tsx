@@ -14,9 +14,7 @@ const  Auth =() => {
       <Stack.Navigator initialRouteName="Initial" screenOptions={{headerShown:false}}>
         <Stack.Screen name='Initial' component={Initial}/>
         <Stack.Screen name="Login" component={Login} />
-        <Stack.Screen name="Otp" component={Otp} options={{
-          headerShown:true
-        }}/>
+        <Stack.Screen name="Otp" component={Otp}/>
         <Stack.Screen name="OtpSucess" component={OtpSucess}/>
         <Stack.Screen name="Register" component={Register}/>
         <Stack.Screen name="RegisterSucess" component={ReigsterSucess}/>

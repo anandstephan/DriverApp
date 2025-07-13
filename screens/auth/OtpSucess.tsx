@@ -1,5 +1,6 @@
 import { StyleSheet, View ,Text} from "react-native"
 import Lock from "../../assets/jsx/Lock"
+import Fonts from "../../constants/font"
 const OtpSucess = () =>{
 return <View style={styles.container}>
         <View style={{flex:2}}/>
@@ -27,13 +28,15 @@ const styles = StyleSheet.create({
         fontWeight:"400",
         fontSize:22,
         lineHeight:32,
-        color:"#101010"
+        color:"#101010",
+        fontFamily:Fonts.poppinsRegular
     },
     txtStyle:{
         color:"#878787",
         textAlign:"center",
         marginHorizontal:20,
         fontWeight:"400",
-        fontSize:14
+        fontSize:14,
+        fontFamily:Fonts.poppinsLight
     }
 })

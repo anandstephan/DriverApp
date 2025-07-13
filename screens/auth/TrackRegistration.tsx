@@ -1,6 +1,7 @@
 import { StyleSheet, View,Image,Text, Pressable } from "react-native"
 import { useDispatch } from "react-redux"
 import { toggleDarkMode } from "../../store/themeSlice"
+import Fonts from "../../constants/font"
 
 const TrackRegistration = () =>{
     const dispatch = useDispatch()
@@ -15,7 +16,7 @@ const TrackRegistration = () =>{
                 source={require('../../assets/png/Check.png')}
                 />
       
-                <Text>Registered Successfully </Text>
+                <Text style={styles.heading}>Registered Successfully </Text>
                 <View/>
                 <View/>
                 <View/>
@@ -43,7 +44,7 @@ const TrackRegistration = () =>{
             <Image
             source={require('../../assets/png/creditCard.png')}
             />
-            <Text style={styles.txtStyle}>Check Credit Score</Text>
+            <Text style={styles.txtStyle}>Check Credit {'\n'} Score</Text>
             </View>
         
             <View style={[styles.innerContainer,{alignItems:"center",justifyContent:"space-between"}]}>
@@ -72,7 +73,7 @@ margin:'5%',
 row:{
     flexDirection:"row",
     justifyContent:"space-between",
-    alignItems:"center"
+    alignItems:"center",
 },
 innerContainer:{
     // borderWidth:1,
@@ -80,11 +81,22 @@ innerContainer:{
     borderWidth:1,
     borderRadius:10,
     borderColor:"#CBD3DF",
+    backgroundColor:"#FFFFFF"
 },
 txtStyle:{
     marginVertical:'10%',
     color:"#878787",
     fontSize:14,
-    fontWeight:"400"
-}
+    fontWeight:"400",
+    fontFamily:Fonts.poppinsRegular,
+    textAlign:"center"
+},
+   heading:{
+        fontWeight:"400",
+        fontSize:22,
+        lineHeight:32,
+        color:"#101010",
+        marginVertical:10,
+        fontFamily:Fonts.poppinsRegular
+    },
 })

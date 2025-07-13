@@ -1,36 +1,46 @@
 import { useNavigation } from "@react-navigation/native"
-import { View,Text,StyleSheet, TextInput, Pressable } from "react-native"
+import { View,Text,StyleSheet, TextInput, Pressable,Switch } from "react-native"
+import Logo from "../../assets/jsx/Logo"
+import Fonts from "../../constants/font"
+import Colors from "../../constants/color"
+import { Checkbox} from "react-native-paper"
+import { useState } from "react"
 
 const Register = () =>{
     const navigation = useNavigation()
+
+  const [checked, setChecked] = useState(false);
 return <View style={styles.container}>
     <View>
-    <Text style={styles.logo}>LOGO</Text>
+    <Logo/>
     </View>
-
+    <Text style={styles.heading}>Register</Text>
     <View style={styles.primaryContainer}>
-        <Text style={styles.heading}>Register</Text>
         <View style={styles.form}>
-            <Text>Name</Text>
+            <Text style={styles.headingText}>Name</Text>
             <TextInput style={styles.input} placeholder="Enter Your Nmae"/>
         </View>
         <View style={[styles.form,{marginTop:'5%'}]}>
-            <Text>Mobile Number</Text>
+            <Text style={styles.headingText}>Mobile Number</Text>
             <TextInput style={styles.input} placeholder="Enter Your Number"/>
         </View>
         <View style={[styles.form,{marginTop:'5%'}]}>
-            <Text>Products Interested in</Text>
+            <Text style={styles.headingText}>Products Interested in</Text>
             <TextInput style={styles.input} placeholder="Chose Multiple"/>
         </View>
-        <View style={[styles.form,{marginTop:0,marginLeft:20}]}>
-
-            <Text style={{color:"#00031480",fontWeight:"400",fontSize:14}}>Agree to Terms & Conditions</Text>
-            <View style={{width:'35%',borderWidth:0.5,borderColor:"#00031480"}}/>
+        <View style={[styles.form,{marginTop:0,flexDirection:"row",justifyContent:"flex-start",alignItems:'center'}]}>
+        <Switch
+        value={checked}
+        onValueChange={setChecked}
+        thumbColor={checked ? '#6200ee' : '#ccc'}
+      />
+            <Text style={{color:"#00031480",fontWeight:"400",fontSize:14,fontFamily:Fonts.poppinsLight}}>Agree to Terms & Conditions</Text>
+            {/* <View style={{borderWidth:0.5,borderColor:"#00031480",width:"38%",marginHorizontal:'18%'}}/> */}
         </View>
         <View style={styles.btnContainer}>
         
             <Pressable style={styles.btn} onPress={()=>navigation.navigate('RegisterSucess')}>
-                <Text style={{ color:"#FFFFFF"}}>Submit</Text>
+                <Text style={{ color:"#FFFFFF",fontSize:16,fontWeight:"400"}}>Submit</Text>
             </Pressable>
             <Pressable onPress={()=>navigation.navigate('Login')}>
             <Text style={styles.txtStyle}>Already have an account? <Text style={styles.underlineTxt}>Sign in</Text></Text>
@@ -54,6 +64,8 @@ const styles = StyleSheet.create({
     primaryContainer:{
         width:"100%",
         marginVertical:'10%',
+        backgroundColor:"#FFFFFF",
+        borderRadius:10
     
     },
     logo:{
@@ -66,7 +78,9 @@ const styles = StyleSheet.create({
     heading:{
         fontWeight:"400",
         fontSize:32,
-        color:"#131212"
+        color:"#131212",
+        fontFamily:Fonts.poppinsBold,
+        margin:5
     },
     input:{
         borderColor:"#CBD3DF",
@@ -79,7 +93,7 @@ const styles = StyleSheet.create({
     form:{
         textAlign:"center",
         width:"95%",
-        marginTop:'15%',
+        marginTop:'5%',
         marginLeft:10
         
     },
@@ -100,14 +114,20 @@ const styles = StyleSheet.create({
         justifyContent:"center",
         alignItems:"center",
         margin:10,
-        backgroundColor:"#D9D9D9",
-        borderRadius:20
+        backgroundColor:Colors.secondary,
+        borderRadius:20,
        
     },
     txtStyle:{
-        fontSize:14
+        fontSize:14,
+        fontFamily:Fonts.poppinsLight
     },
     underlineTxt:{
-        color:"#DADADA"
+        color:Colors.primary
+    },
+    headingText:{
+        fontWeight:"400",
+        fontSize:15,
+        fontFamily:Fonts.poppinsRegular
     }
 })
