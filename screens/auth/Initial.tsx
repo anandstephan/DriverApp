@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
         borderRadius:20,
     },
     btnTxt:{
-        fontFamily:Fonts.poppinsRegular,
+        fontFamily:Fonts.poppinsLight,
         fontSize:20,
         
     },
