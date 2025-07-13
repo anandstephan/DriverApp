@@ -2,6 +2,7 @@ import { View,Text,StyleSheet, Pressable, ImageBackground } from "react-native"
 import { useNavigation } from "@react-navigation/native"
 import Fonts from "../../constants/font"
 import Colors from "../../constants/color"
+import SmallLogo from "../../assets/jsx/smallLogo"
 
 const Initial = () =>{
 
@@ -18,7 +19,7 @@ const Initial = () =>{
             <View style={{flex:1}}/>
              <View style={styles.actionSheetContainer}>
                 <Text style={styles.heading}>Drive the Future, Power the Change</Text>
-                <Text style={styles.subHeading}>Welcome to India's EV Revolution for {'\n'} e-Rickshaws</Text>
+                <Text style={styles.subHeading}>Welcome to India's EV Revolution for {'\n'} e-Rickshaws <View style={{height:11}}><SmallLogo/></View></Text>
                 <View style={styles.btnContainer}>
                  <Pressable style={styles.btn} onPress={()=>navigation.navigate('Login')}>
                     <Text style={styles.btnTxt}>Log in</Text>
@@ -55,15 +56,16 @@ const styles = StyleSheet.create({
         borderRadius:20,
     },
     btnTxt:{
-        fontFamily:Fonts.inter,
-        fontSize:20
+        fontFamily:Fonts.poppinsRegular,
+        fontSize:20,
+        
     },
     actionSheetContainer:{
         flex:2,
         borderTopLeftRadius:70,
         borderTopRightRadius:70,
         justifyContent:"flex-end",
-        backgroundColor:"#FFFFFF"
+        backgroundColor:"#FBFDFE"
         // height:"100%"
     },
     heading:{
@@ -74,6 +76,9 @@ const styles = StyleSheet.create({
     subHeading:{
         textAlign:'center',
         fontWeight:"500",
-        fontSize:15
+        fontSize:15,
+        justifyContent:'center',
+        alignItems:'center',
+        fontFamily:Fonts.poppinsRegular
     }
 })

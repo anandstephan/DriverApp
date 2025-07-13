@@ -1,7 +1,7 @@
 // fonts.js
 const Fonts = {
   poppinsBold: 'Poppins-Bold',
-  inter:"Inter_28pt-Italic"
+  poppinsRegular:'Poppins-Regular'
   // Add more as needed
 };
 
