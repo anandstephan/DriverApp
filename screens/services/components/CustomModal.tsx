@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Modal, View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import AntDesign from 'react-native-vector-icons/AntDesign';
+import Fonts from '../../../constants/font';
 
 interface ModalProps{
     visible:boolean;
@@ -48,7 +49,7 @@ const styles = StyleSheet.create({
       width: 60,
       height: 60,
       borderRadius: 30,
-      backgroundColor: '#fff',
+      backgroundColor: '#76A950',
       justifyContent: 'center',
       alignItems: 'center',
       marginBottom: 15,
@@ -58,5 +59,6 @@ const styles = StyleSheet.create({
       fontSize: 18,
       fontWeight: '600',
       color: '#333',
+      fontFamily:Fonts.poppinsRegular
     },
   });

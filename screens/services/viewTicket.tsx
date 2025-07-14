@@ -1,6 +1,9 @@
 import { useNavigation } from '@react-navigation/native';
 import React from 'react';
 import { View, Text, FlatList, StyleSheet, Dimensions, Pressable } from 'react-native';
+import Header from './components/Header';
+import Colors from '../../constants/color';
+import Fonts from '../../constants/font';
 
 const data = [
   { id: '1', date: '11 - 04 - 25', type: 'Battery', status: 'Open' },
@@ -33,7 +36,9 @@ const ViewTicket = () => {
   );
 
   return (
-    <View style={styles.container}>
+    <View style={{flex:1,backgroundColor:Colors.appBackground}}>
+      <Header title='View Ticket'/>
+      <View style={styles.container}>
       <Text style={styles.heading}>History</Text>
       <View style={styles.header}>
         <Text style={[styles.cell, styles.headerText]}>Date</Text>
@@ -49,26 +54,31 @@ const ViewTicket = () => {
       />
       </View>
     </View>
+    </View>
+ 
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     margin: 16,
-    backgroundColor: '#EBEBEB',
+    backgroundColor: Colors.appBackground,
     borderRadius: 15,
     padding: 12,
+    marginTop:30
   },
   heading: {
     fontSize: 18,
     fontWeight: '600',
     textAlign: 'center',
     marginBottom: 10,
-    backgroundColor:"#D9D9D9",
+    backgroundColor:Colors.secondary,
     // width:"100%",
     padding:10,
     borderTopLeftRadius:10,
-    borderTopRightRadius:10
+    borderTopRightRadius:10,
+    color:Colors.white,
+    fontFamily:Fonts.poppinsRegular
   },
   header: {
     flexDirection: 'row',
@@ -76,16 +86,18 @@ const styles = StyleSheet.create({
     paddingVertical: 6,
     paddingHorizontal: 8,
     borderRadius: 6,
-    marginBottom: 6,
+    marginTop:-10,
+    backgroundColor:Colors.white,
+    
   },
   headerText: {
     fontWeight: '400',
-    color:"#ACACAC"
+    color:Colors.txt
   },
   card: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    backgroundColor: '#fff',
+    backgroundColor: Colors.white,
     paddingVertical: 15,
     paddingHorizontal: 8,
     marginVertical: 4,
@@ -103,9 +115,12 @@ const styles = StyleSheet.create({
     width: '30%',
     fontSize: 14,
     textAlign: 'center',
+    fontFamily:Fonts.poppinsRegular
   },
   listBackground:{
-    backgroundColor:"#EBEBEB"
+    backgroundColor:Colors.white,
+    borderBottomRightRadius:30,
+    borderBottomLeftRadius:30,
   }
 });
 

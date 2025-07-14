@@ -9,7 +9,7 @@ const First = () =>{
   console.log(isDarkMode)
   const dispatch = useDispatch();
 return <>
-  {isDarkMode ?<Main/> :<Auth/>}
+  {!isDarkMode ?<Main/> :<Auth/>}
 </>
 }
 

@@ -3,6 +3,9 @@ import { StyleSheet, View,Text, TextInput, Pressable } from "react-native"
 import { Dropdown } from 'react-native-element-dropdown';
 import Feather from 'react-native-vector-icons/Feather'
 import CustomModal from "./components/CustomModal";
+import Colors from "../../constants/color";
+import Fonts from "../../constants/font";
+import Header from "./components/Header";
 
 
 const data = [
@@ -19,7 +22,8 @@ const CreateTicket = () =>{
 return <View style={styles.container}>
 
   
-    <Text style={styles.txtStyle}>Raise Ticket</Text>
+
+    <Header title="Raise Ticket" />
     <View style={styles.innerContainer}>
         <Text style={styles.txt}>Select Ticket Type</Text>
          <Dropdown
@@ -45,8 +49,8 @@ return <View style={styles.container}>
             <View style={styles.circle}>
                 <Feather name="upload" size={30} color={"#656565"}/>
             </View>
-            <Text>Upload</Text>
-            <Text>Video, Photo</Text>
+            <Text style={styles.txt}>Upload</Text>
+            <Text style={styles.txt}>Video, Photo</Text>
     </View>
     
     </View>
@@ -63,28 +67,30 @@ const styles = StyleSheet.create({
     container:{
         // margin:10,
         padding:10,
-        backgroundColor:"#FFF",
+        backgroundColor:Colors.appBackground,
         flex:1
        },
        txt:{
         fontWeight:"400",
         color:"#585858",
-        marginVertical:5
+        marginVertical:5,
+        fontFamily:Fonts.poppinsRegular
        },
        txtStyle:{
           fontWeight:"600",
           fontSize:18 
        },
        innerContainer:{
-        backgroundColor:"#EBEBEB",
+        backgroundColor:Colors.white,
         padding: 16,
         margin:10,
-        borderRadius:15
+        borderRadius:15,
+        marginVertical:'12%'
   
        },
        dropdown: {
         height: 40,
-        borderColor: '#FFF',
+        borderColor: '#CDCDCD',
         borderWidth: 1,
         borderRadius: 8,
         paddingHorizontal: 8,
@@ -99,11 +105,13 @@ const styles = StyleSheet.create({
         color: '#000',
       },
       inputStyle:{
-        backgroundColor:"#FFF",
+        backgroundColor:Colors.white,
         padding:10,
         margin:5,
         height:120,
-        borderRadius:15
+        borderRadius:15,
+        borderColor:"#CDCDCD",
+        borderWidth:1
       },
       uploadStyle:{
         backgroundColor:"#F4F4F4",
@@ -114,7 +122,8 @@ const styles = StyleSheet.create({
         justifyContent:"center",
         alignItems:'center',
         padding:20,
-        borderRadius:10
+        borderRadius:10,
+        // fontFamily:Fonts.poppinsLight
       },
       circle:{
         borderRadius:100,
@@ -124,13 +133,14 @@ const styles = StyleSheet.create({
       btnContainer:{
         justifyContent:"center",
         alignItems:'center',
-        backgroundColor:"#A4A4A4",
+        backgroundColor:Colors.secondary,
         padding:15,
         marginHorizontal:10,
         borderRadius:10
       },
       btnTxt:{
         color:"#FFF",
-        fontWeight:"600"
+        fontWeight:"600",
+        fontFamily:Fonts.poppinsRegular
       }
 })
