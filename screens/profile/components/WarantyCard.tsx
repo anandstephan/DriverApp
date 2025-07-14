@@ -1,30 +1,22 @@
-import { StyleSheet, View,Text } from "react-native"
-import Battery from "../../../assets/jsx/Battery"
-import Time from "../../../assets/jsx/Time"
+import { StyleSheet, View,Text,Image } from "react-native"
 import Tag from "../../../assets/jsx/Tag"
+import Colors from "../../../constants/color"
 
 const WarantyCard = () =>{
 return <View style={styles.container}>
-    <View style={styles.rowContainer}>
-    <Battery/>
-    <View style={styles.rowContainer}>
-        <Time/>
-        <Text style={styles.dateLeft}>870 Days Left</Text>
-    </View>
-    </View>
-    <View style={styles.midContainer}>
+        <View style={styles.rowContainer}>
+        <View>
         <Text style={styles.cardNumber}>1234 5678 9012</Text>
-        <View style={styles.rowMidContainer}>
-            <View>
-                <Text style={styles.date}>07/24</Text>
-                <Text style={styles.datePlaceholder}>mm/yy</Text>
-            </View>
-            <View>
-                <Text style={styles.date}>07/29</Text>
-                <Text style={styles.datePlaceholder}>mm/yy</Text>
-            </View>
+        <Text style={styles.cardNumber}>Serial Number</Text>
+        <Text style={styles.cardNumber}>Valid Till:  07/2028 </Text>
+        <View style={styles.line}/>
         </View>
+        <Image
+        source={require('../../../assets/png/Clock.png')}
+        />
+
     </View>
+ 
     <View style={styles.tag}>
     <Tag/>
     </View>
@@ -38,7 +30,7 @@ export default WarantyCard
 
 const styles = StyleSheet.create({
 container:{
-       backgroundColor:"#D9D9D9",
+       backgroundColor:Colors.white,
         // height:300,
         borderRadius:10,
         marginHorizontal:20,
@@ -49,6 +41,7 @@ rowContainer:{
     flexDirection:"row",
     justifyContent:"space-between",
     alignItems:"center",
+
 
 },
 dateLeft:{
@@ -66,13 +59,8 @@ cardNumber:{
     fontWeight:"500",
     margin:10
 },
-rowMidContainer:{
-    flexDirection:"row",
-    // borderWidth:1,
-    // flex:1,
-    width:140,
-    justifyContent:"space-between",
-    alignItems:'center'
+subHeading:{
+  fontSize:12  
 },
 date:{
     fontWeight:"400",
@@ -95,5 +83,11 @@ txtStyle:{
     fontSize:14,
     alignSelf:"center",
     marginBottom:20
-}
+},
+  line:{
+        width:'100%',
+        backgroundColor:Colors.primary,
+        height:7,
+        borderRadius:10
+    },
 })

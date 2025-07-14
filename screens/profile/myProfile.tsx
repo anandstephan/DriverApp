@@ -9,10 +9,15 @@ import {
   SafeAreaView,
   TextInput,
 } from 'react-native';
+import Colors from '../../constants/color';
+import Fonts from '../../constants/font';
+import Header from '../services/components/Header';
 
 const MyProfile = () => {
   return (
     <SafeAreaView style={styles.safeArea}>
+
+      <Header title='My Profile'/>
       <ScrollView contentContainerStyle={styles.container}>
         <View style={styles.profileCard}>
           <View style={styles.imageWrapper}>
@@ -124,17 +129,20 @@ const MyProfile = () => {
 };
 
 const styles = StyleSheet.create({
-  safeArea: { flex: 1, backgroundColor: '#fff' },
+  safeArea: { 
+    flex: 1,
+     backgroundColor: Colors.appBackground 
+    },
   container: {
     flexGrow: 1,
     justifyContent: 'center',
     alignItems: 'center',
     paddingVertical: 24,
-    backgroundColor: '#fff',
+    backgroundColor: Colors.appBackground
   },
   profileCard: {
     width: 328,
-    backgroundColor: '#D9D9D9',
+    backgroundColor: Colors.white,
     borderRadius: 10,
     paddingTop: 60,
     paddingHorizontal: 24,
@@ -217,6 +225,7 @@ const styles = StyleSheet.create({
     fontSize: 12,
     color: '#777',
     marginBottom: 4,
+    fontFamily:Fonts.poppinsRegular
   },
   infoRow: {
     flexDirection: 'row',

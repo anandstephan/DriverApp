@@ -85,11 +85,11 @@ const styles = StyleSheet.create({
     },
     btnContainer:{
         flexDirection:"row",
-        backgroundColor:"#89898987",
+        backgroundColor:Colors.secondary,
         padding:10,
         borderRadius:10,  
         justifyContent:"center",
-        alignItems:"center"
+        alignItems:"center",
     },
     txtStyle:{
         fontFamily:Fonts.poppinsRegular

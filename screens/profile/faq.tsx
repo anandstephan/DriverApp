@@ -8,6 +8,9 @@ import {
 } from 'react-native';
 import Collapsible from 'react-native-collapsible';
 import Icon from 'react-native-vector-icons/Feather'; // install if not present: react-native-vector-icons
+import Colors from '../../constants/color';
+import Fonts from '../../constants/font';
+import Header from '../services/components/Header';
 
 const FAQ = () => {
   const [activeIndex, setActiveIndex] = useState<number | null>(1); // question 2 open by default
@@ -31,6 +34,8 @@ const FAQ = () => {
   };
 
   return (
+    <View style={styles.outerContainer}>
+      <Header title='FAQ'/>
     <ScrollView style={styles.container}>
       <Text style={styles.title}>FAQs</Text>
       {faqList.map((item, index) => (
@@ -52,19 +57,25 @@ const FAQ = () => {
         </View>
       ))}
     </ScrollView>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
+  outerContainer:{
+    flex:1,
+    backgroundColor: Colors.appBackground
+  },
   container: {
     padding: 16,
-    backgroundColor: '#fff',
-    flex: 1,
+    backgroundColor: Colors.appBackground
+    // flex: 1,
   },
   title: {
     fontSize: 20,
     fontWeight: 'bold',
     marginBottom: 16,
+    fontFamily:Fonts.poppinsBold
   },
   card: {
     backgroundColor: '#D9D9D9',
@@ -80,11 +91,13 @@ const styles = StyleSheet.create({
   question: {
     fontSize: 16,
     fontWeight: '600',
+    fontFamily:Fonts.poppinsRegular
   },
   answer: {
     marginTop: 10,
     fontSize: 14,
     color: '#333',
+    fontFamily:Fonts.poppinsLight
   },
 });
 

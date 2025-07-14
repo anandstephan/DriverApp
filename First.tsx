@@ -6,10 +6,9 @@ import Auth from "./navigator/auth/Auth";
 import { toggleDarkMode, setDarkMode } from './store/themeSlice';
 const First = () =>{
   const isDarkMode = useSelector((state) => state.theme.isDarkMode);
-  console.log(isDarkMode)
   const dispatch = useDispatch();
 return <>
-  {!isDarkMode ?<Main/> :<Auth/>}
+  {isDarkMode ?<Main/> :<Auth/>}
 </>
 }
 

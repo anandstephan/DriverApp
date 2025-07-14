@@ -3,6 +3,13 @@ import Entypo from 'react-native-vector-icons/Entypo'
 import Profile from "../../../assets/jsx/Profile.jsx"
 import { useNavigation } from "@react-navigation/native";
 import { Pressable } from "react-native";
+import Fonts from "../../../constants/font.js";
+import Document from "../../../assets/jsx/Document.jsx";
+import CreditCard from "../../../assets/jsx/CreditCard.jsx";
+import Toolkit from "../../../assets/jsx/Toolkit.jsx";
+import Agreement from "../../../assets/jsx/Agreement.jsx";
+import Share from "../../../assets/jsx/Share.jsx";
+import Logout from "../../../assets/jsx/Logout.jsx";
 
 interface NavigationProps{
     title:string;
@@ -12,11 +19,28 @@ interface NavigationProps{
 const Card = ({title,navigationScreen}:NavigationProps) =>{
 
     const navigation = useNavigation()
+    let icon;
+    if(title==='My Profile'){
+        icon = <Profile/>
+    }else if(title==="Digital Documents"){
+        icon= <Document/>
+    }else if(title==="Warranty card"){
+        icon = <CreditCard/>
+    }else if(title === 'Product Information'){
+        icon = <Toolkit/>
+    }
+    else if(title==="Driver Agreement"){
+        icon = <Agreement/>
+    }else if(title === "Logout"){
+        icon = <Logout/>
+    }else{
+        icon = <Share/>
+    }
 
 return     <Pressable onPress={()=>navigation.navigate(navigationScreen)}>
  <View style={styles.rowContainer}>
     <View style={[styles.rowContainer,{marginHorizontal:10}]}>
-     <Profile/>
+    {icon}
     <Text style={styles.heading}>{title}</Text>
     </View>
     <View>
@@ -38,6 +62,7 @@ const styles = StyleSheet.create({
     heading:{
         fontWeight:"400",
         fontSize:16,
-        marginLeft:10
+        marginLeft:10,
+        fontFamily:Fonts.poppinsRegular
     }
 })

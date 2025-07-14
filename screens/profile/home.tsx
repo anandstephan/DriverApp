@@ -1,5 +1,8 @@
 import { Image, StyleSheet, Text, View } from "react-native"
 import Card from "./components/Card"
+import Header from "../services/components/Header"
+import Colors from "../../constants/color"
+import Fonts from "../../constants/font"
 
 
 const arr = [
@@ -14,7 +17,7 @@ const arr = [
 
 const Home = () =>{
 return <View style={styles.container}>
-        <Text style={styles.heading}>My Profile</Text>
+        <Header title="My Profile"/>
         <View style={styles.innerContainer}>
             <Image
             source={require('../../assets/png/driverPic.png')}
@@ -43,7 +46,9 @@ export default Home
 const styles = StyleSheet.create({
     container:{
         margin:10,
-        padding:10
+        padding:10,
+        flex:1,
+        backgroundColor:Colors.appBackground
     },
     innerContainer:{
         flexDirection:"row",
@@ -55,14 +60,16 @@ const styles = StyleSheet.create({
     heading:{
         fontWeight:"500",
         fontSize:20,
-        color:"#000000"
+        color:Colors.txtblack,
+        fontFamily:Fonts.poppinsBold
     },
     subHeading:{
         fontWeight:"400",
-        fontSize:13
+        fontSize:13,
+        fontFamily:Fonts.poppinsLight
     },
     outerContainer:{
-        backgroundColor:"#D9D9D9",
+        backgroundColor:Colors.white,
         // height:300,
         borderRadius:10,
         marginHorizontal:20,

@@ -1,20 +1,25 @@
 import { StyleSheet, View,Text,Image } from "react-native"
 import ReferAndEarn from "../../assets/jsx/ReferAndEarn"
+import Fonts from "../../constants/font"
+import Colors from "../../constants/color"
+import Header from "../services/components/Header"
 
 const ReferEarn = () =>{
-return <View style={styles.container}>
+return <View style={{backgroundColor:Colors.appBackground,flex:1}}>
+    <Header title="Refer and Earn"/>
+<View style={styles.container}>
     <ReferAndEarn/>
     <Text style={styles.txtStyle}>**share your code and get exclusive peaks**</Text>
     <View style={styles.codeContainer}>
-        <Text>C85D1</Text>
+        <Text style={styles.label}>C85D1</Text>
         <View/>
         <View/>
         <View/>
         <View style={styles.line}/>
-        <Text>Copy</Text>
+        <Text style={styles.label}>Copy</Text>
     </View>
     <View style={[styles.codeContainer,{justifyContent:'center',borderWidth:0}]}>
-        <Text>Refer & Earn</Text>
+        <Text style={styles.label}>Refer & Earn</Text>
     </View>
       <View style={styles.secondaryContainer}>
         <View style={styles.outerContainer}>
@@ -43,6 +48,7 @@ return <View style={styles.container}>
         </View>
         </View>
 </View>
+</View>
 }
 
 export default ReferEarn
@@ -52,13 +58,14 @@ const styles = StyleSheet.create({
         justifyContent:'center',
         alignItems:"center",
         marginVertical:'10%',
-     
+
     },
     txtStyle:{
         fontWeight:"400",
         fontSize:14,
         color:"#000000",
-        marginTop:-25
+        marginTop:-25,
+        fontFamily:Fonts.poppinsRegular
     },
     codeContainer:{
         width:150,
@@ -88,7 +95,7 @@ const styles = StyleSheet.create({
         justifyContent:"center",
         alignItems:'center',
         padding:10,
-        backgroundColor:"#959595",
+        backgroundColor:Colors.secondary,
         borderTopLeftRadius:10,
         borderTopRightRadius:10
     },
@@ -97,8 +104,9 @@ const styles = StyleSheet.create({
     },
     tableHeadingStyle:{
         fontWeight:"700",
-        color:"#777777",
-        fontSize:16
+        color:Colors.white,
+        fontSize:16,
+        fontFamily:Fonts.poppinsRegular
     },
     tableContentContainer:{
         height:100
@@ -110,8 +118,9 @@ const styles = StyleSheet.create({
         alignItems:"center"
     },
     label:{
-        color:"#ACACAC",
+        color:Colors.txt,
         fontWeight:"400",
-        fontSize:15
+        fontSize:15,
+        fontFamily:Fonts.poppinsRegular
     }
 })

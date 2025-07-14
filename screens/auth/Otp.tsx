@@ -3,13 +3,14 @@ import { useEffect } from "react";
 import { StyleSheet, View,Text } from "react-native"
 import { OtpInput } from "react-native-otp-entry";
 import Fonts from "../../constants/font";
+import Colors from "../../constants/color";
 const Otp = () =>{
 
     const navigation = useNavigation()
 
     useEffect(()=>{
         setTimeout(()=>{
-            navigation.navigate('OtpSucess')
+            // navigation.navigate('OtpSucess')
         },2000)
     },[])
 
@@ -76,7 +77,9 @@ const styles = StyleSheet.create({
         marginHorizontal:20,
         padding:10,
         margin:10,
-        flex:1
+        flex:1,
+        backgroundColor:Colors.appBackground,
+        
     },
     primaryContainer:{
         flex:1,

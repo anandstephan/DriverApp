@@ -2,10 +2,15 @@ import {  ScrollView, View,Pressable,Text, StyleSheet } from "react-native"
 import ProductCard from "./components/ProductCard"
 import { useNavigation } from "@react-navigation/native"
 import VideoCard from "./components/VideoCard"
+import Colors from "../../constants/color"
+import Header from "../services/components/Header"
+import Fonts from "../../constants/font"
 
 const ProductInfo = () =>{
     const navigation = useNavigation()
-return <ScrollView>
+return <View style={styles.container}>
+    <Header title="Product Information"/>
+    <ScrollView>
         <ProductCard title="product"/>
         <VideoCard/>
         <ProductCard title="document"/>
@@ -14,6 +19,7 @@ return <ScrollView>
         </Pressable>
         
 </ScrollView>
+</View>
 }
 
 export default ProductInfo
@@ -22,12 +28,19 @@ const styles = StyleSheet.create({
     btnContainer:{
         padding:10,
         margin:10,
-        backgroundColor:"#D9D9D9",
+        backgroundColor:Colors.appBackground,
         justifyContent:"center",
-        alignItems:"center"
+        alignItems:"center",
+        borderWidth:1,
+        borderColor:Colors.lightGray
     },
     label:{
         fontWeight:"600",
-        fontSize:16   
+        fontSize:16,
+        fontFamily:Fonts.poppinsBold   
+    },
+    container:{
+        flex:1,
+        backgroundColor:Colors.appBackground
     }
 })

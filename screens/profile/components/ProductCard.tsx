@@ -1,6 +1,8 @@
 import { StyleSheet, View,Text } from "react-native"
 import AntDesign from 'react-native-vector-icons/AntDesign'
 import Ionicons from 'react-native-vector-icons/Ionicons'
+import Fonts from "../../../constants/font"
+import Colors from "../../../constants/color"
 const ProductCard = ({title}:string) =>{
 return <View style={styles.container}>
         <View style={styles.rowContainer}>
@@ -28,7 +30,7 @@ export default ProductCard
 
 const styles = StyleSheet.create({
     container:{
-        backgroundColor:"#D9D9D9",
+        backgroundColor:Colors.white,
         // height:300,
         borderRadius:10,
         marginHorizontal:20,
@@ -50,8 +52,9 @@ const styles = StyleSheet.create({
     label:{
       fontWeight:"500",
         fontSize:14,
-        color:"#000000",
-        marginLeft:20
+        color:Colors.txtblack,
+        marginLeft:20,
+        fontFamily:Fonts.poppinsRegular
     },
     box:{
         borderRadius:10,
@@ -59,8 +62,10 @@ const styles = StyleSheet.create({
         padding:10,
         margin:5, 
         height:80,
-        backgroundColor:"#FFF",
+        backgroundColor:Colors.white,
         justifyContent:"center",
-        alignItems:'center'
+        alignItems:'center',
+        borderWidth:0.8,
+        borderColor:Colors.lightGray
     }
 })

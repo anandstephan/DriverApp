@@ -3,9 +3,12 @@ import { View,Text,StyleSheet, TextInput, Pressable } from "react-native"
 import Logo from "../../assets/jsx/Logo"
 import Fonts from "../../constants/font"
 import Colors from "../../constants/color"
+import { useDispatch } from "react-redux"
+import { toggleDarkMode } from "../../store/themeSlice"
 
 const Login = () =>{
     const navigation = useNavigation()
+    const dispatch = useDispatch()
 return <View style={styles.container}>
     <View>
     <Logo/>
@@ -30,7 +33,9 @@ return <View style={styles.container}>
                 <Text style={{color:"#000000",fontFamily:Fonts.poppinsRegular}}>Login with OTP</Text>
                 <View style={{borderWidth:0.5,borderColor:"#000000"}}/>
             </Pressable>
-            <Pressable style={styles.btn}>
+            <Pressable style={styles.btn} onPress={()=>{
+                dispatch(toggleDarkMode())
+            }}>
                 <Text style={{ color:"#FFFFFF",fontFamily:Fonts.poppinsRegular}}>Login</Text>
             </Pressable>
         </View>
@@ -47,7 +52,8 @@ const styles = StyleSheet.create({
         alignItems:"flex-start",
         marginHorizontal:20,
         padding:10,
-        margin:10
+        margin:10,
+        // backgroundColor:'red'
     },  
     primaryContainer:{
         width:"100%",
@@ -74,10 +80,11 @@ const styles = StyleSheet.create({
     input:{
         borderColor:"#CBD3DF",
         borderWidth:1,
-        padding:20,
+        // padding:20,
         margin:10,
-        height:30,
-        borderRadius:10
+        // height:30,
+        borderRadius:10,
+        color:Colors.txtblack
     },
     form:{
         textAlign:"center",
