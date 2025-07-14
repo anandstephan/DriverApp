@@ -4,6 +4,8 @@ import { View, Text, Image } from 'react-native';
 import Services from '../../screens/services';
 import Wallet from '../../screens/wallet'
 import Profile from '../../screens/profile'
+import Colors from '../../constants/color';
+import Fonts from '../../constants/font';
 const Tab = createBottomTabNavigator();
 
 const DummyScreen = ({ title }) => (
@@ -42,18 +44,23 @@ const Main = () => {
             style={{
               width: 24,
               height: 24,
-              tintColor: focused ? '#000' : 'lightgray',
+              tintColor: focused ? Colors.txtblack: Colors.lightGray,
             }}
             resizeMode="contain"
           />
         ),
-        tabBarActiveBackgroundColor:"#FFFFFF",
-        tabBarActiveTintColor: '#000',
-        tabBarInactiveTintColor: 'lightgray',
+        tabBarLabelStyle:{
+          fontFamily:Fonts.poppinsBold,
+          fontSize:13
+        },
+        tabBarActiveBackgroundColor:Colors.white,
+        tabBarActiveTintColor: Colors.txtblack,
+        tabBarInactiveTintColor: Colors.lightGray,
         tabBarStyle: {
           backgroundColor: '#3D3D3D',
           height: 60,
           paddingBottom: 5,
+        
         },
         headerShown: false,
       })}

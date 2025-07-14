@@ -3,12 +3,17 @@ import Entypo from 'react-native-vector-icons/Entypo'
 import AntDesign from 'react-native-vector-icons/AntDesign'
 import AntDesign1 from 'react-native-vector-icons/AntDesign'
 import { useNavigation } from "@react-navigation/native"
+import Colors from "../../constants/color"
+import Fonts from "../../constants/font"
+import Header from "../services/components/Header"
 
 
 
 const Home = () =>{
     const navigation = useNavigation()
-return <ScrollView>
+return <View>
+    <Header title="My Wallet"/>
+<ScrollView style={{backgroundColor:Colors.appBackground,marginVertical:30}}>
         <View style={styles.container}>
         <View style={styles.rowContainer}>
             <Image
@@ -39,12 +44,12 @@ return <ScrollView>
             </View>
         </View>
 </View> 
-        <View style={[styles.container,{backgroundColor:"transparent"}]}>
+        <View style={[styles.container,{backgroundColor:"transparent",borderWidth:0}]}>
             <Text style={styles.heading}>EMI Trakcer</Text>
 
         </View>
         <View style={styles.container}>
-            <View style={styles.container}>
+            <View style={[styles.container,{borderWidth:0}]}>
             <Text style={styles.heading1}>Total Pending</Text>
             <View style={styles.rowContainer}>
             <Text style={styles.emiAmt}>₹53,444</Text>
@@ -54,7 +59,7 @@ return <ScrollView>
                 <View style={styles.line}/>
                 <View style={styles.line}/>
                 <View style={styles.line}/>
-                <View style={[styles.line,{backgroundColor:"#FFF"}]}/>
+                <View style={[styles.line,{backgroundColor:"red"}]}/>
                 <View style={[styles.line,{backgroundColor:"#FFF"}]}/>
                 <View style={[styles.line,{backgroundColor:"#FFF"}]}/>
                 <View style={[styles.line,{backgroundColor:"#FFF"}]}/>
@@ -67,8 +72,8 @@ return <ScrollView>
             <Pressable style={styles.btn} onPress={()=>navigation.navigate('payment')}>
                 <Text style={styles.btnTxt}>Schedule</Text>
             </Pressable>
-            <Pressable style={[styles.btn,{borderColor:"#EAEAEA",backgroundColor:"#FFF"}]}>
-                <Text style={styles.btnTxt}>History</Text>
+            <Pressable style={[styles.btn,{borderColor:"#EAEAEA",backgroundColor:Colors.primary}]}>
+                <Text style={[styles.btnTxt]}>History</Text>
             </Pressable>
         </View>
         <View style={[styles.container,{marginHorizontal:10}]}>
@@ -105,19 +110,21 @@ return <ScrollView>
         
         </View>
 </ScrollView>
+</View>
 }
 
 export default Home
 
 const styles = StyleSheet.create({
     container:{
-        backgroundColor:"#D9D9D9",
+        backgroundColor:Colors.white,
         // height:100,
         borderRadius:20,
         marginHorizontal:10,
         marginVertical:10,
         padding:5,
-
+        borderWidth:1,
+        borderColor:Colors.lightGray
     },
     rowContainer:{
         flexDirection:"row",
@@ -127,7 +134,8 @@ const styles = StyleSheet.create({
     },
     heading:{
         fontWeight:"700",
-        fontSize:20
+        fontSize:20,
+        fontFamily:Fonts.poppinsRegular
     },
     innerContainer:{
         flexDirection:"row",
@@ -137,7 +145,8 @@ const styles = StyleSheet.create({
     txtStyle:{
         fontWeight:"400",
         fontSize:14,
-        marginLeft:10
+        marginLeft:10,
+        fontFamily:Fonts.poppinsRegular
     },
     verticalContainer:{
         justifyContent:"space-between",
@@ -149,16 +158,18 @@ const styles = StyleSheet.create({
     heading1:{
         color:"#A8A8A8",
         fontWeight:"700",
-        fontSize:15
+        fontSize:15,
+        fontFamily:Fonts.poppinsRegular
     },
     emiAmt:{
         fontSize:16,
         fontWeight:"700",
-        color:"#777777"
+        color:"#777777",
+        fontFamily:Fonts.poppinsRegular
     },
     line:{
         width:40,
-        backgroundColor:"#6F6F6F",
+        backgroundColor:Colors.primary,
         height:7,
         borderRadius:10
     },
@@ -175,23 +186,26 @@ const styles = StyleSheet.create({
         margin:10,
         // borderWidth:1,
         borderRadius:20,
-        width:'30%',
-        backgroundColor:"#EAEAEA",
+        width:'40%',
+        backgroundColor:Colors.secondary,
        
     },
     btnTxt:{
         alignSelf:"center",
         fontWeight:"700",
-        fontSize:16
+        fontSize:16,
+        color:Colors.white
     },
     tableHeading:{
         color:"#ACACAC",
         fontWeight:"500",
-        fontSize:14
+        fontSize:14,
+        fontFamily:Fonts.poppinsRegular
     },
     tableContent:{
         // color:"#ACACAC",
         fontWeight:"700",
-        fontSize:14
+        fontSize:14,
+            fontFamily:Fonts.poppinsRegular
     }
 })
