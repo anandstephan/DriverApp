@@ -11,7 +11,7 @@ import Header from "../services/components/Header"
 
 const Home = () =>{
     const navigation = useNavigation()
-return <View>
+return <View style={{flex:1,backgroundColor:Colors.appBackground}}>
     <Header title="My Wallet"/>
 <ScrollView style={{backgroundColor:Colors.appBackground,marginVertical:30}}>
         <View style={styles.container}>
