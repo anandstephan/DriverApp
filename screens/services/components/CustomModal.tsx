@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Modal, View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Fonts from '../../../constants/font';
+import Colors from '../../../constants/color';
 
 interface ModalProps{
     visible:boolean;
@@ -37,7 +38,7 @@ const styles = StyleSheet.create({
     },
     modalContainer: {
       width: '80%',
-      backgroundColor: '#F3F3F3',
+      backgroundColor: Colors.white,
       borderRadius: 20,
       paddingVertical: 30,
       paddingHorizontal: 20,
@@ -49,7 +50,7 @@ const styles = StyleSheet.create({
       width: 60,
       height: 60,
       borderRadius: 30,
-      backgroundColor: '#76A950',
+      backgroundColor: Colors.primary,
       justifyContent: 'center',
       alignItems: 'center',
       marginBottom: 15,

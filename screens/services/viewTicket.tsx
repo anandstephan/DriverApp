@@ -36,7 +36,7 @@ const ViewTicket = () => {
   );
 
   return (
-    <View style={{flex:1,backgroundColor:Colors.appBackground}}>
+    <View style={styles.outerContainer}>
       <Header title='View Ticket'/>
       <View style={styles.container}>
       <Text style={styles.heading}>History</Text>
@@ -60,6 +60,10 @@ const ViewTicket = () => {
 };
 
 const styles = StyleSheet.create({
+  outerContainer:{
+    flex:1,
+    backgroundColor:Colors.appBackground
+  },
   container: {
     margin: 16,
     backgroundColor: Colors.appBackground,

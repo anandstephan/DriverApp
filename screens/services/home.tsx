@@ -12,23 +12,26 @@ const data = [
 
 
 const Home = () =>{
-return <View style={styles.container}>
+return <View style={styles.outerContainer}>
+ <View style={styles.container}>
         <Text style={styles.txtStyle}>Services Page</Text>
             {data.map(item => <Card key={item.heading} heading={item.heading} subHeading={item.subHeading}  navigationScreen={item.navigationScreen}/>)}
+</View>
 </View>
 }
 
 export default Home
 
 const styles = StyleSheet.create({
-    container:{
-     margin:10,
-     padding:10,
+    outerContainer:{
      backgroundColor:Colors.appBackground,
      flex:1
     },
+    container:{
+    margin:10,
+     padding:10,
+    },
     txtStyle:{
-       fontWeight:"600",
        fontSize:18 ,
        fontFamily:Fonts.poppinsBold
     }

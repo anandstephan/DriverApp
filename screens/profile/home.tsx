@@ -3,20 +3,22 @@ import Card from "./components/Card"
 import Header from "../services/components/Header"
 import Colors from "../../constants/color"
 import Fonts from "../../constants/font"
+import { FloatingWhatsApp } from "react-floating-whatsapp"
 
 
 const arr = [
     {title:"My Profile",navigationScreen:"myProfile"},
-    {title:"Digital Documents",navigationScreen:"myProfile"},
+    {title:"Digital Documents",navigationScreen:"digitalDocument"},
     {title:"Warranty card",navigationScreen:"waranty"},
     {title:"Product Information",navigationScreen:"productInfo"},
-    {title:"Driver Agreement",navigationScreen:"myProfile"},
+    {title:"Driver Agreement",navigationScreen:"driverAgreement"},
     {title:"Refer and Earn",navigationScreen:"referAndEarn"},
     {title:"Logout",navigationScreen:"myProfile"}
 ]
 
 const Home = () =>{
 return <View style={styles.container}>
+        <View>
         <Header title="My Profile"/>
         <View style={styles.innerContainer}>
             <Image
@@ -38,6 +40,17 @@ return <View style={styles.container}>
         <View style={styles.outerContainer}>
             {arr.map((item,idx) => <Card key={idx} {...item}/>)}
         </View>
+        </View>
+{/* <FloatingWhatsApp
+        phoneNumber="919876543210"
+        accountName="Support"
+        avatar="https://yourdomain.com/avatar.jpg"
+        chatMessage="Hi there! How can I help you?"
+        allowEsc
+        allowClickAway
+        notification
+        notificationSound
+      /> */}
 </View>
 }
 
@@ -45,11 +58,11 @@ export default Home
 
 const styles = StyleSheet.create({
     container:{
-        margin:10,
-        padding:10,
+      
         flex:1,
         backgroundColor:Colors.appBackground
     },
+  
     innerContainer:{
         flexDirection:"row",
         justifyContent:"space-between",

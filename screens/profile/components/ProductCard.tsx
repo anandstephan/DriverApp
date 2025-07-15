@@ -3,7 +3,11 @@ import AntDesign from 'react-native-vector-icons/AntDesign'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import Fonts from "../../../constants/font"
 import Colors from "../../../constants/color"
-const ProductCard = ({title}:string) =>{
+
+type Props={
+    title:String;
+}
+const ProductCard = ({title}:Props) =>{
 return <View style={styles.container}>
         <View style={styles.rowContainer}>
             <View style={styles.circle}>
