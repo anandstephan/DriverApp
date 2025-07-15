@@ -10,6 +10,8 @@ import Toolkit from "../../../assets/jsx/Toolkit.jsx";
 import Agreement from "../../../assets/jsx/Agreement.jsx";
 import Share from "../../../assets/jsx/Share.jsx";
 import Logout from "../../../assets/jsx/Logout.jsx";
+import { useDispatch } from "react-redux";
+import { toggleDarkMode } from "../../../store/themeSlice.js";
 
 interface NavigationProps{
     title:string;
@@ -19,6 +21,7 @@ interface NavigationProps{
 const Card = ({title,navigationScreen}:NavigationProps) =>{
 
     const navigation = useNavigation()
+    const dispatch = useDispatch()
     let icon;
     if(title==='My Profile'){
         icon = <Profile/>
@@ -37,7 +40,13 @@ const Card = ({title,navigationScreen}:NavigationProps) =>{
         icon = <Share/>
     }
 
-return     <Pressable onPress={()=>navigation.navigate(navigationScreen)}>
+return     <Pressable onPress={()=>{
+    if(title === "Logout"){
+        dispatch(toggleDarkMode())
+    }else{
+        navigation.navigate(navigationScreen)
+    }
+}}>
  <View style={styles.rowContainer}>
     <View style={[styles.rowContainer,{marginHorizontal:10}]}>
     {icon}
