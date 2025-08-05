@@ -5,10 +5,30 @@ import Fonts from "../../constants/font"
 import Colors from "../../constants/color"
 import { useDispatch } from "react-redux"
 import { toggleDarkMode } from "../../store/themeSlice"
+import { useState } from "react"
+import { useLogin } from "../../features/login/useLogin"
+import { storage } from "../../utilities/storage"
 
 const Login = () =>{
     const navigation = useNavigation()
     const dispatch = useDispatch()
+
+    const [driverId,setDriverId] = useState('DRI0013')
+    const [password,setPassword] = useState('pass@124')
+
+    const {handleLogin,loading} = useLogin()
+
+    const onLoginHandler = async () =>{
+        handleLogin({driverId,password},(response:Object)=>{
+        if(response.message === "Login successful"){
+        storage.set('token',response.token)
+        storage.set('driverInfo',response.driver)
+        dispatch(toggleDarkMode())
+
+        }
+        })
+    }
+
 return <View style={styles.container}>
     <View>
     <Logo/>
@@ -18,11 +38,11 @@ return <View style={styles.container}>
 
         <View style={styles.form}>
             <Text style={styles.headingText}>Driver ID</Text>
-            <TextInput style={styles.input}/>
+            <TextInput style={styles.input} onChangeText={e => setDriverId(e)} value={driverId}/>
         </View>
         <View style={[styles.form]}>
             <Text style={styles.headingText}>Password</Text>
-            <TextInput style={styles.input} keyboardType="visible-password" />
+            <TextInput style={styles.input} keyboardType="visible-password" onChangeText={e => setPassword(e)} value={password} />
         </View>
         <View style={[styles.form,{marginTop:0,marginLeft:20}]}>
             <Text style={{color:"#00031480",fontWeight:"400",fontSize:14,fontFamily:Fonts.poppinsLight}}>Forgot Password</Text>
@@ -33,9 +53,7 @@ return <View style={styles.container}>
                 <Text style={{color:"#000000",fontFamily:Fonts.poppinsRegular}}>Login with OTP</Text>
                 <View style={{borderWidth:0.5,borderColor:"#000000"}}/>
             </Pressable>
-            <Pressable style={styles.btn} onPress={()=>{
-                dispatch(toggleDarkMode())
-            }}>
+            <Pressable style={styles.btn} onPress={onLoginHandler}>
                 <Text style={{ color:"#FFFFFF",fontFamily:Fonts.poppinsRegular}}>Login</Text>
             </Pressable>
         </View>

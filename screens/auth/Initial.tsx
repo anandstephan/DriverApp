@@ -3,10 +3,28 @@ import { useNavigation } from "@react-navigation/native"
 import Fonts from "../../constants/font"
 import Colors from "../../constants/color"
 import SmallLogo from "../../assets/jsx/smallLogo"
+import { useEffect } from "react"
+import { storage } from "../../utilities/storage"
+import { useDispatch } from "react-redux"
+import { toggleDarkMode } from "../../store/themeSlice"
 
 const Initial = () =>{
 
     const navigation = useNavigation()
+    const dispatch = useDispatch()
+
+    useEffect(()=>{
+        async function getDriverInfo(){
+            const result = await storage.get('token')
+            console.log("===>",result)
+            if(result!==null){
+                     dispatch(toggleDarkMode())
+                
+            }
+        }
+        getDriverInfo()
+    },[])
+
 
   return  <ImageBackground
         source={require('../../assets/png/splash.png')}

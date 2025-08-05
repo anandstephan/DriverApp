@@ -45,14 +45,17 @@ const Main = () => {
               width: 24,
               height: 24,
               tintColor: focused ? Colors.txtblack: Colors.lightGray,
+              
             }}
             resizeMode="contain"
           />
         ),
         tabBarLabelStyle:{
           fontFamily:Fonts.poppinsBold,
-          fontSize:13
+          fontSize:13,
+       
         },
+        
         tabBarActiveBackgroundColor:Colors.white,
         tabBarActiveTintColor: Colors.txtblack,
         tabBarInactiveTintColor: Colors.lightGray,

@@ -3,13 +3,28 @@ import { View,Text,StyleSheet, TextInput, Pressable,Switch } from "react-native"
 import Logo from "../../assets/jsx/Logo"
 import Fonts from "../../constants/font"
 import Colors from "../../constants/color"
-import { Checkbox} from "react-native-paper"
 import { useState } from "react"
+import { useSignup } from "../../features/signup/useSignup"
 
 const Register = () =>{
     const navigation = useNavigation()
 
   const [checked, setChecked] = useState(false);
+
+  const [name,setName] = useState('')
+  const [phone,setPhone] = useState('')
+  const [interestedIn,setInterestedIn] = useState('')
+  const {handleSignup,loading} =useSignup()
+
+  const onSubmitHandler = () =>{
+
+    handleSignup({name,phone,interestedIn},()=>{
+    navigation.navigate('RegisterSucess')
+    })
+
+  }
+
+
 return <View style={styles.container}>
     <View>
     <Logo/>
@@ -18,15 +33,15 @@ return <View style={styles.container}>
     <View style={styles.primaryContainer}>
         <View style={styles.form}>
             <Text style={styles.headingText}>Name</Text>
-            <TextInput style={styles.input} placeholder="Enter Your Nmae"/>
+            <TextInput style={styles.input} placeholder="Enter Your Name" onChangeText={e => setName(e)} value={name} />
         </View>
         <View style={[styles.form,{marginTop:'5%'}]}>
             <Text style={styles.headingText}>Mobile Number</Text>
-            <TextInput style={styles.input} placeholder="Enter Your Number"/>
+            <TextInput style={styles.input} placeholder="Enter Your Number" onChangeText={e => setPhone(e)} value={phone}/>
         </View>
         <View style={[styles.form,{marginTop:'5%'}]}>
             <Text style={styles.headingText}>Products Interested in</Text>
-            <TextInput style={styles.input} placeholder="Chose Multiple"/>
+            <TextInput style={styles.input} placeholder="Chose Multiple" onChangeText={e => setInterestedIn(e)} value={interestedIn}/>
         </View>
         <View style={[styles.form,{marginTop:0,flexDirection:"row",justifyContent:"flex-start",alignItems:'center'}]}>
         <Switch
@@ -39,7 +54,7 @@ return <View style={styles.container}>
         </View>
         <View style={styles.btnContainer}>
         
-            <Pressable style={styles.btn} onPress={()=>navigation.navigate('RegisterSucess')}>
+            <Pressable style={styles.btn} onPress={onSubmitHandler}>
                 <Text style={{ color:"#FFFFFF",fontSize:16,fontWeight:"400"}}>Submit</Text>
             </Pressable>
             <Pressable onPress={()=>navigation.navigate('Login')}>

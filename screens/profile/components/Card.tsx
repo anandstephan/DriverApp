@@ -12,6 +12,8 @@ import Share from "../../../assets/jsx/Share.jsx";
 import Logout from "../../../assets/jsx/Logout.jsx";
 import { useDispatch } from "react-redux";
 import { toggleDarkMode } from "../../../store/themeSlice.js";
+import { logoutUser } from "../../../features/logout/logoutService.ts";
+import { storage } from "../../../utilities/storage.ts";
 
 interface NavigationProps{
     title:string;
@@ -42,7 +44,15 @@ const Card = ({title,navigationScreen}:NavigationProps) =>{
 
 return     <Pressable onPress={()=>{
     if(title === "Logout"){
-        dispatch(toggleDarkMode())
+        logoutUser()
+        .then(res => {
+            if(res?.message==="Logged out successfully"){
+                storage.clear()
+                dispatch(toggleDarkMode())
+            }
+        
+        })
+
     }else{
         navigation.navigate(navigationScreen)
     }
