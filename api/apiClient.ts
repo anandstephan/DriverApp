@@ -6,16 +6,17 @@ const apiClient = axios.create({
   timeout: 5000,
   headers:{
     'Content-Type':"application/json"
-  }
+  },
+  withCredentials: true 
 });
 
-apiClient.interceptors.request.use(async (config) => {
-  const token = await storage.get('token')
-  if (token) {
-    config.headers.Authorization = `Bearer ${token}`;
-  }
-  return config;
-});
+// apiClient.interceptors.request.use(async (config) => {
+//   const token = await storage.get('token')
+//   if (token) {
+//     config.headers.Authorization = `Bearer ${token}`;
+//   }
+//   return config;
+// });
 
 
 export default apiClient;

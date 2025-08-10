@@ -21,8 +21,6 @@ const Login = () =>{
     const onLoginHandler = async () =>{
         handleLogin({driverId,password},(response:Object)=>{
         if(response.message === "Login successful"){
-        storage.set('token',response.token)
-        storage.set('driverInfo',response.driver)
         dispatch(toggleDarkMode())
 
         }

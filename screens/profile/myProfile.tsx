@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   View,
   Text,
@@ -8,12 +8,60 @@ import {
   ScrollView,
   SafeAreaView,
   TextInput,
+  ActivityIndicator,
 } from 'react-native';
 import Colors from '../../constants/color';
 import Fonts from '../../constants/font';
 import Header from '../services/components/Header';
+import { useProfile } from '../../features/myprofile/useProfile';
+import { ProfileTab } from '../../features/myprofile/type';
 
 const MyProfile = () => {
+
+  const { profile, loading, error, refetch } = useProfile();
+  
+  const [profileTab,setProfileTab] = useState<ProfileTab>({
+    name:'',
+    driverId:"",
+    phone:"",
+    address:"",
+    cluster:"",
+    city:"",
+    state:""
+  })
+
+useEffect(() => {
+  if (profile) {
+    setProfileTab({
+      name: profile?.name ?? '',
+      driverId: profile?.driverId ?? '',
+      phone: profile?.phone ?? '',
+      address: profile?.address ?? '',
+      cluster: profile?.cluster ?? '',
+      city: profile?.city ?? '',
+      state: profile?.state ?? '',
+    });
+  }
+}, [profile]);
+
+
+  if (loading) {
+    return (
+      <SafeAreaView style={[styles.safeArea, { justifyContent: 'center', alignItems: 'center' }]}>
+        <ActivityIndicator size="large" color={Colors.primary} />
+      </SafeAreaView>
+    );
+  }
+
+  if (error) {
+    return (
+      <SafeAreaView style={[styles.safeArea, { justifyContent: 'center', alignItems: 'center' }]}>
+        <Text style={{ color: 'red' }}>{error}</Text>
+      </SafeAreaView>
+    );
+  }
+
+
   return (
     <SafeAreaView style={styles.safeArea}>
 
@@ -40,7 +88,7 @@ const MyProfile = () => {
           <View style={styles.infoItem}>
             <Text style={styles.label}>Driver Name</Text>
             <View style={styles.infoRow}>
-              <TextInput style={styles.value} value='Rajesh Kumar'/>
+              <TextInput style={styles.value} value={profileTab.name} />
               <Image
               source={require('../../assets/png/circlecheck.png')}
               width={200}
@@ -64,7 +112,7 @@ const MyProfile = () => {
           <View style={styles.infoItem}>
             <Text style={styles.label}>Driver Contact Number</Text>
             <View style={styles.infoRow}>
-              <TextInput style={styles.value} value="+91 987654321"/>
+              <TextInput style={styles.value} value={profileTab.phone}/>
               <Image
               source={require('../../assets/png/circlecheck.png')}
               width={200}
@@ -76,7 +124,7 @@ const MyProfile = () => {
           <View style={styles.infoItem}>
             <Text style={styles.label}>Driver Address</Text>
             <View style={styles.infoRow}>
-              <TextInput style={styles.value} value="123 Royal street"/>
+              <TextInput style={styles.value} value={profileTab.address}/>
             <Image
               source={require('../../assets/png/circlecheck.png')}
               width={200}
@@ -88,7 +136,7 @@ const MyProfile = () => {
           <View style={styles.infoItem}>
             <Text style={styles.label}>Cluster</Text>
             <View style={styles.infoRow}>
-              <TextInput style={styles.value} value="Delhi NCR"/>
+              <TextInput style={styles.value} value={profileTab.cluster}/>
             <Image
               source={require('../../assets/png/circlecheck.png')}
               width={200}
@@ -100,7 +148,7 @@ const MyProfile = () => {
           <View style={styles.infoItem}>
             <Text style={styles.label}>City</Text>
             <View style={styles.infoRow}>
-              <TextInput style={styles.value} value="Delhi"/>
+              <TextInput style={styles.value} value={profileTab.city}/>
              <Image
               source={require('../../assets/png/circlecheck.png')}
               width={200}
@@ -112,7 +160,7 @@ const MyProfile = () => {
           <View style={styles.infoItem}>
             <Text style={styles.label}>State</Text>
             <View style={styles.infoRow}>
-              <TextInput style={styles.value} value="New Delhi"/>
+              <TextInput style={styles.value} value={profileTab.state}/>
               <Image
               source={require('../../assets/png/circlecheck.png')}
               width={200}

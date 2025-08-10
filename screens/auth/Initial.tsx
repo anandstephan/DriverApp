@@ -16,7 +16,7 @@ const Initial = () =>{
     useEffect(()=>{
         async function getDriverInfo(){
             const result = await storage.get('token')
-            console.log("===>",result)
+            console.log("===>",result)  
             if(result!==null){
                      dispatch(toggleDarkMode())
                 

@@ -1,12 +1,35 @@
-import { View, StyleSheet, Text, Image } from "react-native";
+import { View, StyleSheet, Text, Image, SafeAreaView, ActivityIndicator } from "react-native";
 import Entypo from "react-native-vector-icons/Entypo";
 import AntDesign from "react-native-vector-icons/AntDesign";
 import { Rating } from "react-native-ratings";
 import Header from "./components/Header";
 import Colors from "../../constants/color";
 import Fonts from "../../constants/font";
+import { useRoute } from "@react-navigation/native";
+import { useTicket } from "../../features/ticket/useTicket";
 
 const BatteryStatus = () => {
+
+  const route = useRoute()
+  const {ticketId} = route.params
+  const {ticket,loading,error,refetch} =   useTicket(ticketId)
+  console.log(ticket)
+  
+    if (loading) {
+    return (
+      <SafeAreaView style={[styles.safeArea, { justifyContent: 'center', alignItems: 'center' }]}>
+        <ActivityIndicator size="large" color={Colors.primary} />
+      </SafeAreaView>
+    );
+  }
+
+  if (error) {
+    return (
+      <SafeAreaView style={[styles.safeArea, { justifyContent: 'center', alignItems: 'center' }]}>
+        <Text style={{ color: 'red' }}>{error}</Text>
+      </SafeAreaView>
+    );
+  }
   return (
     <View style={styles.screen}>
       <Header title="View Ticket" />
@@ -28,10 +51,10 @@ const BatteryStatus = () => {
           <View style={styles.rowContainer}>
             <View style={styles.rowNoPadding}>
               <AntDesign name="calendar" size={20} />
-              <Text style={styles.date}>10/02/2025</Text>
+              <Text style={styles.date}>{new Date(ticket?.createdAt).toLocaleDateString()}</Text>
             </View>
             <View style={styles.codeBox}>
-              <Text style={styles.codeText}>10AL9831</Text>
+              <Text style={styles.codeText}>{ticket?.ticketId}</Text>
             </View>
           </View>
 
@@ -53,8 +76,7 @@ const BatteryStatus = () => {
         <View style={styles.descriptionBox}>
           <Text style={styles.descriptionHeading}>Description</Text>
           <Text style={styles.para}>
-            Battery stopped working yesterday, please fix it fast. Charger is
-            working
+            {ticket?.description}
           </Text>
 
           {/* Image/Media Row */}
@@ -234,4 +256,8 @@ const styles = StyleSheet.create({
     marginLeft: -90,
     marginVertical: 10,
   },
+  safeArea:{
+        flex: 1,
+     backgroundColor: Colors.appBackground 
+  }
 });
