@@ -6,3 +6,4 @@ export const loginUser = async (payload: LoginPayload): Promise<LoginResponse> =
   const response = await apiClient.post<LoginResponse>('/api/auth/driver/login', payload);
   return response.data;
 };
+

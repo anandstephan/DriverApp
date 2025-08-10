@@ -14,6 +14,7 @@ import { useDispatch } from "react-redux";
 import { toggleDarkMode } from "../../../store/themeSlice.js";
 import { logoutUser } from "../../../features/logout/logoutService.ts";
 import { storage } from "../../../utilities/storage.ts";
+import { useLogout } from "../../../features/logout/useLogout.ts";
 
 interface NavigationProps{
     title:string;
@@ -42,17 +43,13 @@ const Card = ({title,navigationScreen}:NavigationProps) =>{
         icon = <Share/>
     }
 
-return     <Pressable onPress={()=>{
+return     <Pressable onPress={async ()=>{
+    
     if(title === "Logout"){
-        logoutUser()
-        .then(res => {
-            if(res?.message==="Logged out successfully"){
-                storage.clear()
-                dispatch(toggleDarkMode())
-            }
-        
-        })
-
+        console.log("===")
+          const res =  await useLogout()
+          console.log('res',res)
+            dispatch(toggleDarkMode())
     }else{
         navigation.navigate(navigationScreen)
     }
