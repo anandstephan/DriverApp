@@ -13,7 +13,7 @@ import Logout from "../../../assets/jsx/Logout.jsx";
 import { useDispatch } from "react-redux";
 import { toggleDarkMode } from "../../../store/themeSlice.js";
 import { logoutUser } from "../../../features/logout/logoutService.ts";
-import { storage } from "../../../utilities/storage.ts";
+
 import { useLogout } from "../../../features/logout/useLogout.ts";
 
 interface NavigationProps{
@@ -25,6 +25,9 @@ const Card = ({title,navigationScreen}:NavigationProps) =>{
 
     const navigation = useNavigation()
     const dispatch = useDispatch()
+
+  const { logout, loading, error, status } = useLogout();
+
     let icon;
     if(title==='My Profile'){
         icon = <Profile/>
@@ -44,10 +47,10 @@ const Card = ({title,navigationScreen}:NavigationProps) =>{
     }
 
 return     <Pressable onPress={async ()=>{
-    
+        console.log(title,title === "Logout")
     if(title === "Logout"){
-        console.log("===")
-          const res =  await useLogout()
+        console.log("hhhh")
+          const res =  await logout()
           console.log('res',res)
             dispatch(toggleDarkMode())
     }else{

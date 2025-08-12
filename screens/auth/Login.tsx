@@ -7,7 +7,7 @@ import { useDispatch } from "react-redux"
 import { toggleDarkMode } from "../../store/themeSlice"
 import { useState } from "react"
 import { useLogin } from "../../features/login/useLogin"
-import { storage } from "../../utilities/storage"
+
 
 const Login = () =>{
     const navigation = useNavigation()
@@ -22,7 +22,6 @@ const Login = () =>{
         handleLogin({driverId,password},(response:Object)=>{
         if(response.message === "Login successful"){
         dispatch(toggleDarkMode())
-
         }
         })
     }
@@ -31,7 +30,7 @@ return <View style={styles.container}>
     <View>
     <Logo/>
     </View>
-        <Text style={styles.heading}>Login</Text>
+        <Text style={styles.heading}>Login2</Text>
     <View style={styles.primaryContainer}>
 
         <View style={styles.form}>

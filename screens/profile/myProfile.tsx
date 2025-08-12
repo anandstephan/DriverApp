@@ -182,17 +182,19 @@ const styles = StyleSheet.create({
      backgroundColor: Colors.appBackground 
     },
   container: {
-    flexGrow: 1,
+
     justifyContent: 'center',
     alignItems: 'center',
     paddingVertical: 24,
-    backgroundColor: Colors.appBackground
+    backgroundColor: Colors.appBackground,
+   
+  
   },
   profileCard: {
     width: 328,
     backgroundColor: Colors.white,
     borderRadius: 10,
-    paddingTop: 60,
+    paddingTop: 100,
     paddingHorizontal: 24,
     paddingBottom: 24,
     alignItems: 'stretch',
@@ -204,13 +206,13 @@ const styles = StyleSheet.create({
     elevation: 3,
   },
   imageWrapper: {
-    width: 120,
-    height: 120,
+    width: 100,
+    height: 100,
     borderRadius: 60,
     overflow: 'hidden',
     backgroundColor: '#bbb',
     position: 'absolute',
-    top: -60,
+    top: -20,
     alignSelf: 'center',
   },
   profileImage: {

@@ -11,8 +11,8 @@ export const useLogout = () => {
     try {
       setLoading(true);
       setError(null);
+
       const res = await logoutUser();
-      console.log(res)
       setStatus(res);
       return res; // optionally return response to caller
     } catch (err: any) {

@@ -6,6 +6,7 @@ import Wallet from '../../screens/wallet'
 import Profile from '../../screens/profile'
 import Colors from '../../constants/color';
 import Fonts from '../../constants/font';
+import MapScreen from '../../screens/map/MapScreen';
 const Tab = createBottomTabNavigator();
 
 const DummyScreen = ({ title }) => (
@@ -55,7 +56,7 @@ const Main = () => {
           fontSize:13,
        
         },
-        
+      
         tabBarActiveBackgroundColor:Colors.white,
         tabBarActiveTintColor: Colors.txtblack,
         tabBarInactiveTintColor: Colors.lightGray,
@@ -63,12 +64,12 @@ const Main = () => {
           backgroundColor: '#3D3D3D',
           height: 60,
           paddingBottom: 5,
-        
+
         },
         headerShown: false,
       })}
     >
-      <Tab.Screen name="Assets" children={() => <DummyScreen title="Assets" />} />
+      <Tab.Screen name="Assets" component={MapScreen}/>
       <Tab.Screen name="My Wallet" component={Wallet}/>
       <Tab.Screen name="Services"  component={Services}/>
       <Tab.Screen name="My Profile"  component={Profile}/>

@@ -4,6 +4,7 @@ import Header from "../services/components/Header"
 import Colors from "../../constants/color"
 import Fonts from "../../constants/font"
 import { FloatingWhatsApp } from "react-floating-whatsapp"
+import { useProfile } from "../../features/myprofile/useProfile"
 
 
 const arr = [
@@ -17,6 +18,8 @@ const arr = [
 ]
 
 const Home = () =>{
+
+    const {profile} = useProfile()
 return <View style={styles.container}>
         <View>
         <Header title="My Profile"/>
@@ -25,10 +28,10 @@ return <View style={styles.container}>
             source={require('../../assets/png/driverPic.png')}
             />
             <View>
-                <Text style={styles.heading}>Pankaj Kumar</Text>
+                <Text style={styles.heading}>{profile?.name}</Text>
                 <View>
-                    <Text style={styles.subHeading}>Driver ID-      LI2011</Text>
-                    <Text style={styles.subHeading}>Battery ID-    XYZ15358</Text>
+                    <Text style={styles.subHeading}>Driver ID-      {profile?.driverId}</Text>
+                    <Text style={styles.subHeading}>Battery ID-    {profile?.batteryId}</Text>
                 </View>
             </View>
             <View/>
