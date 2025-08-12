@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { View, PermissionsAndroid, Platform, ActivityIndicator, StyleSheet,Text, Image } from 'react-native';
+import { View, PermissionsAndroid, Platform, ActivityIndicator, StyleSheet,Text, Image, Button, Pressable } from 'react-native';
 import MapView, { Marker,PROVIDER_GOOGLE } from 'react-native-maps';
 import Geolocation from '@react-native-community/geolocation';
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
+import Fontisto from 'react-native-vector-icons/Fontisto'
 import HeaderLogo from '../../assets/jsx/HeaderLogo';
 import Language from '../../assets/jsx/Language';
 import BatterySign from '../../assets/jsx/BatterySign';
@@ -10,9 +11,10 @@ import Heart from '../../assets/jsx/Heart';
 import Temperature from '../../assets/jsx/Temperature';
 import Road from '../../assets/jsx/Road';
 import StopWatch from '../../assets/jsx/StopWatch';
+import { useNavigation } from '@react-navigation/native';
 export default function MapScreen() {
   const [location, setLocation] = useState(null);
-
+    const navigation = useNavigation()
   useEffect(() => {
     requestLocationPermission();
   }, []);
@@ -52,32 +54,36 @@ export default function MapScreen() {
                 <HeaderLogo/>
                 <View style={styles.rowContainer}>
                 <Language/>      
+                <Pressable onPress={()=>navigation.navigate('Notification')}>
                 <MaterialIcons name="notifications-none" size={28} />
+                </Pressable>
+
                 </View>
         </View>
         <View style={styles.batteryStatusContainer}>
             <View style={styles.rowContainer}>
                 <BatterySign/>
-                <Text>95%</Text>
+                <Text style={styles.txtStyle}>95%</Text>
             </View>
              <View style={styles.rowContainer}>
                 <Heart/>
-                <Text>100%</Text>
+                <Text style={styles.txtStyle}>100%</Text>
             </View>
                 <View style={styles.rowContainer}>
                 <Temperature/>
-                <Text>45C</Text>
+                <Text style={styles.txtStyle}>45C</Text>
             </View>
                 <View style={styles.rowContainer}>
                 <Road/>
-                <Text>62KM</Text>
+                <Text style={styles.txtStyle}>62KM</Text>
             </View>
             <View style={styles.rowContainer}>
                 <StopWatch/>
-                <Text>5.3Hrs</Text>
+                <Text style={styles.txtStyle}>5.3Hrs</Text>
             </View>
         </View>
       {location ? (
+        <>
         <MapView
         provider={PROVIDER_GOOGLE}
           style={{ flex: 1 }}
@@ -90,7 +96,27 @@ export default function MapScreen() {
           }}
         >
           <Marker coordinate={location} title="You are here" />
+ 
         </MapView>
+            <View style={styles.fabContainer}>
+            {[
+              { icon: 'info', action: () => navigation.navigate('Report') },
+              { icon: 'spinner-refresh', action: () => console.log('Zoom Out') },
+            ].map((btn, index) => (
+              <Pressable
+                key={index}
+                android_ripple={{ color: 'rgba(255,255,255,0.3)', borderless: false }}
+                onPress={btn.action}
+                style={({ pressed }) => [
+                  styles.fab,
+                  { backgroundColor: pressed ? '#0056b3' : '#000000' }
+                ]}
+              >
+                <Fontisto name={btn.icon} size={23} color="#fff" />
+              </Pressable>
+            ))}
+          </View>
+        </>
       ): <View style={styles.loadingContainer}>
         <ActivityIndicator size={'large'} />
         <Text>Fetching Location</Text>
@@ -124,5 +150,24 @@ const styles = StyleSheet.create({
         justifyContent:"space-between",
         alignItems:"center",
         marginHorizontal:10
-    }
+    },
+    txtStyle:{
+        fontWeight:"bold",
+        fontSize:15
+    },
+     fabContainer: {
+    position: 'absolute',
+    right: 20,
+    top: 480,
+    alignItems: 'center',
+  },
+  fab: {
+    borderRadius: 30,
+    width: 50,
+    height: 50,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginVertical: 8,
+    elevation: 5,
+  },
 })

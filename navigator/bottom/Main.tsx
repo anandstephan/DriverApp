@@ -6,7 +6,7 @@ import Wallet from '../../screens/wallet'
 import Profile from '../../screens/profile'
 import Colors from '../../constants/color';
 import Fonts from '../../constants/font';
-import MapScreen from '../../screens/map/MapScreen';
+import MapStack from '../../screens/map';
 const Tab = createBottomTabNavigator();
 
 const DummyScreen = ({ title }) => (
@@ -69,7 +69,7 @@ const Main = () => {
         headerShown: false,
       })}
     >
-      <Tab.Screen name="Assets" component={MapScreen}/>
+      <Tab.Screen name="Assets" component={MapStack}/>
       <Tab.Screen name="My Wallet" component={Wallet}/>
       <Tab.Screen name="Services"  component={Services}/>
       <Tab.Screen name="My Profile"  component={Profile}/>
