@@ -12,6 +12,7 @@ import Temperature from '../../assets/jsx/Temperature';
 import Road from '../../assets/jsx/Road';
 import StopWatch from '../../assets/jsx/StopWatch';
 import { useNavigation } from '@react-navigation/native';
+import Carousel from './components/Carousel';
 export default function MapScreen() {
   const [location, setLocation] = useState(null);
     const navigation = useNavigation()
@@ -60,6 +61,7 @@ export default function MapScreen() {
 
                 </View>
         </View>
+        <Carousel/>
         <View style={styles.batteryStatusContainer}>
             <View style={styles.rowContainer}>
                 <BatterySign/>
@@ -113,9 +115,13 @@ export default function MapScreen() {
                 ]}
               >
                 <Fontisto name={btn.icon} size={23} color="#fff" />
+        
               </Pressable>
             ))}
           </View>
+            <View style={[styles.fabContainer,{top:610}]}>
+              <Text style={styles.txtStyle}>*Refreshed 15 mins ago</Text>
+            </View>
         </>
       ): <View style={styles.loadingContainer}>
         <ActivityIndicator size={'large'} />
@@ -137,7 +143,8 @@ const styles = StyleSheet.create({
         flexDirection:"row",
         justifyContent:"space-between",
         alignItems:"center",
-        marginHorizontal:10
+        marginHorizontal:10,
+        paddingHorizontal:'5%',
     },
     rowContainer:{
         flexDirection:"row",
@@ -149,7 +156,8 @@ const styles = StyleSheet.create({
         flexDirection:"row",
         justifyContent:"space-between",
         alignItems:"center",
-        marginHorizontal:10
+        marginHorizontal:10,
+        marginVertical:10
     },
     txtStyle:{
         fontWeight:"bold",

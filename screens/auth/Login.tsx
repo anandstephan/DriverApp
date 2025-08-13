@@ -19,6 +19,7 @@ const Login = () =>{
     const {handleLogin,loading} = useLogin()
 
     const onLoginHandler = async () =>{
+           dispatch(toggleDarkMode())
         handleLogin({driverId,password},(response:Object)=>{
         if(response.message === "Login successful"){
         dispatch(toggleDarkMode())
@@ -30,7 +31,7 @@ return <View style={styles.container}>
     <View>
     <Logo/>
     </View>
-        <Text style={styles.heading}>Login2</Text>
+        <Text style={styles.heading}>Login</Text>
     <View style={styles.primaryContainer}>
 
         <View style={styles.form}>
