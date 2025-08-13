@@ -48,7 +48,8 @@ const styles = StyleSheet.create({
     paddingVertical: 3,
     flexDirection:"row",
     alignItems:"center",
-    justifyContent:"center"
+    justifyContent:"center",
+    margin:10
   },
   backText: {
     color: '#fff',

@@ -133,8 +133,10 @@ const Report = () =>{
           </View>
         </View>
         :
-
+        <View style={{flex:2}}>
         <TabBar/>
+        </View>
+
         }
   
         </>

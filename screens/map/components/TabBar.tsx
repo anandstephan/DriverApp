@@ -2,11 +2,20 @@ import * as React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
+import InfoCard from './InfoCard';
 
 function TodayScreen() {
   return (
     <View style={styles.container}>
-      <Text>Today Cards Render Here</Text>
+        <View style={styles.rowContainer}>
+        <InfoCard/>
+        <InfoCard/>
+        </View>
+        <View style={styles.rowContainer}>
+        <InfoCard/>
+        <InfoCard/>
+        </View>
+
     </View>
   );
 }
@@ -14,7 +23,15 @@ function TodayScreen() {
 function YesterdayScreen() {
   return (
     <View style={styles.container}>
-      <Text>Yesterday Cards Render Here</Text>
+        <View style={styles.rowContainer}>
+        <InfoCard/>
+        <InfoCard/>
+        </View>
+        <View style={styles.rowContainer}>
+        <InfoCard/>
+        <InfoCard/>
+        </View>
+
     </View>
   );
 }
@@ -22,7 +39,15 @@ function YesterdayScreen() {
 function Last7DaysScreen() {
   return (
     <View style={styles.container}>
-      <Text>Last 7 Days Cards Render Here</Text>
+        <View style={styles.rowContainer}>
+        <InfoCard/>
+        <InfoCard/>
+        </View>
+        <View style={styles.rowContainer}>
+        <InfoCard/>
+        <InfoCard/>
+        </View>
+
     </View>
   );
 }
@@ -50,5 +75,14 @@ const TabBar = ()  =>{
 export default TabBar
 
 const styles = StyleSheet.create({
-  container: { flex: 1, alignItems: 'center', justifyContent: 'center' },
+  container: {
+     flex: 1, 
+     alignItems: 'center', 
+     justifyContent: 'center',
+     },
+     rowContainer:{
+        flexDirection:"row",
+        justifyContent:"space-between",
+        alignItems:"center"
+     }
 });
