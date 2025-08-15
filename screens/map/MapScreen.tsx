@@ -13,11 +13,15 @@ import Road from '../../assets/jsx/Road';
 import StopWatch from '../../assets/jsx/StopWatch';
 import { useNavigation } from '@react-navigation/native';
 import Carousel from './components/Carousel';
+import { useHome } from '../../features/home/useHome';
 export default function MapScreen() {
+  
+  const { data, loading, error, refetch } = useHome();
   const [location, setLocation] = useState(null);
     const navigation = useNavigation()
   useEffect(() => {
     requestLocationPermission();
+    
   }, []);
 
   async function requestLocationPermission() {
@@ -48,10 +52,15 @@ export default function MapScreen() {
     );
   }
 
+
+  if (loading) return <View style={{flex:1,justifyContent:"center",alignItems:"center"}}><ActivityIndicator size="large" /></View>; // Loading state
+  if (error) return <Text>{error}</Text>; // Error state
+
+
   return (
     <View style={{flex:1}}>
         <View style={styles.header}>
-
+                {/* <Text>  {JSON.stringify(data)}</Text> */}
                 <HeaderLogo/>
                 <View style={styles.rowContainer}>
                 <Language/>      
@@ -65,15 +74,15 @@ export default function MapScreen() {
         <View style={styles.batteryStatusContainer}>
             <View style={styles.rowContainer}>
                 <BatterySign/>
-                <Text style={styles.txtStyle}>95%</Text>
+                <Text style={styles.txtStyle}>{data?.data.soh}%</Text>
             </View>
              <View style={styles.rowContainer}>
                 <Heart/>
-                <Text style={styles.txtStyle}>100%</Text>
+                <Text style={styles.txtStyle}>{data?.data.soc}%</Text>
             </View>
                 <View style={styles.rowContainer}>
                 <Temperature/>
-                <Text style={styles.txtStyle}>45C</Text>
+                <Text style={styles.txtStyle}>{data?.data?.temp.toFixed(2)}C</Text>
             </View>
                 <View style={styles.rowContainer}>
                 <Road/>
@@ -81,7 +90,7 @@ export default function MapScreen() {
             </View>
             <View style={styles.rowContainer}>
                 <StopWatch/>
-                <Text style={styles.txtStyle}>5.3Hrs</Text>
+                <Text style={styles.txtStyle}>{data?.data?.timeTravelled.durationMinutes}Hrs</Text>
             </View>
         </View>
       {location ? (
@@ -91,8 +100,8 @@ export default function MapScreen() {
           style={{ flex: 1 }}
           showsUserLocation={true} // blue dot
           initialRegion={{
-            latitude: location.latitude,
-            longitude: location.longitude,
+            latitude: data?.data.lat || location.latitude,
+            longitude: data?.data.lng || location.longitude,
             latitudeDelta: 0.01,
             longitudeDelta: 0.01,
           }}

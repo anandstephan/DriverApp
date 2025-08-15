@@ -12,6 +12,7 @@ export const useTickets = () => {
       setLoading(true);
       setError(null);
       const data = await getDriverTickets();
+
       setTickets(data.tickets);
     } catch (err: any) {
       setError(err.message || 'Failed to fetch driver tickets');

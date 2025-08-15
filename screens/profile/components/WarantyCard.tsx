@@ -3,12 +3,13 @@ import Tag from "../../../assets/jsx/Tag";
 import Colors from "../../../constants/color";
 import Fonts from "../../../constants/font";
 
-const WarantyCard = () => {
+const WarantyCard = ({item}:any) => {
+
   return (
     <View style={styles.container}>
       <View style={styles.rowContainer}>
         <View>
-          <Text style={styles.cardNumber}>1234 5678 9012</Text>
+          <Text style={styles.cardNumber}>{item?.serialNo}</Text>
           <Text style={styles.subHeading}>Serial Number</Text>
           <Text style={styles.validTill}>Valid Till: 07/2028</Text>
           <View style={styles.line} />
