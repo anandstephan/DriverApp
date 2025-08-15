@@ -1,10 +1,11 @@
 import { View,Text, StyleSheet } from "react-native"
 import Road from "../../../assets/jsx/Road"
-const InfoCard = () =>{
+const InfoCard = ({title,item}) =>{
+ 
 return <View style={styles.container}>
         <View>
-            <Text style={styles.heading}>Distance</Text>
-            <Text style={styles.subHeading}>13.03kms</Text>
+            <Text style={styles.heading}>{title}</Text>
+            <Text style={styles.subHeading}>{item}</Text>
         </View>
         <View>
             <Road/>
@@ -20,7 +21,7 @@ const styles = StyleSheet.create({
         justifyContent:"space-between",
         alignItems:"center",
         backgroundColor:"#57C8DC",
-        padding:15,
+        padding:10,
         margin:10,
         width:200,
         borderRadius:5

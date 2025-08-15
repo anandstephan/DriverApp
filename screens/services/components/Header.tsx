@@ -15,7 +15,7 @@ return <View style={styles.row}>
    
     <View style={styles.row}>
        <Pressable onPress={()=>navigation.goBack()}>  <Ionicons name="chevron-back" size={25}/></Pressable>
-      <Text style={styles.txtStyle}>      {title}</Text>
+      <Text style={styles.txtStyle}>{title}</Text>
       </View>
       <FontAwesome name="question-circle-o" size={30} color={'black'} />
 </View>

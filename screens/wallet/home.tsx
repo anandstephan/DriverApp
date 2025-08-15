@@ -26,9 +26,7 @@ return <View style={{flex:1,backgroundColor:Colors.appBackground}}>
                 <View style={styles.innerContainer}>
                 <View style={styles.innerContainer}>
                 <Entypo name="share" size={15} />
-                <Text style={styles.txtStyle}>
-                    Share QR
-                </Text>
+                <Text style={styles.txtStyle}>Share QR</Text>
                 </View>
                 <View style={styles.innerContainer}>
                 <AntDesign name="download" size={15} />

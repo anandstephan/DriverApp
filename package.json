@@ -31,6 +31,7 @@
     "react-native-collapsible": "^1.6.2",
     "react-native-element-dropdown": "^2.12.4",
     "react-native-gesture-handler": "^2.26.0",
+    "react-native-image-picker": "^8.2.1",
     "react-native-linear-gradient": "^2.8.3",
     "react-native-maps": "^1.25.3",
     "react-native-otp-entry": "^1.8.5",

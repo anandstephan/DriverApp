@@ -111,8 +111,8 @@ export default function MapScreen() {
         </MapView>
             <View style={styles.fabContainer}>
             {[
-              { icon: 'info', action: () => navigation.navigate('Report') },
-              { icon: 'spinner-refresh', action: () => console.log('Zoom Out') },
+              { icon: 'info', action: () => navigation.navigate('Report',{data:data?.data}) },
+              { icon: 'spinner-refresh', action: () => navigation.navigate('Report',{data:data?.data,isFlag:true}) },
             ].map((btn, index) => (
               <Pressable
                 key={index}

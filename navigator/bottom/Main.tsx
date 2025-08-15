@@ -37,7 +37,6 @@ const getIcon = (routeName, focused) => {
 const Main = () => {
   return (
     <Tab.Navigator
-  initialRouteName="My Wallet"
       screenOptions={({ route }) => ({
         tabBarIcon: ({ focused }) => (
           <Image

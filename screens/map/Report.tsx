@@ -1,4 +1,4 @@
-import { ActivityIndicator, PermissionsAndroid, Platform, Pressable, StyleSheet, Text, View } from "react-native"
+import { ActivityIndicator, Image, PermissionsAndroid, Platform, Pressable, StyleSheet, Text, View } from "react-native"
 import Header from "./components/Header"
 import { useEffect, useState } from "react";
 import Geolocation from "@react-native-community/geolocation";
@@ -9,14 +9,21 @@ import Temperature from "../../assets/jsx/Temperature";
 import Road from "../../assets/jsx/Road";
 import StopWatch from "../../assets/jsx/StopWatch";
 import Engine from "../../assets/jsx/Engine";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 import TabBar from "./components/TabBar";
+import { useBatteryControl } from "../../features/battery/useBatteryControl";
 
 const Report = () =>{
 
       const [location, setLocation] = useState(null);
       const navigation = useNavigation()
       const [flag,setFlag] = useState(true)
+
+       const route =    useRoute()
+      const data = route.params?.data 
+      console.log(data)
+    const {sendBatteryControl} = useBatteryControl()
+
 
         useEffect(() => {
     requestLocationPermission();
@@ -59,8 +66,8 @@ const Report = () =>{
           style={{ flex: 3 }}
           showsUserLocation={true} // blue dot
           initialRegion={{
-            latitude: location.latitude,
-            longitude: location.longitude,
+            latitude: data?.lat || location.latitude,
+            longitude: data?.lng || location.longitude,
             latitudeDelta: 0.01,
             longitudeDelta: 0.01,
           }}
@@ -69,19 +76,37 @@ const Report = () =>{
  
         </MapView>
         {
-          flag ?       <View
-        style={{flex:1}}
-        >   
-        <View style={styles.rowContainer}>
-
-
-                <View>
+          flag ?
+          <View
+          style={{marginBottom:30}}
+          >     
+          <View style={[styles.rowContainer,{justifyContent:"center",}]}>
+              <View>
+               <Pressable onPress={()=>{
+                sendBatteryControl({message:"Mobilize"})
+               }}> 
+              <Engine/>
+              <Text>Mobilize</Text>
+              </Pressable>
+              </View>
+              <View>
+                  <Pressable onPress={()=>{
+                sendBatteryControl({message:"ImMobilize"})
+               }}>
+              <Engine/>
+              <Text>Immobilize</Text>
+              </Pressable>
+              </View>
+              
+              </View>
+              <View style={styles.rowContainer}>
+                <View style={{flex:1,marginHorizontal:10}}>
                     <Pressable style={styles.reportBtn} onPress={()=>setFlag(!flag)}>
                         <Text style={[styles.txtStyle,{textAlign:'center'}]}>Reports</Text>
                     </Pressable>
                     <View style={styles.rowContainer}>
                         <BatterySign/>
-                        <Text style={styles.txtStyle}>95%</Text>
+                        <Text style={styles.txtStyle}>{data.soc}%</Text>
                     </View>
                     <View style={styles.rowContainer}>
                         <Heart/>
@@ -89,10 +114,10 @@ const Report = () =>{
                     </View>
                     <View style={styles.rowContainer}>
                         <Temperature/>
-                        <Text style={styles.txtStyle}>45C</Text>
+                        <Text style={styles.txtStyle}>{Math.round(data?.temp)}C</Text>
                     </View>
                 </View>
-            <View style={styles.rowContainer}>
+               <View style={[styles.rowContainer,{flex:2,justifyContent:'center',marginHorizontal:2}]}>
                 <View style={{backgroundColor:'#2F343E',width:80,height:80,borderRadius:100,justifyContent:'center',alignItems:'center'}}>
                   <Text style={styles.bigTxt}>12</Text>
                   <Text style={styles.txtColor}>Kmph</Text>
@@ -102,25 +127,25 @@ const Report = () =>{
                   <Text style={styles.txtColor}>rpm</Text>
                 </View>
             </View>
-         <View>
+            <View style={{flex:1,marginHorizontal:10}}>
             <View>
             <Engine/>
             </View>
    
-            <View style={styles.rowContainer}>
+            <View style={[styles.rowContainer]}>
 
                 <BatterySign/>
-                <Text style={styles.txtStyle}>95%</Text>
+                <Text style={styles.txtStyle}>{data?.soh}%</Text>
             </View>
             <View style={styles.rowContainer}>
                 <StopWatch/>
-                <Text style={styles.txtStyle}>5.3Hrs</Text>
+                <Text style={styles.txtStyle}>{data?.timeTravelled?.durationMinutes}Hrs</Text>
             </View>
             <View style={styles.rowContainer}>
                 <Road/>
                 <Text style={styles.txtStyle}>62KM</Text>
             </View>
-        </View>
+            </View>
           </View>
           <View style={styles.endContainer}>
             <View style={{flex:1,height:1,backgroundColor:"#000000",marginVertical:10}}/>
@@ -133,7 +158,7 @@ const Report = () =>{
           </View>
         </View>
         :
-        <View style={{flex:2}}>
+        <View style={{flex:1}}>
         <TabBar/>
         </View>
 
@@ -162,7 +187,7 @@ const styles = StyleSheet.create({
         flexDirection:"row",
         alignItems:"center",
         // justifyContent:"space-between",
-        gap:10
+        gap:10,
     },
     txtStyle:{
         fontWeight:"bold",

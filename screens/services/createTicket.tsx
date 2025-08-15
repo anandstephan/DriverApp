@@ -1,12 +1,14 @@
 import { useState } from "react";
-import { StyleSheet, View,Text, TextInput, Pressable } from "react-native"
+import { StyleSheet, View,Text, TextInput, Pressable, Alert } from "react-native"
 import { Dropdown } from 'react-native-element-dropdown';
 import Feather from 'react-native-vector-icons/Feather'
 import CustomModal from "./components/CustomModal";
 import Colors from "../../constants/color";
 import Fonts from "../../constants/font";
 import Header from "./components/Header";
-
+import {launchCamera, launchImageLibrary} from 'react-native-image-picker'
+import { useS3Upload } from "../../features/upload/useUpload";
+import { useCreateTicket } from "../../features/createTicket/useCreateTicket";
 
 const data = [
     { label: 'Apple', value: 'apple' },
@@ -19,6 +21,39 @@ const CreateTicket = () =>{
 
     const [value, setValue] = useState(null);
     const [visible,setVisible] = useState(false)
+    const [file, setFile] = useState(null);
+    const [desc,setDesc] = useState('')
+
+    console.log(useS3Upload())
+  const {handleCreateTicket,loading} = useCreateTicket()
+
+  const pickDocument = async () => {
+    try {
+      const res = await launchImageLibrary({
+        mediaType:"photo"
+      })
+      console.log("res",res)
+      // res ek array return karta hai
+      if (res && res.length > 0) {
+        setFile(res[0]);
+      }
+    } catch (err) {
+      console.log("error",err)
+    }
+  };
+
+
+  const onSubmitHandler = () =>{
+    handleCreateTicket({
+      description:desc,
+      ticketType:value,
+      media:["https://example.com/uploads/battery_issue.jpg"]
+    },(res) =>{
+      console.log("---->",res)
+    })
+    setVisible(!visible)
+  }
+
 return <View style={styles.container}>
 
   
@@ -44,7 +79,10 @@ return <View style={styles.container}>
     <TextInput
     style={styles.inputStyle}
     multiline={true}
+    value={desc}
+    onChangeText={txt => setDesc(txt)}
     />
+    <Pressable onPress={pickDocument}>
     <View style={styles.uploadStyle}>
             <View style={styles.circle}>
                 <Feather name="upload" size={30} color={"#656565"}/>
@@ -52,9 +90,9 @@ return <View style={styles.container}>
             <Text style={styles.txt}>Upload</Text>
             <Text style={styles.txt}>Video, Photo</Text>
     </View>
-    
+    </Pressable>
     </View>
-    <Pressable style={styles.btnContainer} onPress={()=>setVisible(!visible)}>
+    <Pressable style={styles.btnContainer} onPress={onSubmitHandler}>
         <Text style={styles.btnTxt}>Submit</Text>
     </Pressable>
     <CustomModal visible={visible} onClose={()=>setVisible(!visible)}/>
