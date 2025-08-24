@@ -23,8 +23,9 @@ const CreateTicket = () =>{
     const [visible,setVisible] = useState(false)
     const [file, setFile] = useState(null);
     const [desc,setDesc] = useState('')
+    const [uploadedFile,setUploadedFile] = useState(null)
+  const {upload} = useS3Upload()
 
-    console.log(useS3Upload())
   const {handleCreateTicket,loading} = useCreateTicket()
 
   const pickDocument = async () => {
@@ -33,9 +34,12 @@ const CreateTicket = () =>{
         mediaType:"photo"
       })
       console.log("res",res)
+      
       // res ek array return karta hai
-      if (res && res.length > 0) {
-        setFile(res[0]);
+      if (res && res.assets?.length > 0) {
+        setFile(res?.assets[0]);
+      const newresponse = await  upload(res?.assets[0],"tickets","driverApp")
+      setUploadedFile(newresponse.fileUrl)
       }
     } catch (err) {
       console.log("error",err)
@@ -47,7 +51,7 @@ const CreateTicket = () =>{
     handleCreateTicket({
       description:desc,
       ticketType:value,
-      media:["https://example.com/uploads/battery_issue.jpg"]
+      media:uploadedFile
     },(res) =>{
       console.log("---->",res)
     })

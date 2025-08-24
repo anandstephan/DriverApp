@@ -14,11 +14,19 @@ import StopWatch from '../../assets/jsx/StopWatch';
 import { useNavigation } from '@react-navigation/native';
 import Carousel from './components/Carousel';
 import { useHome } from '../../features/home/useHome';
+import { useTranslation } from "react-i18next";
+import i18n from '../../src/i18n';
 export default function MapScreen() {
   
   const { data, loading, error, refetch } = useHome();
   const [location, setLocation] = useState(null);
-    const navigation = useNavigation()
+  const navigation = useNavigation()
+
+  const { t, i18n } = useTranslation();
+
+
+
+
   useEffect(() => {
     requestLocationPermission();
     
@@ -57,14 +65,29 @@ export default function MapScreen() {
   if (error) return <Text>{error}</Text>; // Error state
 
 
+  const toggleLanguage = () => {
+  const currentLang = i18n.language; // current selected language
+
+  if (currentLang.startsWith("en")) {
+    i18n.changeLanguage("hi"); // switch to Hindi
+  } else {
+    i18n.changeLanguage("en"); // switch to English
+  }
+};
+
   return (
     <View style={{flex:1}}>
         <View style={styles.header}>
-                {/* <Text>  {JSON.stringify(data)}</Text> */}
                 <HeaderLogo/>
                 <View style={styles.rowContainer}>
+                <Pressable onPress={toggleLanguage}>
                 <Language/>      
-                <Pressable onPress={()=>navigation.navigate('Notification')}>
+                </Pressable>
+
+                <Pressable onPress={()=>{
+
+                  navigation.navigate('Notification')
+                }}>
                 <MaterialIcons name="notifications-none" size={28} />
                 </Pressable>
 
@@ -74,11 +97,11 @@ export default function MapScreen() {
         <View style={styles.batteryStatusContainer}>
             <View style={styles.rowContainer}>
                 <BatterySign/>
-                <Text style={styles.txtStyle}>{data?.data.soh}%</Text>
+                <Text style={styles.txtStyle}>{data?.data.soc}%</Text>
             </View>
              <View style={styles.rowContainer}>
                 <Heart/>
-                <Text style={styles.txtStyle}>{data?.data.soc}%</Text>
+                <Text style={styles.txtStyle}>{data?.data.soh}%</Text>
             </View>
                 <View style={styles.rowContainer}>
                 <Temperature/>
@@ -128,7 +151,7 @@ export default function MapScreen() {
               </Pressable>
             ))}
           </View>
-            <View style={[styles.fabContainer,{top:610}]}>
+            <View style={[styles.fabContainer,{top:700}]}>
               <Text style={styles.txtStyle}>*Refreshed 15 mins ago</Text>
             </View>
         </>
@@ -148,25 +171,29 @@ const styles = StyleSheet.create({
         alignItems:"center"
     },
     header:{
-  
+        // borderWidth:1,
         flexDirection:"row",
         justifyContent:"space-between",
         alignItems:"center",
-        marginHorizontal:10,
-        paddingHorizontal:'5%',
+        // marginHorizontal:10,
+        paddingHorizontal:'2%',
+        marginTop:10,
+        marginVertical:10
     },
     rowContainer:{
         flexDirection:"row",
         alignItems:"center",
         justifyContent:"space-between",
-        gap:5
+        // gap:5
     },
     batteryStatusContainer:{
         flexDirection:"row",
         justifyContent:"space-between",
         alignItems:"center",
         marginHorizontal:10,
-        marginVertical:10
+        marginVertical:10,
+        // borderWidth:1,
+        // backgroundColor:"red"
     },
     txtStyle:{
         fontWeight:"bold",
@@ -175,7 +202,7 @@ const styles = StyleSheet.create({
      fabContainer: {
     position: 'absolute',
     right: 20,
-    top: 480,
+    top: 580,
     alignItems: 'center',
   },
   fab: {

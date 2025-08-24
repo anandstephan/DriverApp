@@ -5,6 +5,7 @@ import { Provider } from 'react-redux';
 import store from './store';
 import First from './First';
 import Colors from './constants/color';
+import "./src/i18n";  // i18n setup
 const App = () =>{
   
 

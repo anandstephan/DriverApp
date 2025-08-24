@@ -16,6 +16,7 @@ export const useHome = () => {
       setLoading(true); // Loader start
       setError(null);   // Purana error clear
       const res = await home(); // API call
+      
       setData(res); // Response data store
     } catch (err: any) {
       setError(err?.message || "Kuchh galat ho gaya"); // Error set

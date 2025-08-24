@@ -1,5 +1,5 @@
 import { useNavigation } from "@react-navigation/native";
-import { View, Text, StyleSheet, TextInput, Pressable, Switch, ActivityIndicator } from "react-native";
+import { View, Text, StyleSheet, TextInput, Pressable, Switch, ActivityIndicator, KeyboardAvoidingView, ScrollView } from "react-native";
 import Logo from "../../assets/jsx/Logo";
 import Fonts from "../../constants/font";
 import Colors from "../../constants/color";
@@ -27,13 +27,14 @@ const Register = () => {
   };
 
   return (
-    <View style={styles.container}>
+
+    <ScrollView contentContainerStyle={styles.container}>
       <View>
         <Logo />
       </View>
 
       <Text style={styles.heading}>Register</Text>
-
+      
       <View style={styles.primaryContainer}>
         <View style={styles.form}>
           <Text style={styles.headingText}>Name</Text>
@@ -116,7 +117,7 @@ const Register = () => {
           </Pressable>
         </View>
       </View>
-    </View>
+    </ScrollView>
   );
 };
 
@@ -153,10 +154,11 @@ const styles = StyleSheet.create({
   input: {
     borderColor: "#CBD3DF",
     borderWidth: 1,
-    padding: 20,
+    // padding: 20,
     margin: 10,
-    height: 30,
+    // height: 30,
     borderRadius: 10,
+    color:"#000000"
   },
   form: {
     textAlign: "center",

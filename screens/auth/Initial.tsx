@@ -1,4 +1,4 @@
-import { View,Text,StyleSheet, Pressable, ImageBackground } from "react-native"
+import { View,Text,StyleSheet, Pressable, ImageBackground, Dimensions } from "react-native"
 import { useNavigation } from "@react-navigation/native"
 import Fonts from "../../constants/font"
 import Colors from "../../constants/color"
@@ -33,7 +33,7 @@ const Initial = () =>{
             <View style={{flex:1}}/>
              <View style={styles.actionSheetContainer}>
                 <Text style={styles.heading}>Drive the Future, Power the Change</Text>
-                <Text style={styles.subHeading}>Welcome to India's EV Revolution for {'\n'} e-Rickshaws <View style={{height:11}}><SmallLogo/></View></Text>
+                <Text style={styles.subHeading}>Welcome to India's EV Revolution with {'\n'} <View style={{height:11}}><SmallLogo/></View></Text>
                 <View style={styles.btnContainer}>
                  <Pressable style={styles.btn} onPress={()=>navigation.navigate('Login')}>
                     <Text style={styles.btnTxt}>Log in</Text>
@@ -80,9 +80,10 @@ const styles = StyleSheet.create({
         borderTopRightRadius:70,
         justifyContent:"flex-end",
         backgroundColor:"#FBFDFE"
-        // height:"100%"
+        // height:"100%" 
     },
     heading:{
+        marginHorizontal:Dimensions.get('window').width/10,
         fontSize:20,
         textAlign:"center",
         fontFamily:Fonts.poppinsBold

@@ -7,13 +7,10 @@ import Profile from '../../screens/profile'
 import Colors from '../../constants/color';
 import Fonts from '../../constants/font';
 import MapStack from '../../screens/map';
+import { useTranslation } from "react-i18next";
 const Tab = createBottomTabNavigator();
 
-const DummyScreen = ({ title }) => (
-  <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-    <Text>{title}</Text>
-  </View>
-);
+
 
 const getIcon = (routeName, focused) => {
   switch (routeName) {
@@ -35,6 +32,8 @@ const getIcon = (routeName, focused) => {
 };
 
 const Main = () => {
+  
+  const { t, i18n } = useTranslation();
   return (
     <Tab.Navigator
       screenOptions={({ route }) => ({
@@ -68,10 +67,10 @@ const Main = () => {
         headerShown: false,
       })}
     >
-      <Tab.Screen name="Assets" component={MapStack}/>
-      <Tab.Screen name="My Wallet" component={Wallet}/>
-      <Tab.Screen name="Services"  component={Services}/>
-      <Tab.Screen name="My Profile"  component={Profile}/>
+      <Tab.Screen name={t("assets")} component={MapStack}/>
+      <Tab.Screen name={t("wallet")} component={Wallet}/>
+      <Tab.Screen name={t("services")} component={Services}/>
+      <Tab.Screen name={t("profile")}  component={Profile}/>
     </Tab.Navigator>
   );
 };

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { Modal, View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { Modal, View, Text, StyleSheet, TouchableOpacity, Pressable } from 'react-native';
 import AntDesign from 'react-native-vector-icons/AntDesign';
+import Entypo from 'react-native-vector-icons/Entypo'
 import Fonts from '../../../constants/font';
 import Colors from '../../../constants/color';
 
@@ -18,6 +19,11 @@ onRequestClose={onClose}
 >
 <View style={styles.overlay}>
   <View style={styles.modalContainer}>
+    <View>
+      <Pressable onPress={onClose}>
+      <Entypo name='cross' size={28} color="black"/>
+    </Pressable>
+    </View>
     <View style={styles.checkCircle}>
       <AntDesign name="check" size={28} color="black" />
     </View>
