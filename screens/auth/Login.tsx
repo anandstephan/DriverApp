@@ -12,8 +12,8 @@ const Login = () => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
 
-  const [driverId, setDriverId] = useState("DRI0001");
-  const [password, setPassword] = useState("DRI0001");
+  const [driverId, setDriverId] = useState("DRI0030");
+  const [password, setPassword] = useState("DRI0030");
 
   const { handleLogin, loading } = useLogin();
 

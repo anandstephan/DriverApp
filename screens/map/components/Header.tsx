@@ -1,6 +1,6 @@
 import { useNavigation } from '@react-navigation/native';
 import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, Image } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, Image, Alert } from 'react-native';
 import Feather from 'react-native-vector-icons/Feather'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 const  Header = () => {
@@ -8,7 +8,10 @@ const  Header = () => {
   return (
     <View style={styles.container}>
       {/* Back Button */}
-      <TouchableOpacity style={styles.backButton} onPress={()=>navigation.goBack()}>
+      <TouchableOpacity style={styles.backButton} onPress={()=>{
+        // Alert.alert("kk","kkkkk")
+        navigation.goBack()
+      }}>
         <Ionicons name='arrow-back-sharp' size={25} color={'#FFFFFF'}/>
         <Text style={styles.backText}>Back</Text>
       </TouchableOpacity>

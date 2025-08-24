@@ -15,12 +15,12 @@ function TodayScreen() {
   return (
     <View style={styles.container}>
         <View style={styles.rowContainer}>
-        <InfoCard title="Distance" item={data?.data.mileage} />
-        <InfoCard title="SOC" item={data?.data.soc}/>
+        <InfoCard title="Distance" item={data?.data.totalDistanceTravelled} />
+        <InfoCard title="SOC" item={data?.data.soc?.toFixed(2)}/>
         </View>
         <View style={styles.rowContainer}>
         <InfoCard title="Mileage" item={data?.data.mileage}/>
-        <InfoCard title="Duration" item={data?.data?.timeTravelled?.durationMinutes}/>
+        <InfoCard title="Duration" item={data?.data?.timeTravelled?.durationString}/>
         </View>
 
     </View>
@@ -35,13 +35,13 @@ function YesterdayScreen() {
    </View>
   return (
     <View style={styles.container}>
-       <View style={styles.rowContainer}>
-        <InfoCard title="Distance" item={data?.data.mileage} />
-        <InfoCard title="SOC" item={data?.data.soc}/>
+  <View style={styles.rowContainer}>
+        <InfoCard title="Distance" item={data?.data.totalDistanceTravelled+" Km"} />
+        <InfoCard title="SOC" item={data?.data.soc?.toFixed(2)}/>
         </View>
         <View style={styles.rowContainer}>
         <InfoCard title="Mileage" item={data?.data.mileage}/>
-        <InfoCard title="Duration" item={data?.data?.timeTravelled?.durationMinutes}/>
+        <InfoCard title="Duration" item={data?.data?.timeTravelled?.durationString}/>
         </View>
     </View>
   );
@@ -49,19 +49,20 @@ function YesterdayScreen() {
 
 function Last7DaysScreen() {
        const {data,loading,error} = useReport('last7Days')
+       console.log("7days",data)
 
    if(loading)return <View style={{flex:1,justifyContent:"center",alignItems:"center"}}>
     <ActivityIndicator size={'large'}/>
    </View>
   return (
     <View style={styles.container}>
-    <View style={styles.rowContainer}>
-        <InfoCard title="Distance" item={data?.data.mileage} />
-        <InfoCard title="SOC" item={data?.data.soc.toFixed(2)}/>
+   <View style={styles.rowContainer}>
+        <InfoCard title="Distance" item={data?.data.totalDistanceTravelled} />
+        <InfoCard title="SOC" item={data?.data.soc?.toFixed(2)}/>
         </View>
         <View style={styles.rowContainer}>
         <InfoCard title="Mileage" item={data?.data.mileage}/>
-        <InfoCard title="Duration" item={data?.data?.timeTravelled?.durationMinutes}/>
+        <InfoCard title="Duration" item={data?.data?.timeTravelled?.durationString}/>
         </View>
 
     </View>
@@ -95,6 +96,7 @@ const styles = StyleSheet.create({
      flex: 1, 
      alignItems: 'center', 
      justifyContent: 'center',
+     marginHorizontal:20
      },
      rowContainer:{
         flexDirection:"row",

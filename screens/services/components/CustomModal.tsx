@@ -19,7 +19,7 @@ onRequestClose={onClose}
 >
 <View style={styles.overlay}>
   <View style={styles.modalContainer}>
-    <View>
+    <View style={{marginLeft:"90%"}}>
       <Pressable onPress={onClose}>
       <Entypo name='cross' size={28} color="black"/>
     </Pressable>

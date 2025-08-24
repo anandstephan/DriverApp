@@ -4,6 +4,7 @@ import { batteryService } from './batteryService';
 import { BatteryControlMsg } from './type';
 
 export const useBatteryControl = () => {
+ 
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<Error | null>(null);
@@ -13,6 +14,7 @@ export const useBatteryControl = () => {
       setLoading(true);
       setError(null);
       const result = await batteryService(payload);
+      console.log("result",result)
       setData(result);
       return result; // so caller can get response directly too
     } catch (err) {

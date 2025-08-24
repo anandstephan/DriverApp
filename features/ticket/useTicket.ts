@@ -12,6 +12,7 @@ export const useTicket = (ticketId: string) => {
     setError(null);
     try {
       const data = await getDriverTicket(ticketId);
+      console.log(data,"---->")
       setTicket(data.ticket);
     } catch (err: any) {
       setError(err.message || 'Failed to fetch ticket');

@@ -14,48 +14,20 @@ import TabBar from "./components/TabBar";
 import { useBatteryControl } from "../../features/battery/useBatteryControl";
 
 const Report = () =>{
-
+       const route =    useRoute()
       const [location, setLocation] = useState(null);
       const navigation = useNavigation()
       const [flag,setFlag] = useState(true)
+      const [showMobilize,setShowMobilze] = useState(false)
 
-       const route =    useRoute()
       const data = route.params?.data 
-      console.log(data)
+
     const {sendBatteryControl} = useBatteryControl()
 
+  useEffect(()=>{
+    setLocation({latitude:data?.lat,longitude:data?.lng})
+  },[data])
 
-        useEffect(() => {
-    requestLocationPermission();
-  }, []);
-
-  async function requestLocationPermission() {
-    if (Platform.OS === 'android') {
-      const granted = await PermissionsAndroid.request(
-        PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION
-      );
-      if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-        getCurrentLocation();
-      } else {
-        console.log('Location permission denied');
-      }
-    } else {
-      getCurrentLocation();
-    }
-  }
-
-  function getCurrentLocation() {
-    Geolocation.getCurrentPosition(
-      position => {
-        setLocation({
-          latitude: position.coords.latitude,
-          longitude: position.coords.longitude,
-        });
-      },
-      error => console.log(error),
-      { enableHighAccuracy: true, timeout: 15000 }
-    );
-  }
 
     return <View style={styles.container}>
         <Header/>
@@ -66,8 +38,8 @@ const Report = () =>{
           style={{ flex: 3 }}
           showsUserLocation={true} // blue dot
           initialRegion={{
-            latitude: data?.lat || location.latitude,
-            longitude: data?.lng || location.longitude,
+            latitude: location?.latitude ,
+            longitude: location?.longitude,
             latitudeDelta: 0.01,
             longitudeDelta: 0.01,
           }}
@@ -80,10 +52,12 @@ const Report = () =>{
           <View
           style={{marginBottom:30}}
           >     
-          <View style={[styles.rowContainer,{justifyContent:"center",}]}>
+          {
+            showMobilize ?          
+             <View style={[styles.rowContainer,{justifyContent:"center",}]}>
               <View>
                <Pressable onPress={()=>{
-                sendBatteryControl({message:"Mobilize"})
+                sendBatteryControl({requestType:"mobilize"})
                }}> 
               <Engine/>
               <Text>Mobilize</Text>
@@ -91,14 +65,16 @@ const Report = () =>{
               </View>
               <View>
                   <Pressable onPress={()=>{
-                sendBatteryControl({message:"ImMobilize"})
+                sendBatteryControl({requestType:"immobilize"})
                }}>
               <Engine/>
               <Text>Immobilize</Text>
               </Pressable>
               </View>
               
-              </View>
+              </View>:null
+          }
+
               <View style={styles.rowContainer}>
                 <View style={{flex:1,marginHorizontal:10}}>
                     <Pressable style={styles.reportBtn} onPress={()=>setFlag(!flag)}>
@@ -110,7 +86,7 @@ const Report = () =>{
                     </View>
                     <View style={styles.rowContainer}>
                         <Heart/>
-                        <Text style={styles.txtStyle}>100%</Text>
+                        <Text style={styles.txtStyle}>{data.soh}%</Text>
                     </View>
                     <View style={styles.rowContainer}>
                         <Temperature/>
@@ -128,22 +104,24 @@ const Report = () =>{
                 </View>
             </View>
             <View style={{flex:1,marginHorizontal:10}}>
-            <View>
+            <View style={{marginHorizontal:30,top:10}}>
             <Engine/>
             </View>
-   
+            <Pressable onPress={()=>setShowMobilze(!showMobilize)}>   
             <View style={[styles.rowContainer]}>
-
-                <BatterySign/>
-                <Text style={styles.txtStyle}>{data?.soh}%</Text>
+                <View style={{marginLeft:-10}}>
+                <Engine/>
+                </View>
+                <Text style={styles.txtStyle}>Active</Text>
             </View>
+            </Pressable>
             <View style={styles.rowContainer}>
                 <StopWatch/>
-                <Text style={styles.txtStyle}>{data?.timeTravelled?.durationMinutes}Hrs</Text>
+                <Text style={styles.txtStyle}>{data?.timeTravelled?.durationString}</Text>
             </View>
             <View style={styles.rowContainer}>
                 <Road/>
-                <Text style={styles.txtStyle}>62KM</Text>
+                <Text style={styles.txtStyle}>{data?.totalDistanceTravelled.toFixed(1)}KM</Text>
             </View>
             </View>
           </View>

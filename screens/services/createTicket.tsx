@@ -11,10 +11,12 @@ import { useS3Upload } from "../../features/upload/useUpload";
 import { useCreateTicket } from "../../features/createTicket/useCreateTicket";
 
 const data = [
-    { label: 'Apple', value: 'apple' },
-    { label: 'Banana', value: 'banana' },
-    { label: 'Mango', value: 'mango' },
-    { label: 'Grapes', value: 'grapes' },
+    { label: 'Temperature', value: 'Temperature' },
+    { label: 'BMS', value: 'BMS' },
+    { label: 'Battery General Issue', value: 'Battery General Issue' },
+    { label: 'Battery Performance Issue', value: 'Battery Performance Issue' },
+    {label:"Battery Mechnical Issue",value:"Battery Mechnical Issue"},
+    {label:"Charger Issue",value:"Charger Issue"}
   ];
   
 const CreateTicket = () =>{
@@ -73,7 +75,7 @@ return <View style={styles.container}>
         maxHeight={200}
         labelField="label"
         valueField="value"
-        placeholder="Select fruit"
+        placeholder="Select Issue"
         value={value}
         onChange={item => {
           setValue(item.value);
@@ -153,7 +155,8 @@ const styles = StyleSheet.create({
         height:120,
         borderRadius:15,
         borderColor:"#CDCDCD",
-        borderWidth:1
+        borderWidth:1,
+      textAlignVertical: "top",
       },
       uploadStyle:{
         backgroundColor:"#F4F4F4",

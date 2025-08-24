@@ -1,3 +1,3 @@
 export type BatteryControlMsg{
-    message:String
+    requestType:String
 }
