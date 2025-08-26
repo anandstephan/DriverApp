@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { StyleSheet, View,Text, TextInput, Pressable, Alert } from "react-native"
+import { StyleSheet, View,Text, TextInput, Pressable, Alert, Image } from "react-native"
 import { Dropdown } from 'react-native-element-dropdown';
 import Feather from 'react-native-vector-icons/Feather'
 import CustomModal from "./components/CustomModal";
@@ -9,7 +9,7 @@ import Header from "./components/Header";
 import {launchCamera, launchImageLibrary} from 'react-native-image-picker'
 import { useS3Upload } from "../../features/upload/useUpload";
 import { useCreateTicket } from "../../features/createTicket/useCreateTicket";
-
+import Entypo from "react-native-vector-icons/Entypo";
 const data = [
     { label: 'Temperature', value: 'Temperature' },
     { label: 'BMS', value: 'BMS' },
@@ -26,6 +26,7 @@ const CreateTicket = () =>{
     const [file, setFile] = useState(null);
     const [desc,setDesc] = useState('')
     const [uploadedFile,setUploadedFile] = useState(null)
+    console.log(file)
   const {upload} = useS3Upload()
 
   const {handleCreateTicket,loading} = useCreateTicket()
@@ -88,7 +89,29 @@ return <View style={styles.container}>
     value={desc}
     onChangeText={txt => setDesc(txt)}
     />
-    <Pressable onPress={pickDocument}>
+    {
+      file ?
+      <View> 
+      <Image
+      source={{uri:file.uri}}
+
+      style={{
+        height:180,
+        width:"100%",
+        marginTop:10
+      }}
+      />
+      <Pressable style={{
+        position:"absolute",
+        left:'90%',
+        top:'10%'
+      }}
+      onPress={()=>setFile(null)}
+      >
+      <Entypo name="circle-with-cross" size={25} />
+      </Pressable>
+      </View>
+      :     <Pressable onPress={pickDocument}>
     <View style={styles.uploadStyle}>
             <View style={styles.circle}>
                 <Feather name="upload" size={30} color={"#656565"}/>
@@ -97,6 +120,8 @@ return <View style={styles.container}>
             <Text style={styles.txt}>Video, Photo</Text>
     </View>
     </Pressable>
+    }
+
     </View>
     <Pressable style={styles.btnContainer} onPress={onSubmitHandler}>
         <Text style={styles.btnTxt}>Submit</Text>
