@@ -36,4 +36,5 @@ export type ProfileTab = {
   cluster: string;
   city: string;
   state: string;
+  profilePic:string;
 };

@@ -25,7 +25,16 @@ const getIcon = (routeName, focused) => {
    
     case 'My Profile':
       return require('../../assets/png/profile.png')
-        
+    
+    case 'संपत्ति':
+            return require('../../assets/png/Rickshaw.png')
+    case 'मेरा वॉलेट':
+         return require('../../assets/png/Wallet.png')
+    case 'सेवाएँ':
+            return require('../../assets/png/settings.png')
+    case 'मेरा प्रोफ़ाइल':
+            return require('../../assets/png/profile.png')
+
     default:
       return null;
   }

@@ -4,14 +4,28 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import InfoCard from './InfoCard';
 import { useReport } from '../../../features/report/useReport';
+import { useIsFocused } from '@react-navigation/native';
 
-function TodayScreen() {
+type MapLocationFunction={
+  setMapLocation:Function
+};
+
+function TodayScreen({setMapLocation}:MapLocationFunction) {
    const {data,loading,error} = useReport('today')
-    console.log("==>",data)
+    const isFocused = useIsFocused();
+
+    console.log("today1x",isFocused)
    if(loading)return <View style={{flex:1,justifyContent:"center",alignItems:"center"}}>
     <ActivityIndicator size={'large'}/>
    </View>
 
+  if(isFocused && data?.data){
+      setMapLocation(data.data.coordinates)  
+  }
+
+    
+
+  
   return (
     <View style={styles.container}>
         <View style={styles.rowContainer}>
@@ -27,12 +41,21 @@ function TodayScreen() {
   );
 }
 
-function YesterdayScreen() {
+function YesterdayScreen({setMapLocation}:MapLocationFunction) {
        const {data,loading,error} = useReport('yesterday')
+    const isFocused = useIsFocused();
 
+    console.log("today12",isFocused)
+  
    if(loading)return <View style={{flex:1,justifyContent:"center",alignItems:"center"}}>
     <ActivityIndicator size={'large'}/>
    </View>
+
+if(isFocused && data?.data){
+    setMapLocation(data.data.coordinates)  
+}
+
+
   return (
     <View style={styles.container}>
   <View style={styles.rowContainer}>
@@ -47,13 +70,20 @@ function YesterdayScreen() {
   );
 }
 
-function Last7DaysScreen() {
+function Last7DaysScreen({setMapLocation}:MapLocationFunction) {
        const {data,loading,error} = useReport('last7Days')
-       console.log("7days",data)
+    const isFocused = useIsFocused();
+console.log("jj",data)
+   
 
    if(loading)return <View style={{flex:1,justifyContent:"center",alignItems:"center"}}>
     <ActivityIndicator size={'large'}/>
    </View>
+    if(isFocused && data?.data){
+      console.log("l;ast7da",data.data.coordinates)
+        setMapLocation(data.data.coordinates)  
+    }
+
   return (
     <View style={styles.container}>
    <View style={styles.rowContainer}>
@@ -71,19 +101,28 @@ function Last7DaysScreen() {
 
 const Tab = createMaterialTopTabNavigator();
 
-const TabBar = ()  =>{
+const TabBar = ({setMapLocation}:any)  =>{
   return (
       <Tab.Navigator
+      
         screenOptions={{
           tabBarLabelStyle: { fontSize: 14, fontWeight: '600' },
           tabBarIndicatorStyle: { backgroundColor: '#000', height: 2 },
           tabBarActiveTintColor: '#000',
           tabBarInactiveTintColor: '#888',
+          lazy:true,
+          
         }}
       >
-        <Tab.Screen name="Today" component={TodayScreen} />
-        <Tab.Screen name="Yesterday" component={YesterdayScreen} />
-        <Tab.Screen name="Last 7 days" component={Last7DaysScreen} />
+        <Tab.Screen name="Today" >
+          {()=> <TodayScreen setMapLocation={setMapLocation} />}
+        </Tab.Screen>
+        <Tab.Screen name="Yesterday">
+          {()=><YesterdayScreen setMapLocation={setMapLocation} />}
+          </Tab.Screen>
+        <Tab.Screen name="Last 7 days">
+          {()=><Last7DaysScreen setMapLocation={setMapLocation} /> }
+        </Tab.Screen>
       </Tab.Navigator>
   );
   

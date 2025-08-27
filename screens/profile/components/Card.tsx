@@ -29,18 +29,18 @@ const Card = ({title,navigationScreen}:NavigationProps) =>{
   const { logout, loading, error, status } = useLogout();
 
     let icon;
-    if(title==='My Profile'){
+    if(title==='My Profile' || title === 'मेरा प्रोफ़ाइल'){
         icon = <Profile/>
-    }else if(title==="Digital Documents"){
+    }else if(title==="Digital Documents" || title==='डिजिटल दस्तावेज़'){
         icon= <Document/>
-    }else if(title==="Warranty card"){
+    }else if(title==="Warranty card" || title === 'वारंटी कार्ड'){
         icon = <CreditCard/>
-    }else if(title === 'Product Information'){
+    }else if(title === 'Product Information' || title === 'उत्पाद जानकारी'){
         icon = <Toolkit/>
     }
-    else if(title==="Driver Agreement"){
+    else if(title==="Driver Agreement" || title === 'ड्राइवर अनुबंध'){
         icon = <Agreement/>
-    }else if(title === "Logout"){
+    }else if(title === "Logout" || title === 'लॉगआउट'){
         icon = <Logout/>
     }else{
         icon = <Share/>

@@ -3,10 +3,12 @@ import { View } from "react-native"
 import Colors from "../../constants/color"
 import Header from "../services/components/Header"
 import DocumentCard from "./components/DocumentCard"
+import { useTranslation } from "react-i18next"
 
 const Document = () =>{
+    const {t} = useTranslation()
 return <View style={styles.container}>
-    <Header title="Digital Documents"/>
+    <Header title={t('digitalDocument')}/>
 
     <View style={styles.innerContainer}>
     <DocumentCard/>

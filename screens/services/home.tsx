@@ -2,19 +2,23 @@ import { View,Text, StyleSheet } from "react-native"
 import Card from "./components/Card"
 import Colors from "../../constants/color"
 import Fonts from "../../constants/font"
+import { useTranslation } from "react-i18next"
 
-const data = [
-    {heading:"Raise Tickets",subHeading:"Raise New Tickets",navigationScreen:"createTicket"},
-    {heading:"View Tickets",subHeading:"Check Status",navigationScreen:"viewTicket"},
-    {heading:"Reports",subHeading:"Detailed Reports",navigationScreen:""}
-]
+
 
 
 
 const Home = () =>{
+    const {t} = useTranslation()
+    const data = [
+    {heading:t('raiseTickets'),subHeading:t('raiseNewTicket'),navigationScreen:"createTicket"},
+    {heading:t('viewTickets'),subHeading:t('checkStatus'),navigationScreen:"viewTicket"},
+    {heading:t('reports'),subHeading:t('detailedReport'),navigationScreen:""}
+]
+
 return <View style={styles.outerContainer}>
  <View style={styles.container}>
-        <Text style={styles.txtStyle}>Services Page</Text>
+        <Text style={styles.txtStyle}>{t('servicePage')}</Text>
             {data.map(item => <Card key={item.heading} heading={item.heading} subHeading={item.subHeading}  navigationScreen={item.navigationScreen}/>)}
 </View>
 </View>

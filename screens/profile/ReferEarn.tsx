@@ -3,10 +3,14 @@ import ReferAndEarn from "../../assets/jsx/ReferAndEarn"
 import Fonts from "../../constants/font"
 import Colors from "../../constants/color"
 import Header from "../services/components/Header"
+import { useTranslation } from "react-i18next"
 
 const ReferEarn = () =>{
+
+    const {t} = useTranslation()
+
 return <View style={{backgroundColor:Colors.appBackground,flex:1}}>
-    <Header title="Refer and Earn"/>
+    <Header title={t('referAndEarn')}/>
 <View style={styles.container}>
     <ReferAndEarn/>
     <Text style={styles.txtStyle}>**share your code and get exclusive peaks**</Text>

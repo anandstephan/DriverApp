@@ -17,7 +17,7 @@ import { useTranslation } from "react-i18next";
 import i18n from '../../src/i18n';
 
 export default function MapScreen() {
-  const { data, loading, error } = useHome();
+  const { data, loading, error,refetch } = useHome();
   const [location, setLocation] = useState(null);
   const mapRef = useRef(null);
   const navigation = useNavigation();
@@ -27,6 +27,7 @@ export default function MapScreen() {
   // ✅ set location from API data
   useEffect(() => {
     if (data?.data) {
+    
       setLocation({
         latitude: data.data.lat,
         longitude: data.data.lng,
@@ -65,6 +66,9 @@ export default function MapScreen() {
   }
 
   if (error) return <Text>{error}</Text>;
+
+
+
 
   return (
     <View style={{ flex: 1 }}>
@@ -131,7 +135,7 @@ export default function MapScreen() {
           <View style={styles.fabContainer}>
             {[
               { icon: 'info', action: () => navigation.navigate('Report', { data: data?.data }) },
-              { icon: 'spinner-refresh', action: () => navigation.navigate('Report', { data: data?.data, isFlag: true }) },
+              { icon: 'spinner-refresh', action: () => refetch() },
             ].map((btn, index) => (
               <Pressable
                 key={index}
@@ -148,7 +152,7 @@ export default function MapScreen() {
           </View>
 
           <View style={[styles.fabContainer, { top: 700 }]}>
-            <Text style={styles.txtStyle}>*Refreshed 15 mins ago</Text>
+            <Text style={styles.txtStyle}>*{t('refreshedText')}</Text>
           </View>
         </>
       ) : (

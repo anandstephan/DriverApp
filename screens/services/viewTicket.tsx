@@ -5,6 +5,7 @@ import Header from './components/Header';
 import Colors from '../../constants/color';
 import Fonts from '../../constants/font';
 import { useTickets } from '../../features/ticket/useTickets';
+import { useTranslation } from 'react-i18next';
 
 const data = [
   { id: '1', date: '11 - 04 - 25', type: 'Battery', status: 'Open' },
@@ -17,7 +18,7 @@ const ViewTicket = () => {
 
     const navigation = useNavigation()
     const {tickets,loading,error,refetch} = useTickets()
-
+    const {t} = useTranslation()
     const [data,setData] = useState([])
     useEffect(()=>{
       if(tickets){
@@ -42,7 +43,7 @@ const ViewTicket = () => {
   }
 
   const renderItem = ({ item }: any) => {
-    
+      
   return  <Pressable onPress={()=>navigation.navigate('batteryStatus',{ticketId:item?.ticketId})}>
     <View
       style={[
@@ -63,13 +64,13 @@ const ViewTicket = () => {
 
   return (
     <View style={styles.outerContainer}>
-      <Header title='View Ticket'/>
+      <Header title={t('viewTicket')}/>
       <View style={styles.container}>
-      <Text style={styles.heading}>History</Text>
+      <Text style={styles.heading}>{t('history')}</Text>
       <View style={styles.header}>
-        <Text style={[styles.cell, styles.headerText]}>Date</Text>
-        <Text style={[styles.cell, styles.headerText]}>Type</Text>
-        <Text style={[styles.cell, styles.headerText]}>Status</Text>
+        <Text style={[styles.cell, styles.headerText]}>{t('date')}</Text>
+        <Text style={[styles.cell, styles.headerText]}>{t('type')}</Text>
+        <Text style={[styles.cell, styles.headerText]}>{t('status')}</Text>
       </View>
       <View style={{height:Dimensions.get('window').width/1.5}}>
       <FlatList

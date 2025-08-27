@@ -10,6 +10,7 @@ import {launchCamera, launchImageLibrary} from 'react-native-image-picker'
 import { useS3Upload } from "../../features/upload/useUpload";
 import { useCreateTicket } from "../../features/createTicket/useCreateTicket";
 import Entypo from "react-native-vector-icons/Entypo";
+import { useTranslation } from "react-i18next";
 const data = [
     { label: 'Temperature', value: 'Temperature' },
     { label: 'BMS', value: 'BMS' },
@@ -26,7 +27,7 @@ const CreateTicket = () =>{
     const [file, setFile] = useState(null);
     const [desc,setDesc] = useState('')
     const [uploadedFile,setUploadedFile] = useState(null)
-    console.log(file)
+    const {t} = useTranslation()
   const {upload} = useS3Upload()
 
   const {handleCreateTicket,loading} = useCreateTicket()
@@ -65,9 +66,9 @@ return <View style={styles.container}>
 
   
 
-    <Header title="Raise Ticket" />
+    <Header title={t('raiseTicket')} />
     <View style={styles.innerContainer}>
-        <Text style={styles.txt}>Select Ticket Type</Text>
+        <Text style={styles.txt}>{t('selectTicketType')}</Text>
          <Dropdown
         style={styles.dropdown}
         placeholderStyle={styles.placeholderStyle}
@@ -82,7 +83,7 @@ return <View style={styles.container}>
           setValue(item.value);
         }}
       />
-    <Text style={styles.txt}>Add a Brief Description</Text>
+    <Text style={styles.txt}>{t('addBriefDescription')}</Text>
     <TextInput
     style={styles.inputStyle}
     multiline={true}
@@ -116,15 +117,15 @@ return <View style={styles.container}>
             <View style={styles.circle}>
                 <Feather name="upload" size={30} color={"#656565"}/>
             </View>
-            <Text style={styles.txt}>Upload</Text>
-            <Text style={styles.txt}>Video, Photo</Text>
+            <Text style={styles.txt}>{t('upload')}</Text>
+            <Text style={styles.txt}>{t('video')}, {t('photo')}</Text>
     </View>
     </Pressable>
     }
 
     </View>
     <Pressable style={styles.btnContainer} onPress={onSubmitHandler}>
-        <Text style={styles.btnTxt}>Submit</Text>
+        <Text style={styles.btnTxt}>{t('submit')}</Text>
     </Pressable>
     <CustomModal visible={visible} onClose={()=>setVisible(!visible)}/>
 </View>

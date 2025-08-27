@@ -6,27 +6,42 @@ import Fonts from "../../constants/font"
 import { FloatingWhatsApp } from "react-floating-whatsapp"
 import { useProfile } from "../../features/myprofile/useProfile"
 
+import { useTranslation } from "react-i18next"
 
-const arr = [
-    {title:"My Profile",navigationScreen:"myProfile"},
-    {title:"Digital Documents",navigationScreen:"digitalDocument"},
-    {title:"Warranty card",navigationScreen:"waranty"},
-    {title:"Product Information",navigationScreen:"productInfo"},
-    {title:"Driver Agreement",navigationScreen:"driverAgreement"},
-    {title:"Refer and Earn",navigationScreen:"referAndEarn"},
-    {title:"Logout",navigationScreen:"myProfile"}
-]
+
 
 const Home = () =>{
+
+  const { t } = useTranslation();
+    const arr = [
+    {title:t('profile'),navigationScreen:"myProfile"},
+    {title:t('digitalDocument'),navigationScreen:"digitalDocument"},
+    {title:t('warrantyCard'),navigationScreen:"waranty"},
+    {title:t('productInfo'),navigationScreen:"productInfo"},
+    {title:t('driverAgreement'),navigationScreen:"driverAgreement"},
+    {title:t('referAndEarn'),navigationScreen:"referAndEarn"},
+    {title:t('logout'),navigationScreen:"myProfile"}
+]
+
 
     const {profile} = useProfile()
 return <View style={styles.container}>
         <View>
-        <Header title="My Profile"/>
+        <Header title={t('profile')}/>
         <View style={styles.innerContainer}>
+            {
+                profile?.selfie !==undefined
+                ?
+             <Image
+            source={{uri:profile?.selfie}}
+            style={{width:80,height:80,borderRadius:50,borderWidth:1}}
+            /> 
+                : 
             <Image
             source={require('../../assets/png/driverPic.png')}
             />
+            }
+       
             <View>
                 <Text style={styles.heading}>{profile?.name}</Text>
                 <View>

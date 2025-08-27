@@ -9,17 +9,23 @@ import {
   SafeAreaView,
   TextInput,
   ActivityIndicator,
+  Alert,
 } from 'react-native';
 import Colors from '../../constants/color';
 import Fonts from '../../constants/font';
 import Header from '../services/components/Header';
 import { useProfile } from '../../features/myprofile/useProfile';
 import { ProfileTab } from '../../features/myprofile/type';
+import {launchCamera, launchImageLibrary} from 'react-native-image-picker'
+import { useS3Upload } from '../../features/upload/useUpload';
+import { useTranslation } from 'react-i18next';
 
 const MyProfile = () => {
 
   const { profile, loading, error, refetch } = useProfile();
-  
+
+  const {t} = useTranslation()
+
   const [profileTab,setProfileTab] = useState<ProfileTab>({
     name:'',
     driverId:"",
@@ -27,8 +33,36 @@ const MyProfile = () => {
     address:"",
     cluster:"",
     city:"",
-    state:""
+    state:"",
+    profilePic:""
   })
+
+      const [file, setFile] = useState(null);
+    const [uploadedFile,setUploadedFile] = useState(null)
+        const {upload} = useS3Upload()
+
+    const pickDocument = async () => {
+    try {
+      const res = await launchImageLibrary({
+        mediaType:"photo"
+      })
+      console.log("res",res)
+      
+      // res ek array return karta hai
+      if (res && res.assets?.length > 0) {
+        setFile(res?.assets[0]);
+      const newresponse = await  upload(res?.assets[0],"profile","driverPic")
+      console.log("newres",newresponse)
+        
+      setUploadedFile(newresponse.fileUrl)
+      Alert.alert("Pic","Pic uploaded Successfully")
+      setProfileTab({...profileTab,profilePic:newresponse.fileUrl})
+      }
+    } catch (err) {
+      console.log("error",err)
+      Alert.alert("Message","File is too Large!")
+    }
+  };
 
 useEffect(() => {
   if (profile) {
@@ -40,6 +74,7 @@ useEffect(() => {
       cluster: profile?.cluster ?? '',
       city: profile?.city ?? '',
       state: profile?.state ?? '',
+      profilePic:profile?.selfie??""
     });
   }
 }, [profile]);
@@ -65,17 +100,28 @@ useEffect(() => {
   return (
     <SafeAreaView style={styles.safeArea}>
 
-      <Header title='My Profile'/>
+      <Header title={t('profile')}/> 
       <ScrollView contentContainerStyle={styles.container}>
         <View style={styles.profileCard}>
+          
           <View style={styles.imageWrapper}>
-            <Image
+            {
+              profileTab.profilePic.length!==0 ?             
+              <Image
+              source={{uri:profileTab.profilePic}}
+              style={styles.profileImage}
+              accessibilityLabel="Portrait of man wearing formal shirt, upright pose against blurred dark background with grid texture"
+              onError={() => {}}
+            />:
+              <Image
               source={require('../../assets/png/driverPic.png')}
               style={styles.profileImage}
               accessibilityLabel="Portrait of man wearing formal shirt, upright pose against blurred dark background with grid texture"
               onError={() => {}}
             />
-            <TouchableOpacity style={styles.cameraIconWrapper} activeOpacity={0.7}>
+            }
+        
+            <TouchableOpacity style={styles.cameraIconWrapper} activeOpacity={0.7} onPress={pickDocument}>
               {/* Simple camera icon with lines */}
               <View style={styles.cameraIcon}>
                 <View style={styles.cameraBody} />
@@ -86,7 +132,7 @@ useEffect(() => {
           </View>
 
           <View style={styles.infoItem}>
-            <Text style={styles.label}>Driver Name</Text>
+            <Text style={styles.label}>{t('driverName')}</Text>
             <View style={styles.infoRow}>
               <TextInput style={styles.value} value={profileTab.name} />
               <Image
@@ -98,7 +144,7 @@ useEffect(() => {
           </View>
 
           <View style={styles.infoItem}>
-            <Text style={styles.label}>Driver ID</Text>
+            <Text style={styles.label}>{t('driverId')}</Text>
             <View style={styles.infoRow}>
               <TextInput style={styles.value} value="FB2011"/>
               <Image
@@ -110,7 +156,7 @@ useEffect(() => {
           </View>
 
           <View style={styles.infoItem}>
-            <Text style={styles.label}>Driver Contact Number</Text>
+            <Text style={styles.label}>{t('driverContactNumber')}</Text>
             <View style={styles.infoRow}>
               <TextInput style={styles.value} value={profileTab.phone}/>
               <Image
@@ -122,7 +168,7 @@ useEffect(() => {
           </View>
 
           <View style={styles.infoItem}>
-            <Text style={styles.label}>Driver Address</Text>
+            <Text style={styles.label}>{t('driverAddress')}</Text>
             <View style={styles.infoRow}>
               <TextInput style={styles.value} value={profileTab.address}/>
             <Image
@@ -134,7 +180,7 @@ useEffect(() => {
           </View>
 
           <View style={styles.infoItem}>
-            <Text style={styles.label}>Cluster</Text>
+            <Text style={styles.label}>{t('cluster')}</Text>
             <View style={styles.infoRow}>
               <TextInput style={styles.value} value={profileTab.cluster}/>
             <Image
@@ -146,7 +192,7 @@ useEffect(() => {
           </View>
 
           <View style={styles.infoItem}>
-            <Text style={styles.label}>City</Text>
+            <Text style={styles.label}>{t('city')}</Text>
             <View style={styles.infoRow}>
               <TextInput style={styles.value} value={profileTab.city}/>
              <Image
@@ -158,7 +204,7 @@ useEffect(() => {
           </View>
 
           <View style={styles.infoItem}>
-            <Text style={styles.label}>State</Text>
+            <Text style={styles.label}>{t('state')}</Text>
             <View style={styles.infoRow}>
               <TextInput style={styles.value} value={profileTab.state}/>
               <Image

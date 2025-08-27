@@ -1,8 +1,8 @@
 import { ActivityIndicator, Image, PermissionsAndroid, Platform, Pressable, StyleSheet, Text, View } from "react-native"
 import Header from "./components/Header"
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Geolocation from "@react-native-community/geolocation";
-import MapView, { Marker, PROVIDER_GOOGLE } from "react-native-maps";
+import MapView, { Marker, PROVIDER_GOOGLE,Polyline,Circle   } from "react-native-maps";
 import BatterySign from "../../assets/jsx/BatterySign";
 import Heart from "../../assets/jsx/Heart";
 import Temperature from "../../assets/jsx/Temperature";
@@ -13,6 +13,7 @@ import { useNavigation, useRoute } from "@react-navigation/native";
 import TabBar from "./components/TabBar";
 import { useBatteryControl } from "../../features/battery/useBatteryControl";
 
+
 const Report = () =>{
        const route =    useRoute()
       const [location, setLocation] = useState(null);
@@ -20,13 +21,31 @@ const Report = () =>{
       const [flag,setFlag] = useState(true)
       const [showMobilize,setShowMobilze] = useState(false)
 
-      const data = route.params?.data 
+      const [maplocation,setMapLocation] = useState([])
+      const mapRef = useRef(null);
 
+    console.log("map",maplocation)
+      const data = route.params?.data 
     const {sendBatteryControl} = useBatteryControl()
 
   useEffect(()=>{
     setLocation({latitude:data?.lat,longitude:data?.lng})
   },[data])
+
+  // ✅ Function to zoom into coordinates
+  const zoomToFit = () => {
+    if (mapRef.current && maplocation.length > 0) {
+      mapRef.current.fitToCoordinates(maplocation, {
+        edgePadding: { top: 50, right: 50, bottom: 50, left: 50 }, // padding
+        animated: true,
+      });
+    }
+  };
+
+  // ✅ Call on load
+  useEffect(() => {
+    zoomToFit();
+  }, [maplocation]);
 
 
     return <View style={styles.container}>
@@ -34,6 +53,7 @@ const Report = () =>{
         {location ? (
         <>
         <MapView
+         ref={mapRef}
         provider={PROVIDER_GOOGLE}
           style={{ flex: 3 }}
           showsUserLocation={true} // blue dot
@@ -45,7 +65,20 @@ const Report = () =>{
           }}
         >
           <Marker coordinate={location} title="You are here" />
- 
+          {maplocation.map((point,index) =>(
+               <Circle
+            key={index}
+            center={point}
+            radius={0.5} // 👈 size of point (adjust)
+            strokeColor="hotpink"
+            fillColor="pink"
+          />
+          ))}
+            <Polyline
+          coordinates={maplocation}
+          strokeColor="blue"
+          strokeWidth={4}
+        />
         </MapView>
         {
           flag ?
@@ -137,7 +170,9 @@ const Report = () =>{
         </View>
         :
         <View style={{flex:1}}>
-        <TabBar/>
+        <TabBar
+        setMapLocation={setMapLocation}
+        />
         </View>
 
         }

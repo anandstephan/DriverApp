@@ -1,23 +1,27 @@
 import { useNavigation } from '@react-navigation/native';
 import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, Image, Alert } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, Pressable, Alert } from 'react-native';
 import Feather from 'react-native-vector-icons/Feather'
 import Ionicons from 'react-native-vector-icons/Ionicons'
+import { useProfile } from '../../../features/myprofile/useProfile';
 const  Header = () => {
   const navigation = useNavigation()
+        const {profile} = useProfile()
+    console.log("++++",profile?.batteryId)
   return (
     <View style={styles.container}>
       {/* Back Button */}
-      <TouchableOpacity style={styles.backButton} onPress={()=>{
+      <Pressable style={styles.backButton} onPress={()=>{
         // Alert.alert("kk","kkkkk")
+        console.log("===")
         navigation.goBack()
       }}>
         <Ionicons name='arrow-back-sharp' size={25} color={'#FFFFFF'}/>
         <Text style={styles.backText}>Back</Text>
-      </TouchableOpacity>
+      </Pressable>
 
       {/* ID in center */}
-      <Text style={styles.title}>CGF24H0046</Text>
+      <Text style={styles.title}>{profile?.batteryId}</Text>
 
       {/* Right Icons */}
       <View style={styles.rightIcons}>
