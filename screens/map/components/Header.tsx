@@ -4,10 +4,12 @@ import { View, Text, TouchableOpacity, StyleSheet, Pressable, Alert } from 'reac
 import Feather from 'react-native-vector-icons/Feather'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import { useProfile } from '../../../features/myprofile/useProfile';
+import { useTranslation } from 'react-i18next';
 const  Header = () => {
   const navigation = useNavigation()
+  const {t} = useTranslation()
         const {profile} = useProfile()
-    console.log("++++",profile?.batteryId)
+
   return (
     <View style={styles.container}>
       {/* Back Button */}
@@ -17,7 +19,7 @@ const  Header = () => {
         navigation.goBack()
       }}>
         <Ionicons name='arrow-back-sharp' size={25} color={'#FFFFFF'}/>
-        <Text style={styles.backText}>Back</Text>
+        <Text style={styles.backText}>{t('back')}</Text>
       </Pressable>
 
       {/* ID in center */}

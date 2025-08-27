@@ -12,6 +12,7 @@ import Engine from "../../assets/jsx/Engine";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import TabBar from "./components/TabBar";
 import { useBatteryControl } from "../../features/battery/useBatteryControl";
+import { useTranslation } from "react-i18next";
 
 
 const Report = () =>{
@@ -24,9 +25,10 @@ const Report = () =>{
       const [maplocation,setMapLocation] = useState([])
       const mapRef = useRef(null);
 
-    console.log("map",maplocation)
+
       const data = route.params?.data 
     const {sendBatteryControl} = useBatteryControl()
+    const {t} = useTranslation()
 
   useEffect(()=>{
     setLocation({latitude:data?.lat,longitude:data?.lng})
@@ -111,7 +113,7 @@ const Report = () =>{
               <View style={styles.rowContainer}>
                 <View style={{flex:1,marginHorizontal:10}}>
                     <Pressable style={styles.reportBtn} onPress={()=>setFlag(!flag)}>
-                        <Text style={[styles.txtStyle,{textAlign:'center'}]}>Reports</Text>
+                        <Text style={[styles.txtStyle,{textAlign:'center'}]}>{t('reports')}</Text>
                     </Pressable>
                     <View style={styles.rowContainer}>
                         <BatterySign/>

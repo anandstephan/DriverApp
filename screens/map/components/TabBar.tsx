@@ -5,6 +5,7 @@ import { createMaterialTopTabNavigator } from '@react-navigation/material-top-ta
 import InfoCard from './InfoCard';
 import { useReport } from '../../../features/report/useReport';
 import { useIsFocused } from '@react-navigation/native';
+import { useTranslation } from 'react-i18next';
 
 type MapLocationFunction={
   setMapLocation:Function
@@ -101,7 +102,8 @@ console.log("jj",data)
 
 const Tab = createMaterialTopTabNavigator();
 
-const TabBar = ({setMapLocation}:any)  =>{
+const   TabBar = ({setMapLocation}:any)  =>{
+  const {t} = useTranslation()
   return (
       <Tab.Navigator
       
@@ -114,13 +116,13 @@ const TabBar = ({setMapLocation}:any)  =>{
           
         }}
       >
-        <Tab.Screen name="Today" >
+        <Tab.Screen name={t('today')} >
           {()=> <TodayScreen setMapLocation={setMapLocation} />}
         </Tab.Screen>
-        <Tab.Screen name="Yesterday">
+        <Tab.Screen name={t('yesterday')}>
           {()=><YesterdayScreen setMapLocation={setMapLocation} />}
           </Tab.Screen>
-        <Tab.Screen name="Last 7 days">
+        <Tab.Screen name={t('last7days')}>
           {()=><Last7DaysScreen setMapLocation={setMapLocation} /> }
         </Tab.Screen>
       </Tab.Navigator>

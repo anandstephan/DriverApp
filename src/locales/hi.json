@@ -37,6 +37,10 @@
   "driverAddress": "चालक का पता",
   "cluster": "क्लस्टर",
   "city": "शहर",
-  "state": "राज्य"
+  "state": "राज्य",
+  "today": "आज",
+  "yesterday": "कल",
+  "last7days": "पिछले 7 दिन",
+  "back": "वापस"
 
 }
