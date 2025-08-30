@@ -11,6 +11,7 @@ import { useS3Upload } from "../../features/upload/useUpload";
 import { useCreateTicket } from "../../features/createTicket/useCreateTicket";
 import Entypo from "react-native-vector-icons/Entypo";
 import { useTranslation } from "react-i18next";
+import { useNavigation } from "@react-navigation/native";
 const data = [
     { label: 'Temperature', value: 'Temperature' },
     { label: 'BMS', value: 'BMS' },
@@ -29,8 +30,18 @@ const CreateTicket = () =>{
     const [uploadedFile,setUploadedFile] = useState(null)
     const {t} = useTranslation()
   const {upload} = useS3Upload()
-
+  const navigation = useNavigation()
   const {handleCreateTicket,loading} = useCreateTicket()
+
+  const onCloseHandler = ()=>{
+    setValue(null)
+    setFile(null)
+    setDesc('')
+    setUploadedFile(null)
+    
+    setVisible(!visible)
+    navigation.goBack()
+  }
 
   const pickDocument = async () => {
     try {
@@ -127,7 +138,7 @@ return <View style={styles.container}>
     <Pressable style={styles.btnContainer} onPress={onSubmitHandler}>
         <Text style={styles.btnTxt}>{t('submit')}</Text>
     </Pressable>
-    <CustomModal visible={visible} onClose={()=>setVisible(!visible)}/>
+    <CustomModal visible={visible} onClose={onCloseHandler}/>
 </View>
 }
 
