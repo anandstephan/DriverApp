@@ -42,7 +42,10 @@ const getIcon = (routeName, focused) => {
 
 const Main = () => {
   
+
+
   const { t, i18n } = useTranslation();
+
   return (
     <Tab.Navigator
       screenOptions={({ route }) => ({

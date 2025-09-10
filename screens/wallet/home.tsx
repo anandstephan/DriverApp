@@ -6,11 +6,15 @@ import { useNavigation } from "@react-navigation/native"
 import Colors from "../../constants/color"
 import Fonts from "../../constants/font"
 import Header from "../services/components/Header"
+import { useProfile } from "../../features/myprofile/useProfile"
 
 
 
 const Home = () =>{
     const navigation = useNavigation()
+      const { profile, loading, error, refetch } = useProfile();
+      console.log("==",profile?.driver.emiPayment)
+
 return <View style={{flex:1,backgroundColor:Colors.appBackground}}>
     <Header title="My Wallet"/>
 <ScrollView style={{backgroundColor:Colors.appBackground,marginVertical:30}}>
@@ -50,8 +54,8 @@ return <View style={{flex:1,backgroundColor:Colors.appBackground}}>
             <View style={[styles.container,{borderWidth:0}]}>
             <Text style={styles.heading1}>Total Pending</Text>
             <View style={styles.rowContainer}>
-            <Text style={styles.emiAmt}>₹53,444</Text>
-            <Text style={styles.emiAmt}><Text style={[styles.emiAmt,{color:"#000"}]}>3</Text> / 12 Months</Text>
+            <Text style={styles.emiAmt}>₹{+profile?.driver?.emiPayment.loanAmount-profile?.driver?.emiPayment.downPayment}</Text>
+            <Text style={styles.emiAmt}><Text style={[styles.emiAmt,{color:"#000"}]}>3</Text> / {profile?.driver?.emiPayment?.tenure} Months</Text>
             </View>
             <View style={styles.rowContainer}>
                 <View style={styles.line}/>
@@ -79,33 +83,21 @@ return <View style={{flex:1,backgroundColor:Colors.appBackground}}>
         <Text style={styles.tableHeading}>Due Date</Text>
         <Text style={styles.tableHeading}>Amount</Text>
         <Text style={styles.tableHeading}>Status</Text>
-        <Text style={styles.tableHeading}>Action</Text>
+        {/* <Text style={styles.tableHeading}>Action</Text> */}
         </View>
-        <View style={[styles.rowContainer,{backgroundColor:"#FFFFFF",margin:5}]}>
-        <Text style={[styles.tableContent,{fontWeight:"500"}]}>11 - 04 - 25</Text>
-        <Text style={styles.tableContent}>₹ 3500</Text>
-        <Text style={styles.tableContent}>Due</Text>
-        <Text style={styles.tableContent}>Pay</Text>
+        <ScrollView style={{height:300}}>
+        {
+           profile?.driver?.emiPayment?.payments?.map(item => {
+            return   <View style={[styles.rowContainer,{backgroundColor:"#FFFFFF",margin:5}]} key={item.emiNumber}>
+        <Text style={[styles.tableContent,{fontWeight:"500"}]}>{new Date(item.dueDate).toLocaleDateString()}</Text>
+        <Text style={styles.tableContent}>₹ {item.amount}</Text>
+        <Text style={styles.tableContent}>{item.status}</Text>
+        {/* <Text style={styles.tableContent}>Pay</Text> */}
         </View>
-        <View style={[styles.rowContainer,{backgroundColor:"#FFFFFF",margin:5}]}>
-        <Text style={[styles.tableContent,{fontWeight:"500"}]}>11 - 04 - 25</Text>
-        <Text style={styles.tableContent}>₹ 3500</Text>
-        <Text style={styles.tableContent}>Due</Text>
-        <Text style={styles.tableContent}>Pay</Text>
-        </View>
-        <View style={[styles.rowContainer,{backgroundColor:"#FFFFFF",margin:5}]}>
-        <Text style={[styles.tableContent,{fontWeight:"500"}]}>11 - 04 - 25</Text>
-        <Text style={styles.tableContent}>₹ 3500</Text>
-        <Text style={styles.tableContent}>Due</Text>
-        <Text style={styles.tableContent}>Pay</Text>
-        </View>
-        <View style={[styles.rowContainer,{backgroundColor:"#FFFFFF",margin:5}]}>
-        <Text style={[styles.tableContent,{fontWeight:"500"}]}>11 - 04 - 25</Text>
-        <Text style={styles.tableContent}>₹ 3500</Text>
-        <Text style={styles.tableContent}>Due</Text>
-        <Text style={styles.tableContent}>Pay</Text>
-        </View>
-        
+           }) 
+        }
+      
+        </ScrollView>
         </View>
 </ScrollView>
 </View>

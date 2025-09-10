@@ -3,7 +3,13 @@ import { BatteryData } from './types.ts';
 
 
 export const home = async (): Promise<BatteryData> => {
+  try {
   const response = await apiClient.get('/api/driver/home');
-  return response.data;
+  console.log("res",response)
+  return response.data;    
+  } catch (error) {
+    console.log("Error",error)
+  }
+
 };
 

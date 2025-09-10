@@ -66,8 +66,9 @@ const MyProfile = () => {
 
 useEffect(() => {
   if (profile) {
+    console.log("+++",profile)
     setProfileTab({
-      name: profile?.name ?? '',
+      name: profile?.firstName+" "+profile?.lastName ?? '',
       driverId: profile?.driverId ?? '',
       phone: profile?.phone ?? '',
       address: profile?.address ?? '',
