@@ -20,6 +20,6 @@ export const uploadFileToS3 = async (
       'Content-Type': 'multipart/form-data',
     },
   });
-
+  console.log("Pic",response.data)
   return response.data;
 };

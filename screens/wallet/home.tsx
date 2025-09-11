@@ -21,7 +21,7 @@ return <View style={{flex:1,backgroundColor:Colors.appBackground}}>
         <View style={styles.container}>
         <View style={styles.rowContainer}>
             <Image
-            source={require('../../assets/png/QR.png')}
+            source={require('../../assets/png/blur.png')}
             width={100}
             height={100}
             />

@@ -2,16 +2,17 @@ import { StyleSheet, View, Text, Image } from "react-native";
 import Tag from "../../../assets/jsx/Tag";
 import Colors from "../../../constants/color";
 import Fonts from "../../../constants/font";
+import { addYearsAndFormat, getTimeLeftFromNow, getYearsLeftFromNow } from "../../../utilities/dateFormat";
 
-const WarantyCard = ({item}:any) => {
-
+const WarantyCard = ({item,type}:any) => {
+console.log("item",type)
   return (
     <View style={styles.container}>
       <View style={styles.rowContainer}>
         <View>
           <Text style={styles.cardNumber}>{item?.serialNo}</Text>
           <Text style={styles.subHeading}>Serial Number</Text>
-          <Text style={styles.validTill}>Valid Till: 07/2028</Text>
+          <Text style={styles.validTill}>Valid Till: {addYearsAndFormat(item.handoverDate,type==="battery"?3:1)}</Text>
           <View style={styles.line} />
         </View>
         <Image source={require("../../../assets/png/Clock.png")} />
@@ -21,11 +22,11 @@ const WarantyCard = ({item}:any) => {
         <View style={styles.rowContainer}>
           <View>
             <Text style={styles.cardNumber}>Warranty:</Text>
-            <Text style={styles.cardNumber}>3 Year</Text>
+            <Text style={styles.cardNumber}>{getTimeLeftFromNow(type==='charger' ? 1 :3).yearsLeft}   Year</Text>
           </View>
           <View>
             <Text style={styles.cardNumber}>Days Left:</Text>
-            <Text style={styles.cardNumber}>870</Text>
+            <Text style={styles.cardNumber}>{getTimeLeftFromNow(type==='charger' ? 1 :3).daysLeft}</Text>
           </View>
           <Image
             style={styles.qrImage}
@@ -54,6 +55,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 20,
     marginVertical: 20,
     paddingHorizontal: 10,
+   
   },
   innerContainer: {
     paddingHorizontal: 0,
