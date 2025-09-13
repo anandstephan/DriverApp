@@ -7,6 +7,8 @@ import { FloatingWhatsApp } from "react-floating-whatsapp"
 import { useProfile } from "../../features/myprofile/useProfile"
 
 import { useTranslation } from "react-i18next"
+import { useFocusEffect, useIsFocused } from "@react-navigation/native"
+import { useCallback } from "react"
 
 
 
@@ -24,9 +26,13 @@ const Home = () =>{
 ]
 
 
-    const {profile} = useProfile()
+    const {profile,refetch} = useProfile()
 
-    
+  useFocusEffect(
+    useCallback(() => {
+      refetch();  // jab bhi screen focus hoga, profile reload hoga
+    }, [refetch])
+  );
 
 return <View style={styles.container}>
         <View>

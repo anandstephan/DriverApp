@@ -15,6 +15,8 @@ import { toggleDarkMode } from "../../../store/themeSlice.js";
 import { logoutUser } from "../../../features/logout/logoutService.ts";
 
 import { useLogout } from "../../../features/logout/useLogout.ts";
+import { Alert } from "react-native";
+import Colors from "../../../constants/color.js";
 
 interface NavigationProps{
     title:string;
@@ -54,10 +56,13 @@ return     <Pressable onPress={async ()=>{
           console.log('res',res)
             dispatch(toggleDarkMode())
     }else{
+        if(navigationScreen === 'digitalDocument' || navigationScreen === 'driverAgreement'){
+            return Alert.alert("DigiVoltt","This section is available in next Update")
+        }
         navigation.navigate(navigationScreen)
     }
 }}>
- <View style={styles.rowContainer}>
+ <View style={[styles.rowContainer,((navigationScreen === 'digitalDocument') || (navigationScreen === 'driverAgreement')) && {backgroundColor:Colors.lightGray}]}>
     <View style={[styles.rowContainer,{marginHorizontal:10}]}>
     {icon}
     <Text style={styles.heading}>{title}</Text>
@@ -76,7 +81,7 @@ const styles = StyleSheet.create({
         flexDirection:"row",
         justifyContent:"space-between",
         alignItems:"center",
-        marginVertical:5
+        marginVertical:5,
     },
     heading:{
         fontWeight:"400",
