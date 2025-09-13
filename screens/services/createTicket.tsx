@@ -53,7 +53,7 @@ const CreateTicket = () =>{
       // res ek array return karta hai
       if (res && res.assets?.length > 0) {
         setFile(res?.assets[0]);
-      const newresponse = await  upload(res?.assets[0],"tickets","driverApp")
+      const newresponse = await  upload(res?.assets[0],"selfie","driverApp")
       setUploadedFile(newresponse.fileUrl)
       }
     } catch (err) {

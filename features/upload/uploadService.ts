@@ -7,7 +7,7 @@ export const uploadFileToS3 = async (
   appName: string
 ): Promise<S3UploadResponse> => {
   const formData = new FormData();
-  formData.append('file', {
+  formData.append('selfie', {
     uri: file.uri,
     name: file.fileName,
     type: file.type,
@@ -15,7 +15,7 @@ export const uploadFileToS3 = async (
   formData.append('category', category);
   formData.append('appName', appName);
 
-  const response = await apiClient.post('/api/others/api/s3/upload', formData, {
+  const response = await apiClient.post('/api/driver/profile/uploadSelfie', formData, {
     headers: {
       'Content-Type': 'multipart/form-data',
     },

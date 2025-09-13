@@ -7,13 +7,22 @@ import Colors from "../../constants/color"
 import Fonts from "../../constants/font"
 import Header from "../services/components/Header"
 import { useProfile } from "../../features/myprofile/useProfile"
+import { useState } from "react"
+import Card from "./components/Card"
 
 
 
 const Home = () =>{
     const navigation = useNavigation()
       const { profile, loading, error, refetch } = useProfile();
-      console.log("==",profile?.driver.emiPayment)
+        const [active,setActive] = useState(false)
+    
+      console.log("==>",profile?.driver.emiPayment.emiAmount)
+      let paymentsCount = profile?.driver.emiPayment.payments.filter(item => item.status!=='paid').length
+      let paidCount = profile?.driver.emiPayment.payments.filter(item => item.status==='paid').length
+      console.log(profile?.driver?.emiPayment)
+    //   let numberOfUnpaid = 
+
 
 return <View style={{flex:1,backgroundColor:Colors.appBackground}}>
     <Header title="My Wallet"/>
@@ -47,35 +56,39 @@ return <View style={{flex:1,backgroundColor:Colors.appBackground}}>
         </View>
 </View> 
         <View style={[styles.container,{backgroundColor:"transparent",borderWidth:0}]}>
-            <Text style={styles.heading}>EMI Trakcer</Text>
+            <Text style={styles.heading}>EMI Tracker</Text>
 
         </View>
         <View style={styles.container}>
             <View style={[styles.container,{borderWidth:0}]}>
             <Text style={styles.heading1}>Total Pending</Text>
             <View style={styles.rowContainer}>
-            <Text style={styles.emiAmt}>₹{+profile?.driver?.emiPayment.loanAmount-profile?.driver?.emiPayment.downPayment}</Text>
-            <Text style={styles.emiAmt}><Text style={[styles.emiAmt,{color:"#000"}]}>3</Text> / {profile?.driver?.emiPayment?.tenure} Months</Text>
+            <Text style={styles.emiAmt}>₹{profile?.driver.emiPayment.emiAmount*paymentsCount}</Text>
+            <Text style={styles.emiAmt}><Text style={[styles.emiAmt,{color:"#000"}]}>{paidCount}</Text> / {profile?.driver?.emiPayment?.tenure} Months</Text>
             </View>
             <View style={styles.rowContainer}>
-                <View style={styles.line}/>
-                <View style={styles.line}/>
-                <View style={styles.line}/>
-                <View style={[styles.line,{backgroundColor:"red"}]}/>
-                <View style={[styles.line,{backgroundColor:"#FFF"}]}/>
-                <View style={[styles.line,{backgroundColor:"#FFF"}]}/>
-                <View style={[styles.line,{backgroundColor:"#FFF"}]}/>
+
+                {
+            profile?.driver.emiPayment.payments.filter(item => item.status==='paid').map((item,idx) =><View key={idx} style={styles.line}/> )
+                }
+                {
+            profile?.driver.emiPayment.payments.filter(item => item.status==='upcoming').map((item,idx) =><View key={idx} style={[styles.line,{borderWidth:1,backgroundColor:"#FFF",borderColor:"gray"}]}/> )
+                }
+                {
+            profile?.driver.emiPayment.payments.filter(item => item.status==='due').map((item,idx) =><View key={idx} style={[styles.line,{backgroundColor:"red"}]}/> )
+                }
+
             </View>
             <Text style={styles.txtStyle2}>Request Foreclosure?</Text>
             </View>
 
         </View>
         <View style={[styles.rowContainer,{marginHorizontal:"5%"}]}>
-            <Pressable style={styles.btn} onPress={()=>navigation.navigate('payment')}>
-                <Text style={styles.btnTxt}>Schedule</Text>
+            <Pressable style={[styles.btn,active && {backgroundColor:Colors.white}]} onPress={()=>setActive(false)}>
+                <Text style={[styles.btnTxt,!active && {color:Colors.white}] }>Schedule</Text>
             </Pressable>
-            <Pressable style={[styles.btn,{borderColor:"#EAEAEA",backgroundColor:Colors.primary}]}>
-                <Text style={[styles.btnTxt]}>History</Text>
+            <Pressable style={[styles.btn,!active && {backgroundColor:Colors.white}]} onPress={()=>setActive(true)}>
+                <Text style={[styles.btnTxt,active && {color:Colors.white}]}>History</Text>
             </Pressable>
         </View>
         <View style={[styles.container,{marginHorizontal:10}]}>
@@ -83,18 +96,17 @@ return <View style={{flex:1,backgroundColor:Colors.appBackground}}>
         <Text style={styles.tableHeading}>Due Date</Text>
         <Text style={styles.tableHeading}>Amount</Text>
         <Text style={styles.tableHeading}>Status</Text>
-        {/* <Text style={styles.tableHeading}>Action</Text> */}
+        <Text style={styles.tableHeading}>Action</Text>
         </View>
         <ScrollView style={{height:300}}>
         {
-           profile?.driver?.emiPayment?.payments?.map(item => {
-            return   <View style={[styles.rowContainer,{backgroundColor:"#FFFFFF",margin:5}]} key={item.emiNumber}>
-        <Text style={[styles.tableContent,{fontWeight:"500"}]}>{new Date(item.dueDate).toLocaleDateString()}</Text>
-        <Text style={styles.tableContent}>₹ {item.amount}</Text>
-        <Text style={styles.tableContent}>{item.status}</Text>
-        {/* <Text style={styles.tableContent}>Pay</Text> */}
-        </View>
+           !active ? profile?.driver?.emiPayment?.payments?.filter(item => item.status==='upcoming').map(item => {
+            return <Card item={item}/>
+           }) :
+           profile?.driver?.emiPayment?.payments?.filter(item => item.status==='paid').map(item => {
+            return <Card item={item}/>
            }) 
+           
         }
       
         </ScrollView>
@@ -121,6 +133,7 @@ const styles = StyleSheet.create({
         justifyContent:"space-between",
         alignItems:"center",
         padding:10,
+        flex:1
     },
     heading:{
         fontWeight:"700",
@@ -158,10 +171,12 @@ const styles = StyleSheet.create({
         fontFamily:Fonts.poppinsRegular
     },
     line:{
-        width:40,
+        // width:40,
+        flex:1,
         backgroundColor:Colors.primary,
         height:7,
-        borderRadius:10
+        borderRadius:10,
+        marginHorizontal:1
     },
     txtStyle2:{
         alignSelf:"center",
@@ -174,17 +189,17 @@ const styles = StyleSheet.create({
     btn:{
         padding:10,
         margin:10,
-        // borderWidth:1,
+        borderWidth:1,
         borderRadius:20,
         width:'40%',
         backgroundColor:Colors.secondary,
-       
+       borderColor:Colors.lightGray
     },
     btnTxt:{
         alignSelf:"center",
         fontWeight:"700",
         fontSize:16,
-        color:Colors.white
+        color:Colors.txtblack
     },
     tableHeading:{
         color:"#ACACAC",

@@ -23,6 +23,7 @@ import { useTranslation } from 'react-i18next';
 const MyProfile = () => {
 
   const { profile, loading, error, refetch } = useProfile();
+  
 
   const {t} = useTranslation()
 
@@ -46,12 +47,11 @@ const MyProfile = () => {
       const res = await launchImageLibrary({
         mediaType:"photo"
       })
-      console.log("res",res)
       
       // res ek array return karta hai
       if (res && res.assets?.length > 0) {
         setFile(res?.assets[0]);
-      const newresponse = await  upload(res?.assets[0],"profile","driverPic")
+      const newresponse = await  upload(res?.assets[0],"selfie","driverApp")
       console.log("newres",newresponse)
         
       setUploadedFile(newresponse.fileUrl)
@@ -66,16 +66,16 @@ const MyProfile = () => {
 
 useEffect(() => {
   if (profile) {
-    console.log("+++",profile)
+
     setProfileTab({
-      name: profile?.firstName+" "+profile?.lastName ?? '',
-      driverId: profile?.driverId ?? '',
-      phone: profile?.phone ?? '',
-      address: profile?.address ?? '',
-      cluster: profile?.cluster ?? '',
-      city: profile?.city ?? '',
-      state: profile?.state ?? '',
-      profilePic:profile?.selfie??""
+      name: profile?.driver.firstName+" "+profile?.driver?.lastName ?? '',
+      driverId: profile?.driver?.driverId ?? '',
+      phone: profile?.driver?.phone ?? '',
+      address: profile?.driver?.address ?? '',
+      cluster: profile?.driver?.cluster ?? '',
+      city: profile?.driver?.city ?? '',
+      state: profile?.driver?.state ?? '',
+      profilePic:profile?.driver?.selfie??""
     });
   }
 }, [profile]);
@@ -147,7 +147,7 @@ useEffect(() => {
           <View style={styles.infoItem}>
             <Text style={styles.label}>{t('driverId')}</Text>
             <View style={styles.infoRow}>
-              <TextInput style={styles.value} value="FB2011"/>
+              <TextInput style={styles.value} value={profileTab.driverId}/>
               <Image
               source={require('../../assets/png/circlecheck.png')}
               width={200}

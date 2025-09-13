@@ -152,7 +152,8 @@ export default function MapScreen() {
           </View>
 
           <View style={[styles.fabContainer, { top: 700 }]}>
-            <Text style={styles.txtStyle}>*{t('refreshedText')}</Text>
+            {/* <Text style={styles.txtStyle}>*{t('refreshedText')}</Text> */}
+            <Text style={styles.txtStyle}>*Refreshed 15 min ago </Text>
           </View>
         </>
       ) : (

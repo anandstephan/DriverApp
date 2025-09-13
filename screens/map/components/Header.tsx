@@ -15,7 +15,7 @@ const  Header = () => {
       {/* Back Button */}
       <Pressable style={styles.backButton} onPress={()=>{
         // Alert.alert("kk","kkkkk")
-        console.log("===")
+        console.log("===",navigation)
         navigation.goBack()
       }}>
         <Ionicons name='arrow-back-sharp' size={25} color={'#FFFFFF'}/>
@@ -23,7 +23,7 @@ const  Header = () => {
       </Pressable>
 
       {/* ID in center */}
-      <Text style={styles.title}>{profile?.batteryId}</Text>
+      <Text style={styles.title}>{profile?.driver?.batteryId}</Text>
 
       {/* Right Icons */}
       <View style={styles.rightIcons}>
@@ -55,10 +55,14 @@ const styles = StyleSheet.create({
   backButton: {
     paddingHorizontal: 5,
     paddingVertical: 3,
+    padding:20,
     flexDirection:"row",
     alignItems:"center",
     justifyContent:"center",
-    margin:10
+    margin:10,
+    borderWidth:2,
+    // borderColor:"red",
+    height:'100%' 
   },
   backText: {
     color: '#fff',

@@ -25,15 +25,18 @@ const Home = () =>{
 
 
     const {profile} = useProfile()
+
+    
+
 return <View style={styles.container}>
         <View>
         <Header title={t('profile')}/>
         <View style={styles.innerContainer}>
             {
-                profile?.selfie !==undefined
+                profile?.driver?.selfie !==undefined
                 ?
              <Image
-            source={{uri:profile?.selfie}}
+            source={{uri:profile?.driver?.selfie}}
             style={{width:80,height:80,borderRadius:50,borderWidth:1}}
             /> 
                 : 
@@ -45,8 +48,8 @@ return <View style={styles.container}>
             <View>
                 <Text style={styles.heading}>{profile?.name}</Text>
                 <View>
-                    <Text style={styles.subHeading}>Driver ID-      {profile?.driverId}</Text>
-                    <Text style={styles.subHeading}>Battery ID-    {profile?.batteryId}</Text>
+                    <Text style={styles.subHeading}>Driver ID-      {profile?.driver?.driverId}</Text>
+                    <Text style={styles.subHeading}>Battery ID-    {profile?.driver?.batteryId}</Text>
                 </View>
             </View>
             <View/>
