@@ -9,6 +9,7 @@ import Header from "../services/components/Header"
 import { useProfile } from "../../features/myprofile/useProfile"
 import { useState } from "react"
 import Card from "./components/Card"
+import { useTranslation } from "react-i18next"
 
 
 
@@ -16,6 +17,7 @@ const Home = () =>{
     const navigation = useNavigation()
       const { profile, loading, error, refetch } = useProfile();
         const [active,setActive] = useState(false)
+          const { t } = useTranslation();
     
       console.log("==>",profile?.driver.emiPayment.emiAmount)
       let paymentsCount = profile?.driver.emiPayment.payments.filter(item => item.status!=='paid').length
@@ -35,36 +37,36 @@ return <View style={{flex:1,backgroundColor:Colors.appBackground}}>
             height={100}
             />
             <View style={styles.verticalContainer}>
-                <Text style={styles.heading}>Scan & Pay Me Here</Text>
+                <Text style={styles.heading}>{t('scanPayHere')}</Text>
                 <View style={styles.innerContainer}>
                 <View style={styles.innerContainer}>
                 <Entypo name="share" size={15} />
-                <Text style={styles.txtStyle}>Share QR</Text>
+                <Text style={styles.txtStyle}>{t('shareQR')}</Text>
                 </View>
                 <View style={styles.innerContainer}>
                 <AntDesign name="download" size={15} />
-                <Text style={styles.txtStyle}>Save QR</Text>
+                <Text style={styles.txtStyle}>{t('saveQR')}</Text>
                 </View> 
                 </View>
                 <View style={[styles.innerContainer,{justifyContent:"flex-start"}]}>
                 <Entypo name="calculator" size={15}/>
                 <Text  style={styles.txtStyle}>
-                Balance & History
+                {t('balanceHistory')}
                 </Text>
                 </View>
             </View>
         </View>
 </View> 
         <View style={[styles.container,{backgroundColor:"transparent",borderWidth:0}]}>
-            <Text style={styles.heading}>EMI Tracker</Text>
+            <Text style={styles.heading}>{t('emi')}</Text>
 
         </View>
         <View style={styles.container}>
             <View style={[styles.container,{borderWidth:0}]}>
-            <Text style={styles.heading1}>Total Pending</Text>
+            <Text style={styles.heading1}>{t('total')}</Text>
             <View style={styles.rowContainer}>
             <Text style={styles.emiAmt}>₹{profile?.driver.emiPayment.emiAmount*paymentsCount}</Text>
-            <Text style={styles.emiAmt}><Text style={[styles.emiAmt,{color:"#000"}]}>{paidCount}</Text> / {profile?.driver?.emiPayment?.tenure} Months</Text>
+            <Text style={styles.emiAmt}><Text style={[styles.emiAmt,{color:"#000"}]}>{paidCount}</Text> / {profile?.driver?.emiPayment?.tenure} {t('months')}</Text>
             </View>
             <View style={styles.rowContainer}>
 
@@ -79,24 +81,24 @@ return <View style={{flex:1,backgroundColor:Colors.appBackground}}>
                 }
 
             </View>
-            <Text style={styles.txtStyle2}>Request Foreclosure?</Text>
+            <Text style={styles.txtStyle2}>{t('requestForeclosure')}?</Text>
             </View>
 
         </View>
         <View style={[styles.rowContainer,{marginHorizontal:"5%"}]}>
             <Pressable style={[styles.btn,active && {backgroundColor:Colors.white}]} onPress={()=>setActive(false)}>
-                <Text style={[styles.btnTxt,!active && {color:Colors.white}] }>Schedule</Text>
+                <Text style={[styles.btnTxt,!active && {color:Colors.white}] }>{t('schedule')}</Text>
             </Pressable>
             <Pressable style={[styles.btn,!active && {backgroundColor:Colors.white}]} onPress={()=>setActive(true)}>
-                <Text style={[styles.btnTxt,active && {color:Colors.white}]}>History</Text>
+                <Text style={[styles.btnTxt,active && {color:Colors.white}]}>{t('history')}</Text>
             </Pressable>
         </View>
         <View style={[styles.container,{marginHorizontal:10}]}>
         <View style={styles.rowContainer}>
-        <Text style={styles.tableHeading}>Due Date</Text>
-        <Text style={styles.tableHeading}>Amount</Text>
-        <Text style={styles.tableHeading}>Status</Text>
-        <Text style={styles.tableHeading}>Action</Text>
+        <Text style={styles.tableHeading}>{t('dueDate')}</Text>
+        <Text style={styles.tableHeading}>{t('amount')}</Text>
+        <Text style={styles.tableHeading}>{t('status')}</Text>
+        <Text style={styles.tableHeading}>{t('amount')}</Text>
         </View>
         <ScrollView style={{height:300}}>
         {

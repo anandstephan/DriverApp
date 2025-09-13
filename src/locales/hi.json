@@ -41,6 +41,17 @@
   "today": "आज",
   "yesterday": "कल",
   "last7days": "पिछले 7 दिन",
-  "back": "वापस"
-
+  "back": "वापस",
+  "emi":"क़िस्त हिसाब",
+  "total":"कुल बकाया",
+  "months":"महीने",
+   "requestForeclosure": "समयपूर्व भुगतान अनुरोध",
+  "dueDate": "नियत तिथि",
+  "amount": "राशि",
+  "action": "कार्रवाई",
+  "schedule": "अनुसूची",
+  "scanPayHere": "यहाँ स्कैन करके भुगतान करें",
+  "shareQR": "क्यूआर साझा करें",
+  "saveQR": "क्यूआर सहेजें",
+  "balanceHistory": "बैलेंस और इतिहास"
 }

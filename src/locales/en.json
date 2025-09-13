@@ -41,5 +41,17 @@
     "today": "Today",
   "yesterday": "Yesterday",
   "last7days": "Last 7 days",
-  "back":"Back"
+  "back":"Back",
+  "emi":"EMI Tracker",
+  "total":"Total Pending",
+  "months":"Months",
+    "requestForeclosure": "Request Foreclosure",
+  "dueDate": "Due Date",
+  "amount": "Amount",
+  "action": "Action",
+  "schedule": "Schedule",
+  "scanPayHere": "Scan & Pay Me Here",
+  "shareQR": "Share QR",
+  "saveQR": "Save QR",
+  "balanceHistory": "Balance & History"
 } 
