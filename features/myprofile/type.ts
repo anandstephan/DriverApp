@@ -38,3 +38,6 @@ export type ProfileTab = {
   state: string;
   profilePic:string;
 };
+
+
+

@@ -11,23 +11,26 @@ import Icon from 'react-native-vector-icons/Feather'; // install if not present:
 import Colors from '../../constants/color';
 import Fonts from '../../constants/font';
 import Header from '../services/components/Header';
+import { useRoute } from '@react-navigation/native';
 
 const FAQ = () => {
   const [activeIndex, setActiveIndex] = useState<number | null>(1); // question 2 open by default
 
-  const faqList = [
-    { question: 'Question 1', answer: 'Lorem ipsum placeholder content.' },
-    {
-      question: 'Question 2',
-      answer:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.',
-    },
-    { question: 'Question 3', answer: 'Lorem ipsum placeholder content.' },
-    { question: 'Question 4', answer: 'Lorem ipsum placeholder content.' },
-    { question: 'Question 5', answer: 'Lorem ipsum placeholder content.' },
-    { question: 'Question 6', answer: 'Lorem ipsum placeholder content.' },
-    { question: 'Question 7', answer: 'Lorem ipsum placeholder content.' },
-  ];
+  const route = useRoute()
+  
+  // const faqList = [
+  //   { question: 'Question 1', answer: 'Lorem ipsum placeholder content.' },
+  //   {
+  //     question: 'Question 2',
+  //     answer:
+  //       'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.',
+  //   },
+  //   { question: 'Question 3', answer: 'Lorem ipsum placeholder content.' },
+  //   { question: 'Question 4', answer: 'Lorem ipsum placeholder content.' },
+  //   { question: 'Question 5', answer: 'Lorem ipsum placeholder content.' },
+  //   { question: 'Question 6', answer: 'Lorem ipsum placeholder content.' },
+  //   { question: 'Question 7', answer: 'Lorem ipsum placeholder content.' },
+  // ];
 
   const toggleCollapse = (index: number) => {
     setActiveIndex(prev => (prev === index ? null : index));
@@ -38,7 +41,7 @@ const FAQ = () => {
       <Header title='FAQ'/>
     <ScrollView style={styles.container}>
       <Text style={styles.title}>FAQs</Text>
-      {faqList.map((item, index) => (
+      {route.params.faqs.map((item, index) => (
         <View key={index} style={styles.card}>
           <TouchableOpacity
             style={styles.header}
@@ -47,7 +50,7 @@ const FAQ = () => {
             <Text style={styles.question}>{item.question}</Text>
             <Icon
               name={activeIndex === index ? 'minus' : 'plus'}
-              size={18}
+              size={16}
               color="#000"
             />
           </TouchableOpacity>
@@ -67,12 +70,12 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.appBackground
   },
   container: {
-    padding: 16,
+    padding: 20,
     backgroundColor: Colors.appBackground
     // flex: 1,
   },
   title: {
-    fontSize: 20,
+    fontSize: 18,
     fontWeight: 'bold',
     marginBottom: 16,
     fontFamily:Fonts.poppinsBold
@@ -82,14 +85,16 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     padding: 12,
     marginBottom: 10,
+    // borderWidth:2
   },
   header: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
+    // width:"100%"
   },
   question: {
-    fontSize: 16,
+    fontSize: 12,
     fontWeight: '600',
     fontFamily:Fonts.poppinsRegular
   },

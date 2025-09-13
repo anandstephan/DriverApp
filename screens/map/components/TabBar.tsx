@@ -16,8 +16,8 @@ function TodayScreen({ setMapLocation }: MapLocationFunction) {
 
   React.useEffect(() => {
     if (isFocused && data?.data) {
-      console.log(data.data.coordinates.slice(-50),data.data.coordinates)
-      setMapLocation(data.data.coordinates.slice(-50));
+      console.log(data.data.coordinates.slice(-150),data.data.coordinates)
+      setMapLocation(data.data.coordinates.slice(-150));
     }
   }, [isFocused, data]);
 
@@ -48,7 +48,7 @@ function YesterdayScreen({ setMapLocation }: MapLocationFunction) {
 
   React.useEffect(() => {
     if (isFocused && data?.data) {
-      setMapLocation(data.data.coordinates.slice(-50));
+      setMapLocation(data.data.coordinates.slice(-150));
     }
   }, [isFocused, data]);
 
@@ -79,7 +79,7 @@ function Last7DaysScreen({ setMapLocation }: MapLocationFunction) {
 
   React.useEffect(() => {
     if (isFocused && data?.data) {
-      setMapLocation(data.data.coordinates.slice(-50));
+      setMapLocation(data.data.coordinates.slice(-150));
     }
   }, [isFocused, data]);
 

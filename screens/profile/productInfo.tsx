@@ -6,17 +6,22 @@ import Colors from "../../constants/color"
 import Header from "../services/components/Header"
 import Fonts from "../../constants/font"
 import { useTranslation } from "react-i18next"
+import { useProductInfo } from "../../features/productInfo/useProductInfo"
 
 const ProductInfo = () =>{
     const navigation = useNavigation()
     const {t} = useTranslation()
+    const {products,faqs} = useProductInfo()
+    console.log("+++++++",products)        
+
+
 return <View style={styles.container}>
     <Header title={t('productInfo')}/>
     <ScrollView>
         <ProductCard title="product"/>
         <VideoCard/>
         <ProductCard title="document"/>
-        <Pressable style={styles.btnContainer} onPress={()=>navigation.navigate('faq')}>
+        <Pressable style={styles.btnContainer} onPress={()=>navigation.navigate('faq',{faqs})}>
             <Text style={styles.label}>FAQ</Text>
         </Pressable>
         
