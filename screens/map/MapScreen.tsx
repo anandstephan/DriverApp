@@ -14,26 +14,28 @@ import { useNavigation } from '@react-navigation/native';
 import Carousel from './components/Carousel';
 import { useHome } from '../../features/home/useHome';
 import { useTranslation } from "react-i18next";
-import i18n from '../../src/i18n';
 
 export default function MapScreen() {
-  const { data, loading, error,refetch } = useHome();
+  const { data, loading, error, refetch } = useHome();
   const [location, setLocation] = useState(null);
+
+  // 🔥 refresh text state
+  const [lastRefresh, setLastRefresh] = useState<number>(Date.now());
+  const [timeAgo, setTimeAgo] = useState("Just now");
+
+
   const mapRef = useRef(null);
   const navigation = useNavigation();
-
   const { t, i18n } = useTranslation();
 
-  // ✅ set location from API data
+  // ✅ update location from API data
   useEffect(() => {
     if (data?.data) {
-    
       setLocation({
         latitude: data.data.lat,
         longitude: data.data.lng,
       });
 
-      // animate map when api data arrives
       if (mapRef.current) {
         mapRef.current.animateToRegion(
           {
@@ -47,6 +49,32 @@ export default function MapScreen() {
       }
     }
   }, [data]);
+
+  // ✅ refresh time auto-update har minute
+  useEffect(() => {
+    const updateTimeAgo = () => {
+      const diffMs = Date.now() - lastRefresh;
+      const diffMin = Math.floor(diffMs / 60000);
+
+      if (diffMin === 0) {
+        setTimeAgo("Just now");
+      } else if (diffMin === 1) {
+        setTimeAgo("1 min ago");
+      } else {
+        setTimeAgo(`${diffMin} mins ago`);
+      }
+    };
+
+    updateTimeAgo();
+    const interval = setInterval(updateTimeAgo, 60000);
+    return () => clearInterval(interval);
+  }, [lastRefresh]);
+
+  // ✅ refetch ke saath refresh time reset
+  const handleRefresh = async () => {
+    await refetch();
+    setLastRefresh(Date.now());
+  };
 
   const toggleLanguage = () => {
     const currentLang = i18n.language;
@@ -66,9 +94,6 @@ export default function MapScreen() {
   }
 
   if (error) return <Text>{error}</Text>;
-
-
-
 
   return (
     <View style={{ flex: 1 }}>
@@ -135,7 +160,7 @@ export default function MapScreen() {
           <View style={styles.fabContainer}>
             {[
               { icon: 'info', action: () => navigation.navigate('Report', { data: data?.data }) },
-              { icon: 'spinner-refresh', action: () => refetch() },
+              { icon: 'spinner-refresh', action: handleRefresh }, // ✅ refresh update
             ].map((btn, index) => (
               <Pressable
                 key={index}
@@ -151,9 +176,9 @@ export default function MapScreen() {
             ))}
           </View>
 
-          <View style={[styles.fabContainer, { top: 700 }]}>
-            {/* <Text style={styles.txtStyle}>*{t('refreshedText')}</Text> */}
-            <Text style={styles.txtStyle}>*Refreshed 15 min ago </Text>
+          {/* Refreshed Text */}
+          <View style={[styles.fabContainer, { top: 625 }]}>
+            <Text style={styles.txtStyle}>*Refreshed {timeAgo}</Text>
           </View>
         </>
       ) : (
@@ -199,7 +224,7 @@ const styles = StyleSheet.create({
   fabContainer: {
     position: 'absolute',
     right: 20,
-    top: 580,
+    top: 500,
     alignItems: 'center',
   },
   fab: {

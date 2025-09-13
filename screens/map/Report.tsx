@@ -68,17 +68,17 @@ const Report = () =>{
         >
           <Marker coordinate={location} title="You are here" />
           {maplocation.map((point,index) =>(
-               <Circle
+            <Circle
             key={index}
             center={point}
             radius={0.5} // 👈 size of point (adjust)
-            strokeColor="hotpink"
-            fillColor="pink"
+            strokeColor="green"
+            fillColor="green"
           />
           ))}
             <Polyline
           coordinates={maplocation}
-          strokeColor="blue"
+          strokeColor="black"
           strokeWidth={4}
         />
         </MapView>
