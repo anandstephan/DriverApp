@@ -4,9 +4,10 @@ import Logo from "../../assets/jsx/Logo";
 import Fonts from "../../constants/font";
 import Colors from "../../constants/color";
 import { useDispatch } from "react-redux";
-import { toggleDarkMode } from "../../store/themeSlice";
+import { toggleLoggedIn } from "../../store/themeSlice";
 import { useState } from "react";
 import { useLogin } from "../../features/login/useLogin";
+import { setItem } from "../../utilities/storage";
 
 const Login = () => {
   const navigation = useNavigation();
@@ -22,7 +23,8 @@ const Login = () => {
     handleLogin({ driverId, password }, (response: Object) => {
         console.log(response)
       if (response.message === "Login successful") {
-        dispatch(toggleDarkMode());
+        dispatch(toggleLoggedIn());
+       setItem("token",response.token) 
       }
     });
   };

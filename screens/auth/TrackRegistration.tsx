@@ -1,6 +1,6 @@
 import { StyleSheet, View,Image,Text, Pressable } from "react-native"
 import { useDispatch } from "react-redux"
-import { toggleDarkMode } from "../../store/themeSlice"
+import { toggleLoggedIn } from "../../store/themeSlice"
 import Fonts from "../../constants/font"
 
 const TrackRegistration = () =>{
@@ -55,7 +55,7 @@ const TrackRegistration = () =>{
             </View>
             </View>
             <View style={{marginVertical:'50%'}}>
-                <Pressable onPress={()=>dispatch(toggleDarkMode())}>
+                <Pressable onPress={()=>dispatch(toggleLoggedIn())}>
                 <Text style={{color:"#00A6FF",textAlign:"center"}}>Track Registration</Text>
                 </Pressable>
       

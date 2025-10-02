@@ -1,14 +1,14 @@
-import { View } from "react-native"
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import Main from "./navigator/bottom/Main";
 import Auth from "./navigator/auth/Auth";
-
-import { toggleDarkMode, setDarkMode } from './store/themeSlice';
+import { getItem } from "./utilities/storage";
 const First = () =>{
-  const isDarkMode = useSelector((state) => state.theme.isDarkMode);
-  const dispatch = useDispatch();
+  const isLoggedIn = useSelector((state) => state.theme.isLoggedIn);
+  console.log("otken",getItem("token"))
+  console.log("lll",isLoggedIn)
+
 return <>
-  {isDarkMode ?<Main/> :<Auth/>}
+  {getItem("token")!==undefined && isLoggedIn ?<Main/> :<Auth/>}
 </>
 }
 

@@ -77,9 +77,9 @@ android {
     buildToolsVersion rootProject.ext.buildToolsVersion
     compileSdk rootProject.ext.compileSdkVersion
 
-    namespace "com.driverapp"
+    namespace "com.digivoltt.driverapp"
     defaultConfig {
-        applicationId "com.driverapp"
+        applicationId "com.digivoltt.driverapp"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1

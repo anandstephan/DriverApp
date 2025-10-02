@@ -8,12 +8,14 @@ import { useProfile } from "../../features/myprofile/useProfile"
 
 import { useTranslation } from "react-i18next"
 import { useFocusEffect, useIsFocused } from "@react-navigation/native"
-import { useCallback } from "react"
+import { useCallback, useEffect } from "react"
 
 
 
 const Home = () =>{
 
+
+   
   const { t } = useTranslation();
     const arr = [
     {title:t('profile'),navigationScreen:"myProfile"},

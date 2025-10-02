@@ -11,12 +11,13 @@ import Agreement from "../../../assets/jsx/Agreement.jsx";
 import Share from "../../../assets/jsx/Share.jsx";
 import Logout from "../../../assets/jsx/Logout.jsx";
 import { useDispatch } from "react-redux";
-import { toggleDarkMode } from "../../../store/themeSlice.js";
+import {  toggleLoggedIn } from "../../../store/themeSlice.js";
 import { logoutUser } from "../../../features/logout/logoutService.ts";
 
 import { useLogout } from "../../../features/logout/useLogout.ts";
 import { Alert } from "react-native";
 import Colors from "../../../constants/color.js";
+import { getItem, removeItem } from "../../../utilities/storage.ts";
 
 interface NavigationProps{
     title:string;
@@ -52,9 +53,10 @@ return     <Pressable onPress={async ()=>{
         console.log(title,title === "Logout")
     if(title === "Logout"){
         console.log("hhhh")
-          const res =  await logout()
-          console.log('res',res)
-            dispatch(toggleDarkMode())
+        //   const res =  await logout()
+          removeItem("token")
+          console.log('res',getItem("token"))
+            dispatch(toggleLoggedIn())
     }else{
         if(navigationScreen === 'digitalDocument' || navigationScreen === 'driverAgreement'){
             return Alert.alert("DigiVoltt","This section is available in next Update")

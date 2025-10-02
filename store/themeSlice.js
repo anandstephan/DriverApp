@@ -1,20 +1,20 @@
 // src/store/themeSlice.js
 import { createSlice } from '@reduxjs/toolkit';
 
-const themeSlice = createSlice({
-  name: 'theme',
+const Auth = createSlice({
+  name: 'auth',
   initialState: {
-    isDarkMode: false,
+    isLoggedIn: false,
   },
   reducers: {
-    toggleDarkMode: (state) => {
-      state.isDarkMode = !state.isDarkMode;
+    toggleLoggedIn: (state) => {
+      state.isLoggedIn = !state.isLoggedIn;
     },
-    setDarkMode: (state, action) => {
-      state.isDarkMode = action.payload;
+    setLoggedIn: (state, action) => {
+      state.isLoggedIn = action.payload;
     },
   },
 });
 
-export const { toggleDarkMode, setDarkMode } = themeSlice.actions;
-export default themeSlice.reducer;
+export const { toggleLoggedIn, setLoggedIn } = Auth.actions;
+export default Auth.reducer;
