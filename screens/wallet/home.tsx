@@ -10,6 +10,8 @@ import { useProfile } from "../../features/myprofile/useProfile"
 import { useState } from "react"
 import Card from "./components/Card"
 import { useTranslation } from "react-i18next"
+import { useEMI } from "../../features/emi/useEmi"
+import { getItem } from "../../utilities/storage"
 
 
 
@@ -17,11 +19,14 @@ const Home = () =>{
     const navigation = useNavigation()
       const { profile, loading, error, refetch } = useProfile();
         const [active,setActive] = useState(false)
+        console.log(getItem("account"),"JJJ")
           const { t } = useTranslation();
-    
-      console.log("==>",profile?.driver.emiPayment.emiAmount)
-      let paymentsCount = profile?.driver.emiPayment.payments.filter(item => item.status!=='paid').length
-      let paidCount = profile?.driver.emiPayment.payments.filter(item => item.status==='paid').length
+            const {data} = useEMI(getItem("account").mobile)
+            console.log(data)
+    // return <View></View>
+      console.log("==>",data[0]?.emiAmount)
+      let paymentsCount = data?.filter(item => item.status!=='paid').length
+      let paidCount = data?.filter(item => item.status==='paid').length
       console.log(profile?.driver?.emiPayment)
     //   let numberOfUnpaid = 
 
@@ -32,9 +37,11 @@ return <View style={{flex:1,backgroundColor:Colors.appBackground}}>
         <View style={styles.container}>
         <View style={styles.rowContainer}>
             <Image
-            source={require('../../assets/png/blur.png')}
-            width={100}
-            height={100}
+            source={require('../../assets/png/qr.png')}
+            style={{
+                width:150,
+                height:150
+            }}
             />
             <View style={styles.verticalContainer}>
                 <Text style={styles.heading}>{t('scanPayHere')}</Text>
@@ -65,19 +72,19 @@ return <View style={{flex:1,backgroundColor:Colors.appBackground}}>
             <View style={[styles.container,{borderWidth:0}]}>
             <Text style={styles.heading1}>{t('total')}</Text>
             <View style={styles.rowContainer}>
-            <Text style={styles.emiAmt}>₹{profile?.driver.emiPayment.emiAmount*paymentsCount}</Text>
+            <Text style={styles.emiAmt}>₹{data[0]?.emiAmount*5}</Text>
             <Text style={styles.emiAmt}><Text style={[styles.emiAmt,{color:"#000"}]}>{paidCount}</Text> / {profile?.driver?.emiPayment?.tenure} {t('months')}</Text>
             </View>
             <View style={styles.rowContainer}>
 
                 {
-            profile?.driver.emiPayment.payments.filter(item => item.status==='paid').map((item,idx) =><View key={idx} style={styles.line}/> )
+            data.filter(item => item.status==='paid').map((item,idx) =><View key={idx} style={styles.line}/> )
                 }
                 {
-            profile?.driver.emiPayment.payments.filter(item => item.status==='upcoming').map((item,idx) =><View key={idx} style={[styles.line,{borderWidth:1,backgroundColor:"#FFF",borderColor:"gray"}]}/> )
+            data.filter(item => item.status==='upcoming').map((item,idx) =><View key={idx} style={[styles.line,{borderWidth:1,backgroundColor:"#FFF",borderColor:"gray"}]}/> )
                 }
                 {
-            profile?.driver.emiPayment.payments.filter(item => item.status==='due').map((item,idx) =><View key={idx} style={[styles.line,{backgroundColor:"red"}]}/> )
+            data.filter(item => item.status==='due').map((item,idx) =><View key={idx} style={[styles.line,{backgroundColor:"red"}]}/> )
                 }
 
             </View>

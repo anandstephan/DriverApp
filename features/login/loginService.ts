@@ -1,9 +1,11 @@
 import apiClient from '../../api/apiClient.ts';
-import { LoginPayload, LoginResponse } from './types.ts';
+import { LoginPayload } from './types.ts';
 
 
-export const loginUser = async (payload: LoginPayload): Promise<LoginResponse> => {
-  const response = await apiClient.post<LoginResponse>('/api/driver/auth/login', payload);
-  return response.data;
+export const loginUser = async (payload: LoginPayload): Promise<any> => {
+  const response = await apiClient.post<any>('/api/auth/login', payload);
+  return response.data;    
+  
+
 };
 

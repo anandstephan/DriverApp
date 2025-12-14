@@ -13,18 +13,19 @@ const Login = () => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
 
-  const [driverId, setDriverId] = useState("DRI00001");
-  const [password, setPassword] = useState("DRI00001");
+  const [id, setId] = useState("DRI00021");
+  const [password, setPassword] = useState("DRI00021");
 
   const { handleLogin, loading } = useLogin();
 
   const onLoginHandler = async () => {
     // dispatch(toggleDarkMode());
-    handleLogin({ driverId, password }, (response: Object) => {
-        console.log(response)
+    handleLogin({ id, password, type: "driver" }, (response: any) => {
+      console.log(response);
       if (response.message === "Login successful") {
         dispatch(toggleLoggedIn());
-       setItem("token",response.token) 
+       setItem("token",response.token)
+       setItem("account",response.account)
       }
     });
   };
@@ -42,8 +43,8 @@ const Login = () => {
           <Text style={styles.headingText}>Driver ID</Text>
           <TextInput
             style={styles.input}
-            onChangeText={(e) => setDriverId(e)}
-            value={driverId}
+            onChangeText={(e) => setId(e)}
+            value={id}
           />
         </View>
 

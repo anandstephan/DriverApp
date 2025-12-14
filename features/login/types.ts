@@ -1,10 +1,9 @@
 export interface LoginPayload {
-  driverId: string;
+  id: string;
   password: string;
+  type:string;
+
 }
 
-export interface LoginResponse {
-  success: boolean;
-  token: string;
-  message: string;
-}
+
+

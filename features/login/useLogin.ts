@@ -7,7 +7,7 @@ export const useLogin = () => {
 
   const handleLogin = async (
     payload: LoginPayload,
-    onSuccess: (result:Object) => void
+    onSuccess: (result:any) => void
   ) => {
     try {
       setLoading(true);

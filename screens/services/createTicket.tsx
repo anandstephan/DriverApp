@@ -63,6 +63,7 @@ const CreateTicket = () =>{
 
 
   const onSubmitHandler = () =>{
+    console.log("===",uploadedFile)
     handleCreateTicket({
       description:desc,
       ticketType:value,
@@ -74,8 +75,6 @@ const CreateTicket = () =>{
   }
 
 return <View style={styles.container}>
-
-  
 
     <Header title={t('raiseTicket')} />
     <View style={styles.innerContainer}>
