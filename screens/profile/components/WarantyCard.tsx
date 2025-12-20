@@ -30,7 +30,7 @@ console.log("item",type)
           </View>
           <Image
             style={styles.qrImage}
-            source={require("../../../assets/png/QR.png")}
+            source={require("../../../assets/png/qr.png")}
           />
         </View>
 

@@ -4,11 +4,11 @@ import Auth from "./navigator/auth/Auth";
 import { getItem } from "./utilities/storage";
 const First = () =>{
   const isLoggedIn = useSelector((state) => state.theme.isLoggedIn);
-  console.log("otken",getItem("token"))
   console.log("lll",isLoggedIn)
+  console.log("token",getItem("token"))
 
 return <>
-  {getItem("token")!==undefined && isLoggedIn ?<Main/> :<Auth/>}
+  {getItem("token")!==undefined && !isLoggedIn ?<Main/> :<Auth/>}
 </>
 }
 

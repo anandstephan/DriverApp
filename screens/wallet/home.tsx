@@ -1,4 +1,4 @@
-import { Image, StyleSheet, View,Text, Pressable, ScrollView } from "react-native"
+import { Image, StyleSheet, View,Text, Pressable, ScrollView, ActivityIndicator } from "react-native"
 import Entypo from 'react-native-vector-icons/Entypo'
 import AntDesign from 'react-native-vector-icons/AntDesign'
 import AntDesign1 from 'react-native-vector-icons/AntDesign'
@@ -19,15 +19,17 @@ const Home = () =>{
     const navigation = useNavigation()
       const { profile, loading, error, refetch } = useProfile();
         const [active,setActive] = useState(false)
-        console.log(getItem("account"),"JJJ")
+        
           const { t } = useTranslation();
-            const {data} = useEMI(getItem("account").mobile)
+            const {data=[]} = useEMI(getItem("account").mobile)
+            if(data===null) return <View>
+                <ActivityIndicator size={'large'}/>
+            </View>
             console.log(data)
     // return <View></View>
-      console.log("==>",data[0]?.emiAmount)
+    //   console.log("==>",data[0]?.emiAmount)
       let paymentsCount = data?.filter(item => item.status!=='paid').length
       let paidCount = data?.filter(item => item.status==='paid').length
-      console.log(profile?.driver?.emiPayment)
     //   let numberOfUnpaid = 
 
 

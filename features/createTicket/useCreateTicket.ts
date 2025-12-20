@@ -9,6 +9,7 @@ export const useCreateTicket = () => {
     payload: TicketPayload,
     onSuccess: (result:Object) => void
   ) => {
+    console.log("mypayload",payload)
     try {
       setLoading(true);
       const response = await createTicket(payload);

@@ -11,6 +11,7 @@ export const useProfile = () => {
     try {
       setLoading(true);
       const data = await getDriverProfile();
+   
       setProfile(data?.data);
     } catch (err: any) {
       setError(err.message || 'Failed to fetch profile');

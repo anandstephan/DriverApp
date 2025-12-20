@@ -1,5 +1,5 @@
-import apiClient from '../../api/apiClient.ts';
-import { TicketPayload, TicketResponse } from './type.ts';
+import apiClient from '../../api/apiClient';
+import { TicketPayload, TicketResponse } from './type';
 
 
 

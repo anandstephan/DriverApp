@@ -23,19 +23,21 @@ import { useTranslation } from 'react-i18next';
 const MyProfile = () => {
 
   const { profile, loading, error, refetch } = useProfile();
-  
+    console.log("profile",profile)
 
   const {t} = useTranslation()
 
+  // return <View></View>
+
   const [profileTab,setProfileTab] = useState<ProfileTab>({
-    name:'',
-    driverId:"",
-    phone:"",
-    address:"",
-    cluster:"",
-    city:"",
-    state:"",
-    profilePic:""
+    name:profile?.name,
+    driverId:profile?.driverId,
+    phone:profile?.mobile,
+    address:profile?.address,
+    cluster:profile?.cluster,
+    city:profile?.city,
+    state:profile?.state,
+    profilePic:profile?.profilePic
   })
 
       const [file, setFile] = useState(null);
@@ -68,14 +70,14 @@ useEffect(() => {
   if (profile) {
 
     setProfileTab({
-      name: profile?.driver.firstName+" "+profile?.driver?.lastName ?? '',
-      driverId: profile?.driver?.driverId ?? '',
-      phone: profile?.driver?.phone ?? '',
-      address: profile?.driver?.address ?? '',
-      cluster: profile?.driver?.cluster ?? '',
-      city: profile?.driver?.city ?? '',
-      state: profile?.driver?.state ?? '',
-      profilePic:profile?.driver?.selfie??""
+      name: profile?.name ?? '',
+      driverId: profile?.driverId ?? '',
+      phone: profile?.mobile ?? '',
+      address: profile?.address ?? '',
+      cluster: profile?.cluster ?? '',
+      city: profile?.city ?? '',
+      state: profile?.state ?? '',
+      profilePic:profile?.selfie??""
     });
   }
 }, [profile]);
@@ -107,7 +109,7 @@ useEffect(() => {
           
           <View style={styles.imageWrapper}>
             {
-              profileTab.profilePic.length!==0 ?             
+              profileTab?.profilePic?.length!==0 ?             
               <Image
               source={{uri:profileTab.profilePic}}
               style={styles.profileImage}

@@ -1,3 +1,4 @@
+import axios from 'axios';
 import apiClient from '../../api/apiClient.ts';
 import { RNFile, S3UploadResponse } from './type.ts';
 
@@ -7,19 +8,27 @@ export const uploadFileToS3 = async (
   appName: string
 ): Promise<S3UploadResponse> => {
   const formData = new FormData();
-  formData.append('selfie', {
+  formData.append('file', {
     uri: file.uri,
-    name: file.fileName,
+    name: file.name,
     type: file.type,
   } as any);
   formData.append('category', category);
   formData.append('appName', appName);
 
-  const response = await apiClient.post('/api/driver/profile/uploadSelfie', formData, {
-    headers: {
-      'Content-Type': 'multipart/form-data',
-    },
-  });
-  console.log("Pic",response.data)
+  console.log("newres",formData)
+      // const url = 'http://localhost:5000/api/others/api/s3/upload'
+
+ const url ="https://backendverse.digivoltt.com/api/others/api/s3/upload"
+    const response = await axios.post(
+      url,
+      formData,
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      }
+    );
+  console.log("Pic2",response.data)
   return response.data;
 };

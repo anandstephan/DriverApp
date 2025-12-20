@@ -56,8 +56,8 @@ return <View style={styles.container}>
             <View>
                 <Text style={styles.heading}>{profile?.name}</Text>
                 <View>
-                    <Text style={styles.subHeading}>Driver ID-      {profile?.driver?.driverId}</Text>
-                    <Text style={styles.subHeading}>Battery ID-    {profile?.driver?.batteryId}</Text>
+                    <Text style={styles.subHeading}>Driver ID-      {profile?.driverId}</Text>
+                    <Text style={styles.subHeading}>Battery ID-    {profile?.batteryId}</Text>
                 </View>
             </View>
             <View/>
