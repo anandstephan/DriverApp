@@ -6,7 +6,8 @@ export const useEMI = (mobile: string) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const fetchEmi = async () => {
+  const fetchEmi = async (mobile: string) => {
+
     try {
       setLoading(true);
       setError(null);
@@ -22,7 +23,7 @@ export const useEMI = (mobile: string) => {
 
   useEffect(() => {
     if (mobile) {
-      fetchEmi();
+      fetchEmi(mobile);
     }
   }, [mobile]);
 

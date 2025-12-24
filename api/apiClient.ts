@@ -1,9 +1,10 @@
 import axios from 'axios';
 import { getItem } from '../utilities/storage';
-
-const apiClient = axios.create({
-  baseURL: 'https://backendverse.digivoltt.com',
+  
     // baseURL:"http://localhost:5000",
+        // baseURL:"http://192.168.29.130:5000",
+const apiClient = axios.create({
+baseURL: 'https://backendverse.digivoltt.com',
   timeout: 5000,
   headers:{
     'Content-Type':"application/json"

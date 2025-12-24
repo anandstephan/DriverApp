@@ -12,30 +12,35 @@ import Card from "./components/Card"
 import { useTranslation } from "react-i18next"
 import { useEMI } from "../../features/emi/useEmi"
 import { getItem } from "../../utilities/storage"
+import { get } from "react-native/Libraries/TurboModule/TurboModuleRegistry"
+import React from "react"
 
 
 
 const Home = () =>{
     const navigation = useNavigation()
+  
       const { profile, loading, error, refetch } = useProfile();
+
         const [active,setActive] = useState(false)
+   
         
           const { t } = useTranslation();
             const {data=[]} = useEMI(getItem("account").mobile)
-            if(data===null) return <View>
+            const tenure = data?.[0]?.emiSchemeId?.tenure
+            if(data===null) 
+            return <View style={{flex:1,justifyContent:'center',alignItems:"center"}}>
                 <ActivityIndicator size={'large'}/>
-            </View>
-            console.log(data)
-    // return <View></View>
-    //   console.log("==>",data[0]?.emiAmount)
-      let paymentsCount = data?.filter(item => item.status!=='paid').length
+                </View>
+                console.log(data)
+      let numberOfUnpaid = data?.filter(item => item.status!=='paid').length
       let paidCount = data?.filter(item => item.status==='paid').length
-    //   let numberOfUnpaid = 
+   
 
 
 return <View style={{flex:1,backgroundColor:Colors.appBackground}}>
-    <Header title="My Wallet"/>
-<ScrollView style={{backgroundColor:Colors.appBackground,marginVertical:30}}>
+        <Header title="My Wallet"/>
+        <ScrollView style={{backgroundColor:Colors.appBackground,marginVertical:30}}>
         <View style={styles.container}>
         <View style={styles.rowContainer}>
             <Image
@@ -74,20 +79,16 @@ return <View style={{flex:1,backgroundColor:Colors.appBackground}}>
             <View style={[styles.container,{borderWidth:0}]}>
             <Text style={styles.heading1}>{t('total')}</Text>
             <View style={styles.rowContainer}>
-            <Text style={styles.emiAmt}>₹{data[0]?.emiAmount*5}</Text>
-            <Text style={styles.emiAmt}><Text style={[styles.emiAmt,{color:"#000"}]}>{paidCount}</Text> / {profile?.driver?.emiPayment?.tenure} {t('months')}</Text>
-            </View>
+            <Text style={styles.emiAmt}>₹{(data[0].emiSchemeId.emiAmount * tenure)-(data.map(item => item?.amountPaid).reduce((a, b) => a + b),0)}</Text>
+            <Text style={styles.emiAmt}><Text style={[styles.emiAmt,{color:"#000"}]}>{paidCount}</Text> / {tenure} {t('months')}</Text>
+            </View> 
+            
             <View style={styles.rowContainer}>
-
-                {
-            data.filter(item => item.status==='paid').map((item,idx) =><View key={idx} style={styles.line}/> )
+                {Array.from({length:tenure}).map(item => {
+    
+                    return <View  style={[styles.line,{backgroundColor:Colors.lightGray}]}/>
                 }
-                {
-            data.filter(item => item.status==='upcoming').map((item,idx) =><View key={idx} style={[styles.line,{borderWidth:1,backgroundColor:"#FFF",borderColor:"gray"}]}/> )
-                }
-                {
-            data.filter(item => item.status==='due').map((item,idx) =><View key={idx} style={[styles.line,{backgroundColor:"red"}]}/> )
-                }
+                )}
 
             </View>
             <Text style={styles.txtStyle2}>{t('requestForeclosure')}?</Text>

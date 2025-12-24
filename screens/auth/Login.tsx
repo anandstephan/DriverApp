@@ -13,8 +13,8 @@ const Login = () => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
 
-  const [id, setId] = useState("DRI00021");
-  const [password, setPassword] = useState("DRI00021");
+  const [id, setId] = useState("DRI00030");
+  const [password, setPassword] = useState("DRI00030");
 
   const { handleLogin, loading } = useLogin();
 
